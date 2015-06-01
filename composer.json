@@ -1,0 +1,25 @@
+{
+    "name": "octo/enum-bundle",
+    "description": "Bring simple enumeration implementation to Symfony2",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Yann Eugoné",
+            "email": "yann.eugone@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.3"
+    },
+    "require-dev": {
+        "symfony/form": "~2.3",
+        "symfony/validator": "~2.3",
+        "phpunit/phpunit": "~4.6"
+    },
+    "autoload": {
+        "psr-0": { "Octo\\EnumBundle": "" }
+    },
+    "minimum-stability": "stable",
+    "target-dir": "Octo/EnumBundle"
+}
