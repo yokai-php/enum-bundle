@@ -1,5 +1,5 @@
 {
-    "name": "octo/enum-bundle",
+    "name": "yeugone/enum-bundle",
     "description": "Bring simple enumeration implementation to Symfony2",
     "license": "Apache2",
     "authors": [
@@ -18,8 +18,7 @@
         "phpunit/phpunit": "~4.6"
     },
     "autoload": {
-        "psr-0": { "Octo\\EnumBundle": "" }
+        "psr-4": { "EnumBundle\\": "" }
     },
-    "minimum-stability": "stable",
-    "target-dir": "Octo/EnumBundle"
+    "minimum-stability": "stable"
 }

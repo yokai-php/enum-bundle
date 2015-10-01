@@ -6,9 +6,9 @@
 
     <services>
 
-        <service id="enum.registry" class="Octo\EnumBundle\Registry\EnumRegistry"/>
+        <service id="enum.registry" class="EnumBundle\Registry\EnumRegistry"/>
 
-        <service id="enum.abstract_translated" class="Octo\EnumBundle\Enum\AbstractTranslatedEnum" abstract="true">
+        <service id="enum.abstract_translated" class="EnumBundle\Enum\AbstractTranslatedEnum" abstract="true">
             <argument type="service" id="translator"/>
         </service>
 

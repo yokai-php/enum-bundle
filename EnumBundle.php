@@ -1,15 +1,15 @@
 <?php
 
-namespace Octo\EnumBundle;
+namespace EnumBundle;
 
-use Octo\EnumBundle\DependencyInjection\CompilerPass\CollectEnumCompilerPass;
+use EnumBundle\DependencyInjection\CompilerPass\CollectEnumCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
  */
-class OctoEnumBundle extends Bundle
+class EnumBundle extends Bundle
 {
     /**
      * {@inheritdoc}

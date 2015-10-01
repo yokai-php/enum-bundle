@@ -1,6 +1,6 @@
 <?php
 
-namespace Octo\EnumBundle\DependencyInjection\CompilerPass;
+namespace EnumBundle\DependencyInjection\CompilerPass;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Octo\EnumBundle\Form\Type;
+namespace EnumBundle\Form\Type;
 
-use Octo\EnumBundle\Registry\EnumRegistryInterface;
+use EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;

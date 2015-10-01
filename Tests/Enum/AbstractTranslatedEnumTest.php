@@ -1,8 +1,8 @@
 <?php
 
-namespace Octo\Tests\Enum;
+namespace Tests\Enum;
 
-use Octo\EnumBundle\Tests\StateEnum;
+use EnumBundle\Tests\StateEnum;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
@@ -11,7 +11,7 @@ class AbstractTranslatedEnumTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructedWithInvalidPattern()
     {
-        $this->setExpectedException('Octo\EnumBundle\Exception\InvalidTranslatePatternException');
+        $this->setExpectedException('EnumBundle\Exception\InvalidTranslatePatternException');
         $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface');
         new StateEnum($translator->reveal(), 'invalid.pattern');
     }

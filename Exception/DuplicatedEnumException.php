@@ -1,6 +1,6 @@
 <?php
 
-namespace Octo\EnumBundle\Exception;
+namespace EnumBundle\Exception;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

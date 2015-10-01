@@ -1,9 +1,9 @@
 <?php
 
-namespace Octo\EnumBundle\Tests\Form;
+namespace EnumBundle\Tests\Form;
 
-use Octo\EnumBundle\Form\Type\EnumType;
-use Octo\EnumBundle\Registry\EnumRegistryInterface;
+use EnumBundle\Form\Type\EnumType;
+use EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Form\AbstractExtension;
 use Symfony\Component\Form\Exception;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Octo\EnumBundle\Tests;
+namespace EnumBundle\Tests;
 
-use Octo\EnumBundle\Enum\EnumInterface;
+use EnumBundle\Enum\EnumInterface;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

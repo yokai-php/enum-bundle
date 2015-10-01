@@ -1,10 +1,10 @@
 <?php
 
-namespace Octo\EnumBundle\Registry;
+namespace EnumBundle\Registry;
 
-use Octo\EnumBundle\Enum\EnumInterface;
-use Octo\EnumBundle\Exception\DuplicatedEnumException;
-use Octo\EnumBundle\Exception\InvalidEnumException;
+use EnumBundle\Enum\EnumInterface;
+use EnumBundle\Exception\DuplicatedEnumException;
+use EnumBundle\Exception\InvalidEnumException;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

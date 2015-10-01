@@ -1,8 +1,8 @@
 <?php
 
-namespace Octo\EnumBundle\Validator\Constraints;
+namespace EnumBundle\Validator\Constraints;
 
-use Octo\EnumBundle\Registry\EnumRegistryInterface;
+use EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;

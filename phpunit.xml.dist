@@ -13,7 +13,7 @@
         >
 
     <testsuites>
-        <testsuite name="OctoEnumBundle Test Suite">
+        <testsuite name="EnumBundle Test Suite">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>

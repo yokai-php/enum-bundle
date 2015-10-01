@@ -1,9 +1,9 @@
 <?php
 
-namespace Octo\EnumBundle\Tests\Form\Type;
+namespace EnumBundle\Tests\Form\Type;
 
-use Octo\EnumBundle\Tests\Form\TestExtension;
-use Octo\EnumBundle\Tests\GenderEnum;
+use EnumBundle\Tests\Form\TestExtension;
+use EnumBundle\Tests\GenderEnum;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
@@ -15,7 +15,7 @@ class EnumTypeTest extends TypeTestCase
 
     protected function setUp()
     {
-        $this->enumRegistry = $this->prophesize('Octo\EnumBundle\Registry\EnumRegistryInterface');
+        $this->enumRegistry = $this->prophesize('EnumBundle\Registry\EnumRegistryInterface');
         $this->enumRegistry->has('state')->willReturn(false);
         $this->enumRegistry->has('gender')->willReturn(true);
         $this->enumRegistry->get('gender')->willReturn(new GenderEnum);

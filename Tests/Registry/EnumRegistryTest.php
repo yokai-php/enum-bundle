@@ -1,10 +1,10 @@
 <?php
 
-namespace Octo\EnumBundle\Tests\Registry;
+namespace EnumBundle\Tests\Registry;
 
-use Octo\EnumBundle\Registry\EnumRegistry;
-use Octo\EnumBundle\Tests\GenderEnum;
-use Octo\EnumBundle\Tests\StateEnum;
+use EnumBundle\Registry\EnumRegistry;
+use EnumBundle\Tests\GenderEnum;
+use EnumBundle\Tests\StateEnum;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
@@ -28,14 +28,14 @@ class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddDuplicatedException()
     {
-        $this->setExpectedException('Octo\EnumBundle\Exception\DuplicatedEnumException');
+        $this->setExpectedException('EnumBundle\Exception\DuplicatedEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->add(new GenderEnum);
     }
 
     public function testGetInvalidException()
     {
-        $this->setExpectedException('Octo\EnumBundle\Exception\InvalidEnumException');
+        $this->setExpectedException('EnumBundle\Exception\InvalidEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->get('type');
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Octo\EnumBundle\Tests\Validator\Constraints;
+namespace EnumBundle\Tests\Validator\Constraints;
 
-use Octo\EnumBundle\Tests\TypeEnum;
-use Octo\EnumBundle\Validator\Constraints\Enum;
-use Octo\EnumBundle\Validator\Constraints\EnumValidator;
+use EnumBundle\Tests\TypeEnum;
+use EnumBundle\Validator\Constraints\Enum;
+use EnumBundle\Validator\Constraints\EnumValidator;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
@@ -16,7 +16,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
 
     protected function createValidator()
     {
-        $registry = $this->prophesize('Octo\EnumBundle\Registry\EnumRegistryInterface');
+        $registry = $this->prophesize('EnumBundle\Registry\EnumRegistryInterface');
         $registry->has('state')->willReturn(false);
         $registry->has('type')->willReturn(true);
         $registry->get('type')->willReturn(new TypeEnum);

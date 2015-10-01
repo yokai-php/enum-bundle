@@ -1,6 +1,6 @@
 <?php
 
-namespace Octo\EnumBundle\Enum;
+namespace EnumBundle\Enum;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

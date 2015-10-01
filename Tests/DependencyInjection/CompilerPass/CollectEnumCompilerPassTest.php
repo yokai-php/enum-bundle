@@ -1,8 +1,8 @@
 <?php
 
-namespace Octo\EnumBundle\Tests\DependencyInjection\CompilerPass;
+namespace EnumBundle\Tests\DependencyInjection\CompilerPass;
 
-use Octo\EnumBundle\DependencyInjection\CompilerPass\CollectEnumCompilerPass;
+use EnumBundle\DependencyInjection\CompilerPass\CollectEnumCompilerPass;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**

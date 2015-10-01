@@ -1,8 +1,8 @@
 <?php
 
-namespace Octo\EnumBundle\Enum;
+namespace EnumBundle\Enum;
 
-use Octo\EnumBundle\Exception\InvalidTranslatePatternException;
+use EnumBundle\Exception\InvalidTranslatePatternException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
