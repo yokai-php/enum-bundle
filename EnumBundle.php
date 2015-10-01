@@ -3,6 +3,7 @@
 namespace EnumBundle;
 
 use EnumBundle\DependencyInjection\CompilerPass\CollectEnumCompilerPass;
+use EnumBundle\DependencyInjection\EnumExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -17,5 +18,13 @@ class EnumBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new CollectEnumCompilerPass);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContainerExtension()
+    {
+        return new EnumExtension;
     }
 }

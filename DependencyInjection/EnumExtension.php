@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
  */
-class OctoEnumExtension extends Extension
+class EnumExtension extends Extension
 {
     /**
      * {@inheritdoc}
