@@ -21,5 +21,6 @@ class EnumExtension extends Extension
         $xmlLoader->load('services.xml');
         $xmlLoader->load('form_types.xml');
         $xmlLoader->load('validators.xml');
+        $xmlLoader->load('twig.xml');
     }
 }
