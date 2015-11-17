@@ -3,12 +3,22 @@ language: php
 php:
   - 5.5
   - 5.6
+  - 7.0
   - hhvm
-  - nightly
 
-env:
-    - SYMFONY_VERSION=2.7.*
-    - SYMFONY_VERSION=2.8.*@dev
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.6
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.8.*@dev
+    - php: 5.6
+      env: SYMFONY_VERSION="3.0.x-dev as 2.8"
+  allow_failures:
+    - php: hhvm
+    - env: SYMFONY_VERSION=2.8.*@dev
+    - env: SYMFONY_VERSION="3.0.x-dev as 2.8"
 
 sudo: false
 
@@ -23,7 +33,11 @@ before_install:
 install: composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
-  - phpunit --coverage-text
+  - vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 notifications:
   email: yann.eugone@gmail.com

@@ -5,6 +5,11 @@ This repository aims to provide simple enumeration implementation to Symfony2 :
 
 
 [![Build Status](https://api.travis-ci.org/yann-eugone/enum-bundle.png?branch=master)](https://travis-ci.org/yann-eugone/enum-bundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/build-status/master)
+[![Total Downloads](https://poser.pugx.org/yeugone/enum-bundle/downloads.png)](https://packagist.org/packages/yeugone/enum-bundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338/mini.png)](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338)
 
 
 Installation
