@@ -7,5 +7,12 @@ namespace EnumBundle\Exception;
  */
 class InvalidTranslatePatternException extends \InvalidArgumentException
 {
-    //todo
+    /**
+     * @param string $transPattern
+     * @return InvalidTranslatePatternException
+     */
+    public static function placeholderRequired($transPattern)
+    {
+        return new self(sprintf('Translation pattern "%s" must contain %%s placeholder', $transPattern));
+    }
 }
