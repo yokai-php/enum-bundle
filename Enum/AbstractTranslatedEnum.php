@@ -32,7 +32,7 @@ abstract class AbstractTranslatedEnum implements EnumInterface
     public function __construct(TranslatorInterface $translator, $transPattern)
     {
         if (false === strpos($transPattern, '%s')) {
-            throw new InvalidTranslatePatternException($transPattern);
+            throw InvalidTranslatePatternException::placeholderRequired($transPattern);
         }
 
         $this->translator = $translator;

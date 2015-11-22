@@ -22,7 +22,7 @@ class EnumRegistry implements EnumRegistryInterface
     public function add(EnumInterface $enum)
     {
         if ($this->has($enum->getName())) {
-            throw new DuplicatedEnumException($enum->getName());
+            throw DuplicatedEnumException::alreadyRegistered($enum->getName());
         }
 
         $this->enums[$enum->getName()] = $enum;
@@ -34,7 +34,7 @@ class EnumRegistry implements EnumRegistryInterface
     public function get($name)
     {
         if (!$this->has($name)) {
-            throw new InvalidEnumException($name);
+            throw InvalidEnumException::nonexistent($name);
         }
 
         return $this->enums[$name];

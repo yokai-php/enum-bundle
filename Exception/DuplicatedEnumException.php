@@ -7,5 +7,13 @@ namespace EnumBundle\Exception;
  */
 class DuplicatedEnumException extends \BadMethodCallException
 {
-    //todo
+    /**
+     * @param string $name
+     *
+     * @return DuplicatedEnumException
+     */
+    public static function alreadyRegistered($name)
+    {
+        return new self(sprintf('Enum with name "%s" is already registered', $name));
+    }
 }

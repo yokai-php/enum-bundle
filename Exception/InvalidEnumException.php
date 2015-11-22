@@ -7,5 +7,13 @@ namespace EnumBundle\Exception;
  */
 class InvalidEnumException extends \DomainException
 {
-    //todo
+    /**
+     * @param string $name
+     *
+     * @return InvalidEnumException
+     */
+    public static function nonexistent($name)
+    {
+        return new self(sprintf('Nonexistent enum with name "%s" in registry', $name));
+    }
 }
