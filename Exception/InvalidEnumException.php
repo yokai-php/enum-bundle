@@ -9,6 +9,7 @@ class InvalidEnumException extends \DomainException
 {
     /**
      * @param string $name
+     *
      * @return InvalidEnumException
      */
     public static function nonexistent($name)

@@ -9,6 +9,7 @@ class InvalidTranslatePatternException extends \InvalidArgumentException
 {
     /**
      * @param string $transPattern
+     *
      * @return InvalidTranslatePatternException
      */
     public static function placeholderRequired($transPattern)

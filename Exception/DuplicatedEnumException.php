@@ -9,6 +9,7 @@ class DuplicatedEnumException extends \BadMethodCallException
 {
     /**
      * @param string $name
+     *
      * @return DuplicatedEnumException
      */
     public static function alreadyRegistered($name)
