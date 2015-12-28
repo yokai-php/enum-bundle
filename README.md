@@ -153,6 +153,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Enum\GenderEnum;
 use AppBundle\Enum\StateEnum;
+use EnumBundle\Form\Type\EnumType;
 //...
 
 class MemberType extends //...
@@ -163,8 +164,8 @@ class MemberType extends //...
     {
         $builder
             //...
-            ->add('state', 'enum', ['enum' => StateEnum::NAME])
-            ->add('gender', 'enum', ['enum' => GenderEnum::NAME])
+            ->add('state', EnumType::class, ['enum' => StateEnum::NAME])
+            ->add('gender', EnumType::class, ['enum' => GenderEnum::NAME])
         ;
     }
 

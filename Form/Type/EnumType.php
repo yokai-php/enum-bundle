@@ -4,6 +4,7 @@ namespace EnumBundle\Form\Type;
 
 use EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,6 +33,7 @@ class EnumType extends AbstractType
     {
         $resolver
             ->setRequired('enum')
+            ->setDefault('choices_as_values', true)
             ->setAllowedValues(
                 'enum',
                 function ($name) {
@@ -52,7 +54,19 @@ class EnumType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        if (!method_exists(AbstractType::class, 'getBlockPrefix')) {
+            return 'choice'; //Symfony 2.x support
+        }
+
+        return ChoiceType::class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'enum';
     }
 
     /**
@@ -60,6 +74,6 @@ class EnumType extends AbstractType
      */
     public function getName()
     {
-        return 'enum';
+        return $this->getBlockPrefix();
     }
 }

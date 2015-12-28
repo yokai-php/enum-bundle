@@ -2,8 +2,10 @@
 
 namespace EnumBundle\Tests\Form\Type;
 
+use EnumBundle\Form\Type\EnumType;
 use EnumBundle\Tests\Form\TestExtension;
 use EnumBundle\Tests\GenderEnum;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
@@ -26,18 +28,18 @@ class EnumTypeTest extends TypeTestCase
     public function testEnumOptionIsRequired()
     {
         $this->setExpectedException('Symfony\Component\OptionsResolver\Exception\MissingOptionsException');
-        $this->factory->create('enum');
+        $this->createForm();
     }
 
     public function testEnumOptionIsInvalid()
     {
         $this->setExpectedException('Symfony\Component\OptionsResolver\Exception\InvalidOptionsException');
-        $this->factory->create('enum', null, ['enum' => 'state']);
+        $this->createForm('state');
     }
 
     public function testEnumOptionValid()
     {
-        $form = $this->factory->create('enum', null, ['enum' => 'gender']);
+        $form = $this->createForm('gender');
 
         $this->assertEquals(['male' => 'Male', 'female' => 'Female'], $form->getConfig()->getOption('choices'));
     }
@@ -47,5 +49,21 @@ class EnumTypeTest extends TypeTestCase
         return [
             new TestExtension($this->enumRegistry->reveal())
         ];
+    }
+
+    private function createForm($enum = null)
+    {
+        $options = [];
+        if ($enum) {
+            $options['enum'] = $enum;
+        }
+
+        if (method_exists(AbstractType::class, 'getBlockPrefix')) {
+            $name = EnumType::class; //Symfony 3.x support
+        } else {
+            $name = 'enum'; //Symfony 2.x support
+        }
+
+        return $this->factory->create($name, null, $options);
     }
 }
