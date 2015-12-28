@@ -153,22 +153,24 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Enum\GenderEnum;
 use AppBundle\Enum\StateEnum;
-//...
+use Symfony\Component\Form\AbstractType;
+// For Symfony >= 2.8
+use EnumBundle\Form\Type\EnumType;
 
-class MemberType extends //...
+class MemberType extends AbstractType
 {
-    //...
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //...
+            // For Symfony >= 2.8
+            ->add('state', EnumType::class, ['enum' => StateEnum::NAME])
+            ->add('gender', EnumType::class, ['enum' => GenderEnum::NAME])
+
+            // For Symfony 2.7
             ->add('state', 'enum', ['enum' => StateEnum::NAME])
             ->add('gender', 'enum', ['enum' => GenderEnum::NAME])
         ;
     }
-
-    //...
 }
 ```
 
