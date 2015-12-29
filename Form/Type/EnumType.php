@@ -43,7 +43,7 @@ class EnumType extends AbstractType
             ->setDefault(
                 'choices',
                 function (Options $options) {
-                    return $this->enumRegistry->get($options['enum'])->getChoices();
+                    return array_flip($this->enumRegistry->get($options['enum'])->getChoices());
                 }
             )
         ;
