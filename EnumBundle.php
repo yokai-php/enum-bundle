@@ -2,7 +2,8 @@
 
 namespace EnumBundle;
 
-use EnumBundle\DependencyInjection\CompilerPass\CollectEnumCompilerPass;
+use EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
+use EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 use EnumBundle\DependencyInjection\EnumExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -17,7 +18,15 @@ class EnumBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new CollectEnumCompilerPass);
+        if ($bundles = $container->getParameter('enum.register_bundles')) {
+            if (true === $bundles) {
+                $bundles = $container->getParameter('kernel.bundles');
+            } else {
+                $bundles = (array) $bundles;
+            }
+            $container->addCompilerPass(new ConventionedEnumCollectorCompilerPass($bundles));
+        }
+        $container->addCompilerPass(new TaggedEnumCollectorCompilerPass);
     }
 
     /**

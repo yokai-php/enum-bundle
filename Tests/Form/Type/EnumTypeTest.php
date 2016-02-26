@@ -3,8 +3,8 @@
 namespace EnumBundle\Tests\Form\Type;
 
 use EnumBundle\Form\Type\EnumType;
+use EnumBundle\Tests\Fixtures\GenderEnum;
 use EnumBundle\Tests\Form\TestExtension;
-use EnumBundle\Tests\GenderEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\TypeTestCase;
 

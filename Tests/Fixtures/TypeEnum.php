@@ -1,21 +1,21 @@
 <?php
 
-namespace EnumBundle\Tests;
+namespace EnumBundle\Tests\Fixtures;
 
 use EnumBundle\Enum\EnumInterface;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
  */
-class GenderEnum implements EnumInterface
+class TypeEnum implements EnumInterface
 {
     public function getChoices()
     {
-        return ['male' => 'Male', 'female' => 'Female'];
+        return ['customer' => 'Customer', 'prospect' => 'Prospect'];
     }
 
     public function getName()
     {
-        return 'gender';
+        return 'type';
     }
 }

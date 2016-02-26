@@ -2,7 +2,7 @@
 
 namespace Tests\Enum;
 
-use EnumBundle\Tests\StateEnum;
+use EnumBundle\Tests\Fixtures\StateEnum;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

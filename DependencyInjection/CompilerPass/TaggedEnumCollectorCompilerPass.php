@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
  */
-class CollectEnumCompilerPass implements CompilerPassInterface
+class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

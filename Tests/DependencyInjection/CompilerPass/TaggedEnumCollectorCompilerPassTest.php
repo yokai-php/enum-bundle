@@ -2,22 +2,22 @@
 
 namespace EnumBundle\Tests\DependencyInjection\CompilerPass;
 
-use EnumBundle\DependencyInjection\CompilerPass\CollectEnumCompilerPass;
+use EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
  */
-class CollectEnumCompilerPassTest extends \PHPUnit_Framework_TestCase
+class TaggedEnumCollectorCompilerPassTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var CollectEnumCompilerPass
+     * @var TaggedEnumCollectorCompilerPass
      */
     private $compiler;
 
     protected function setUp()
     {
-        $this->compiler = new CollectEnumCompilerPass;
+        $this->compiler = new TaggedEnumCollectorCompilerPass;
     }
 
     protected function tearDown()
