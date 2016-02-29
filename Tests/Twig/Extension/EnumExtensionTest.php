@@ -57,6 +57,23 @@ class EnumExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testEnumChoices()
+    {
+        $enum = $this->prophesize('EnumBundle\Enum\EnumInterface');
+        $enum->getChoices()
+            ->willReturn(['foo' => 'FOO', 'bar' => 'BAR']);
+
+        $this->registry->get('test')
+            ->willReturn($enum->reveal());
+
+        $twig = $this->createEnvironment();
+
+        $this->assertSame(
+            'foo,FOO|bar,BAR|',
+            $twig->createTemplate("{% for value,label in enum_choices('test') %}{{ value }},{{ label }}|{% endfor %}")->render([])
+        );
+    }
+
     /**
      * @return \Twig_Environment
      */
