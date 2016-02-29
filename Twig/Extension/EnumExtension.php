@@ -30,6 +30,7 @@ class EnumExtension extends Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('enum_label', [ $this, 'getLabel' ]),
+            new \Twig_SimpleFunction('enum_choices', [ $this, 'getChoices' ]),
         ];
     }
 
@@ -51,13 +52,23 @@ class EnumExtension extends Twig_Extension
      */
     public function getLabel($value, $enum)
     {
-        $choices = $this->registry->get($enum)->getChoices();
+        $choices = $this->getChoices($enum);
 
         if (isset($choices[$value])) {
             return $choices[$value];
         }
 
         return $value;
+    }
+
+    /**
+     * @param string $enum
+     *
+     * @return array
+     */
+    public function getChoices($enum)
+    {
+        return $this->registry->get($enum)->getChoices();
     }
 
     /**
