@@ -1,6 +1,6 @@
 <?php
 
-namespace EnumBundle\Tests;
+namespace Acme\Bundle\AppBundle\Enum\Customer;
 
 use EnumBundle\Enum\AbstractTranslatedEnum;
 

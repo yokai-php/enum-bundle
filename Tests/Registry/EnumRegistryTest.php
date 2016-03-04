@@ -3,8 +3,8 @@
 namespace EnumBundle\Tests\Registry;
 
 use EnumBundle\Registry\EnumRegistry;
-use EnumBundle\Tests\GenderEnum;
-use EnumBundle\Tests\StateEnum;
+use EnumBundle\Tests\Fixtures\GenderEnum;
+use EnumBundle\Tests\Fixtures\StateEnum;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

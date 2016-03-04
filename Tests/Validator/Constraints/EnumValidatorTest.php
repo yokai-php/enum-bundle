@@ -2,7 +2,7 @@
 
 namespace EnumBundle\Tests\Validator\Constraints;
 
-use EnumBundle\Tests\TypeEnum;
+use EnumBundle\Tests\Fixtures\TypeEnum;
 use EnumBundle\Validator\Constraints\Enum;
 use EnumBundle\Validator\Constraints\EnumValidator;
 use Symfony\Component\Validator\Constraints\Choice;
@@ -18,6 +18,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
     {
         $registry = $this->prophesize('EnumBundle\Registry\EnumRegistryInterface');
         $registry->has('state')->willReturn(false);
+        $registry->has('gender')->willReturn(true);
         $registry->has('type')->willReturn(true);
         $registry->get('type')->willReturn(new TypeEnum);
 
