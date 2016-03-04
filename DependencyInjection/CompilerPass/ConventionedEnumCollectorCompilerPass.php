@@ -11,24 +11,23 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ConventionedEnumCollectorCompilerPass implements CompilerPassInterface
 {
     /**
-     * @var array
-     */
-    private $bundles;
-
-    /**
-     * @param array $bundles
-     */
-    public function __construct(array $bundles)
-    {
-        $this->bundles = $bundles;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        foreach ($this->bundles as $bundleClass) {
+        $bundles = $container->getParameter('enum.register_bundles');
+
+        if (!$bundles) {
+            return;
+        }
+
+        if (true === $bundles) {
+            $bundles = $container->getParameter('kernel.bundles');
+        } else {
+            $bundles = (array) $bundles;
+        }
+
+        foreach ($bundles as $bundleClass) {
             $declarativePass = new DeclarativeEnumCollectorCompilerPass($bundleClass);
             $declarativePass->process($container);
         }

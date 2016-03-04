@@ -18,15 +18,10 @@ class EnumBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
-        if ($bundles = $container->getParameter('enum.register_bundles')) {
-            if (true === $bundles) {
-                $bundles = $container->getParameter('kernel.bundles');
-            } else {
-                $bundles = (array) $bundles;
-            }
-            $container->addCompilerPass(new ConventionedEnumCollectorCompilerPass($bundles));
-        }
-        $container->addCompilerPass(new TaggedEnumCollectorCompilerPass);
+        $container
+            ->addCompilerPass(new ConventionedEnumCollectorCompilerPass())
+            ->addCompilerPass(new TaggedEnumCollectorCompilerPass)
+        ;
     }
 
     /**
