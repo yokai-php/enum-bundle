@@ -28,6 +28,10 @@ class ConventionedEnumCollectorCompilerPassTest extends \PHPUnit_Framework_TestC
 
         $namespace = (new \ReflectionClass($bundle))->getNamespaceName();
 
+        $container->getParameter('enum.register_bundles')
+              ->shouldBeCalled()
+              ->willReturn([$bundle]);
+
         $container
             ->setDefinition(
                 $prefix.'.enum.dummy',
@@ -66,7 +70,7 @@ class ConventionedEnumCollectorCompilerPassTest extends \PHPUnit_Framework_TestC
             )
             ->shouldBeCalled();
 
-        $compiler = new ConventionedEnumCollectorCompilerPass([$bundle]);
+        $compiler = new ConventionedEnumCollectorCompilerPass();
         $compiler->process($container->reveal());
     }
 
