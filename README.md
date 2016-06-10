@@ -175,6 +175,20 @@ class MemberType extends AbstractType
 ```
 
 
+Displaying the label for an enum value within a template :
+
+```twig
+    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\StateEnum::NAME')) }}
+    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\GenderEnum::NAME')) }}
+```
+
+
+Integrations
+------------
+
+- [SonataAdminBundle](https://github.com/sonata-project/SonataAdminBundle) : see [doc](Resources/doc/sonata-admin.md)
+
+
 MIT License
 -----------
 
