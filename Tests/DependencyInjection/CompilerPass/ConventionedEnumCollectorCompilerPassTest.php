@@ -5,7 +5,7 @@ namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
 spl_autoload_register(function ($class) {
     $file = dirname(dirname(__DIR__)).'/Fixtures/Bundles/'.str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
     if (file_exists($file)) {
-        require $file;
+        require_once $file;
         return true;
     }
     return false;
@@ -52,11 +52,15 @@ class ConventionedEnumCollectorCompilerPassTest extends \PHPUnit_Framework_TestC
                 )
             )
             ->shouldBeCalled();
+        $class = 'Symfony\Component\DependencyInjection\DefinitionDecorator';
+        if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
+            $class = 'Symfony\Component\DependencyInjection\ChildDefinition';
+        }
         $container
             ->setDefinition(
                 $prefix.'.enum.customer_state',
                 Argument::allOf(
-                    Argument::type('Symfony\Component\DependencyInjection\DefinitionDecorator'),
+                    Argument::type($class),
                     Argument::which('getTags', ['enum' => [[]]]),
                     Argument::which('getClass', $namespace.'\Enum\Customer\StateEnum'),
                     Argument::which(

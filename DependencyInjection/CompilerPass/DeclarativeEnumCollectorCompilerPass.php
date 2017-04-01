@@ -4,6 +4,7 @@ namespace Yokai\EnumBundle\DependencyInjection\CompilerPass;
 
 use ReflectionClass;
 use RuntimeException;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -86,11 +87,21 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
             }
 
             $definition = null;
-            $requiredParameters = $enumReflection->getConstructor() ? $enumReflection->getConstructor()->getNumberOfRequiredParameters() : 0;
+            $requiredParameters = 0;
+            if ($enumReflection->getConstructor()) {
+                $requiredParameters = $enumReflection->getConstructor()->getNumberOfRequiredParameters();
+            }
+
             if ($requiredParameters === 0) {
                 $definition = new Definition($enumClass);
             } elseif ($requiredParameters === 2 && $enumReflection->isSubclassOf(AbstractTranslatedEnum::class)) {
-                $definition = new DefinitionDecorator('enum.abstract_translated');
+                if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
+                    // ChildDefinition was introduced as Symfony 3.3
+                    $definition = new ChildDefinition('enum.abstract_translated');
+                } else {
+                    // DefinitionDecorator was deprecated as Symfony 3.3
+                    $definition = new DefinitionDecorator('enum.abstract_translated');
+                }
                 $definition->setClass($enumClass);
                 $definition->addArgument(
                     $this->getTransPattern($enumClass)
