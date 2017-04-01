@@ -2,10 +2,9 @@
 
 namespace Yokai\EnumBundle\Tests\Form;
 
+use Symfony\Component\Form\AbstractExtension;
 use Yokai\EnumBundle\Form\Type\EnumType;
 use Yokai\EnumBundle\Registry\EnumRegistryInterface;
-use Symfony\Component\Form\AbstractExtension;
-use Symfony\Component\Form\Exception;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

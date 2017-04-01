@@ -2,11 +2,11 @@
 
 namespace Yokai\EnumBundle\Tests\Form\Type;
 
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Test\TypeTestCase;
 use Yokai\EnumBundle\Form\Type\EnumType;
 use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Form\TestExtension;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

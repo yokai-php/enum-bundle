@@ -2,8 +2,8 @@
 
 namespace Yokai\EnumBundle\Enum;
 
-use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
 use Symfony\Component\Translation\TranslatorInterface;
+use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

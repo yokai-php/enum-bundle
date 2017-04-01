@@ -2,10 +2,12 @@
 
 namespace Yokai\EnumBundle\Exception;
 
+use BadMethodCallException;
+
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class DuplicatedEnumException extends \BadMethodCallException
+class DuplicatedEnumException extends BadMethodCallException
 {
     /**
      * @param string $name

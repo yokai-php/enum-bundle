@@ -2,11 +2,11 @@
 
 namespace Yokai\EnumBundle\Tests\Validator\Constraints;
 
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
-use Symfony\Component\Validator\Constraints\Choice;
-use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

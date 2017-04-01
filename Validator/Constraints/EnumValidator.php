@@ -2,11 +2,11 @@
 
 namespace Yokai\EnumBundle\Validator\Constraints;
 
-use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

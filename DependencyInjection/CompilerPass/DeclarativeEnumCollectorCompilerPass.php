@@ -2,8 +2,8 @@
 
 namespace Yokai\EnumBundle\DependencyInjection\CompilerPass;
 
-use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
-use Yokai\EnumBundle\Enum\EnumInterface;
+use ReflectionClass;
+use RuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,6 +11,8 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -43,7 +45,7 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
      */
     public function __construct($bundle, $transDomain = null)
     {
-        $reflection = new \ReflectionClass($bundle);
+        $reflection = new ReflectionClass($bundle);
         $this->bundleDir = dirname($reflection->getFileName());
         $this->bundleNamespace = $reflection->getNamespaceName();
         $this->bundleName = $reflection->getShortName();
@@ -57,7 +59,7 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (!class_exists('Symfony\Component\Finder\Finder')) {
-            throw new \RuntimeException('You need the symfony/finder component to register enums.');
+            throw new RuntimeException('You need the symfony/finder component to register enums.');
         }
 
         $enumDir = $this->bundleDir . '/Enum';
@@ -77,7 +79,7 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
             }
 
             $enumClass = $enumNamespace . '\\' . $file->getBasename('.php');
-            $enumReflection = new \ReflectionClass($enumClass);
+            $enumReflection = new ReflectionClass($enumClass);
 
             if (!$enumReflection->isSubclassOf(EnumInterface::class) || $enumReflection->isAbstract()) {
                 continue; //Not an enum or abstract enum

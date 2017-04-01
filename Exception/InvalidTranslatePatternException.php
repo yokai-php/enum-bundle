@@ -2,10 +2,12 @@
 
 namespace Yokai\EnumBundle\Exception;
 
+use InvalidArgumentException;
+
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class InvalidTranslatePatternException extends \InvalidArgumentException
+class InvalidTranslatePatternException extends InvalidArgumentException
 {
     /**
      * @param string $transPattern

@@ -11,8 +11,8 @@ spl_autoload_register(function ($class) {
     return false;
 });
 
-use Yokai\EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
 use Prophecy\Argument;
+use Yokai\EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
