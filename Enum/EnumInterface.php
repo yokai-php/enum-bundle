@@ -1,6 +1,6 @@
 <?php
 
-namespace EnumBundle\Enum;
+namespace Yokai\EnumBundle\Enum;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

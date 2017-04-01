@@ -1,10 +1,10 @@
 <?php
 
-namespace EnumBundle\Registry;
+namespace Yokai\EnumBundle\Registry;
 
-use EnumBundle\Enum\EnumInterface;
-use EnumBundle\Exception\DuplicatedEnumException;
-use EnumBundle\Exception\InvalidEnumException;
+use Yokai\EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Exception\DuplicatedEnumException;
+use Yokai\EnumBundle\Exception\InvalidEnumException;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

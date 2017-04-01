@@ -1,8 +1,8 @@
 <?php
 
-namespace EnumBundle\Enum;
+namespace Yokai\EnumBundle\Enum;
 
-use EnumBundle\Exception\InvalidTranslatePatternException;
+use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**

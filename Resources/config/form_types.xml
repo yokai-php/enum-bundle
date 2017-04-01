@@ -6,7 +6,7 @@
 
     <services>
 
-        <service id="form_type.enum" class="EnumBundle\Form\Type\EnumType">
+        <service id="form_type.enum" class="Yokai\EnumBundle\Form\Type\EnumType">
             <argument type="service" id="enum.registry"/>
 
             <tag name="form.type" alias="enum" />

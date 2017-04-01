@@ -1,8 +1,8 @@
 <?php
 
-namespace EnumBundle\Form\Type;
+namespace Yokai\EnumBundle\Form\Type;
 
-use EnumBundle\Registry\EnumRegistryInterface;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;

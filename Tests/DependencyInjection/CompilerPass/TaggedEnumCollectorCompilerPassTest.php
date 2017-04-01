@@ -1,8 +1,8 @@
 <?php
 
-namespace EnumBundle\Tests\DependencyInjection\CompilerPass;
+namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
 
-use EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
+use Yokai\EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**

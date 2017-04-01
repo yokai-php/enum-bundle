@@ -1,8 +1,8 @@
 <?php
 
-namespace EnumBundle\Twig\Extension;
+namespace Yokai\EnumBundle\Twig\Extension;
 
-use EnumBundle\Registry\EnumRegistryInterface;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 use Twig_Extension;
 
 /**

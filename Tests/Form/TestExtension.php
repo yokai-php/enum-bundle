@@ -1,9 +1,9 @@
 <?php
 
-namespace EnumBundle\Tests\Form;
+namespace Yokai\EnumBundle\Tests\Form;
 
-use EnumBundle\Form\Type\EnumType;
-use EnumBundle\Registry\EnumRegistryInterface;
+use Yokai\EnumBundle\Form\Type\EnumType;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Form\AbstractExtension;
 use Symfony\Component\Form\Exception;
 

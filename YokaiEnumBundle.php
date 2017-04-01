@@ -1,17 +1,17 @@
 <?php
 
-namespace EnumBundle;
+namespace Yokai\EnumBundle;
 
-use EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
-use EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
-use EnumBundle\DependencyInjection\EnumExtension;
+use Yokai\EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
+use Yokai\EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
+use Yokai\EnumBundle\DependencyInjection\EnumExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
  */
-class EnumBundle extends Bundle
+class YokaiEnumBundle extends Bundle
 {
     /**
      * {@inheritdoc}

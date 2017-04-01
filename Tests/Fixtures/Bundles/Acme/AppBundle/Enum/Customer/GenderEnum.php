@@ -2,7 +2,7 @@
 
 namespace Acme\AppBundle\Enum\Customer;
 
-use EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

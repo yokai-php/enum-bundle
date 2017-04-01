@@ -1,6 +1,6 @@
 <?php
 
-namespace EnumBundle\Tests\DependencyInjection\CompilerPass;
+namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
 
 spl_autoload_register(function ($class) {
     $file = dirname(dirname(__DIR__)).'/Fixtures/Bundles/'.str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
@@ -11,7 +11,7 @@ spl_autoload_register(function ($class) {
     return false;
 });
 
-use EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
+use Yokai\EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
 use Prophecy\Argument;
 
 /**

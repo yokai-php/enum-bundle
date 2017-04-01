@@ -1,6 +1,6 @@
 <?php
 
-namespace EnumBundle\DependencyInjection;
+namespace Yokai\EnumBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

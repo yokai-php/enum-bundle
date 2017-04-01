@@ -1,8 +1,8 @@
 <?php
 
-namespace EnumBundle\Tests\Fixtures;
+namespace Yokai\EnumBundle\Tests\Fixtures;
 
-use EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

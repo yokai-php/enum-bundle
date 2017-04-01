@@ -6,7 +6,7 @@
 
     <services>
 
-        <service id="validator.enum" class="EnumBundle\Validator\Constraints\EnumValidator">
+        <service id="validator.enum" class="Yokai\EnumBundle\Validator\Constraints\EnumValidator">
             <argument type="service" id="enum.registry"/>
 
             <tag name="validator.constraint_validator" alias="enum"/>

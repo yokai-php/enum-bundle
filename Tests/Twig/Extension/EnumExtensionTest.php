@@ -1,9 +1,9 @@
 <?php
 
-namespace EnumBundle\Tests\Twig\Extension;
+namespace Yokai\EnumBundle\Tests\Twig\Extension;
 
-use EnumBundle\Registry\EnumRegistryInterface;
-use EnumBundle\Twig\Extension\EnumExtension;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
+use Yokai\EnumBundle\Twig\Extension\EnumExtension;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>
@@ -17,7 +17,7 @@ class EnumExtensionTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->registry = $this->prophesize('EnumBundle\Registry\EnumRegistryInterface');
+        $this->registry = $this->prophesize('Yokai\EnumBundle\Registry\EnumRegistryInterface');
     }
 
     protected function tearDown()
@@ -29,7 +29,7 @@ class EnumExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumLabel()
     {
-        $enum = $this->prophesize('EnumBundle\Enum\EnumInterface');
+        $enum = $this->prophesize('Yokai\EnumBundle\Enum\EnumInterface');
         $enum->getChoices()
             ->willReturn(['foo' => 'FOO', 'bar' => 'BAR']);
 
@@ -59,7 +59,7 @@ class EnumExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumChoices()
     {
-        $enum = $this->prophesize('EnumBundle\Enum\EnumInterface');
+        $enum = $this->prophesize('Yokai\EnumBundle\Enum\EnumInterface');
         $enum->getChoices()
             ->willReturn(['foo' => 'FOO', 'bar' => 'BAR']);
 

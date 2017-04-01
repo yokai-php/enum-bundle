@@ -1,13 +1,13 @@
-EnumBundle
+Yokai\EnumBundle
 ==============
 
 This repository aims to provide simple enumeration implementation to Symfony2 :
 
 
-[![Build Status](https://api.travis-ci.org/yann-eugone/enum-bundle.png?branch=master)](https://travis-ci.org/yann-eugone/enum-bundle)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/yann-eugone/enum-bundle/build-status/master)
+[![Build Status](https://api.travis-ci.org/yokai-php/enum-bundle.png?branch=master)](https://travis-ci.org/yokai-php/enum-bundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/build-status/master)
 [![Total Downloads](https://poser.pugx.org/yeugone/enum-bundle/downloads.png)](https://packagist.org/packages/yeugone/enum-bundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338/mini.png)](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338)
 
@@ -31,7 +31,7 @@ public function registerBundles()
 {
     $bundles = [
         // ...
-        new EnumBundle\EnumBundle(),
+        new Yokai\EnumBundle(),
     ];
 }
 ```
@@ -49,7 +49,7 @@ We first need to create the classes that will handle our enums :
 // src/AppBundle/Enum/Member/GenderEnum.php
 namespace AppBundle\Enum\Member;
 
-use EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Enum\EnumInterface;
 
 class GenderEnum implements EnumInterface
 {
@@ -72,7 +72,7 @@ class GenderEnum implements EnumInterface
 // src/AppBundle/Enum/Member/StateEnum.php
 namespace AppBundle\Enum\Member;
 
-use EnumBundle\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
 
 class StateEnum extends AbstractTranslatedEnum
 {
@@ -120,7 +120,7 @@ Adding validation to your model :
 // src/AppBundle/Model/Member.php
 namespace AppBundle\Model;
 
-use EnumBundle\Validator\Constraints\Enum;
+use Yokai\EnumBundle\Validator\Constraints\Enum;
 
 class Member
 {
@@ -155,7 +155,7 @@ use AppBundle\Enum\GenderEnum;
 use AppBundle\Enum\StateEnum;
 use Symfony\Component\Form\AbstractType;
 // For Symfony >= 2.8
-use EnumBundle\Form\Type\EnumType;
+use Yokai\EnumBundle\Form\Type\EnumType;
 
 class MemberType extends AbstractType
 {
@@ -192,11 +192,11 @@ Integrations
 MIT License
 -----------
 
-License can be found [here](https://github.com/yann-eugone/enum-bundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/yokai-php/enum-bundle/blob/master/Resources/meta/LICENSE).
 
 
 Authors
 -------
 
 The bundle was originally created by [Yann Eugoné](https://github.com/yann-eugone).
-See the list of [contributors](https://github.com/yann-eugone/enum-bundle/contributors).
+See the list of [contributors](https://github.com/yokai-php/enum-bundle/contributors).

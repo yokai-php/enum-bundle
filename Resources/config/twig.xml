@@ -6,7 +6,7 @@
 
     <services>
 
-        <service id="twig.extension.enum" class="EnumBundle\Twig\Extension\EnumExtension">
+        <service id="twig.extension.enum" class="Yokai\EnumBundle\Twig\Extension\EnumExtension">
             <argument type="service" id="enum.registry"/>
 
             <tag name="twig.extension" alias="enum"/>

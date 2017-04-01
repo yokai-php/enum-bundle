@@ -1,8 +1,8 @@
 <?php
 
-namespace EnumBundle\Tests\Fixtures;
+namespace Yokai\EnumBundle\Tests\Fixtures;
 
-use EnumBundle\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
 
 /**
  * @author Yann Eugoné <yann.eugone@gmail.com>

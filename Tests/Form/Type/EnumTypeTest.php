@@ -1,10 +1,10 @@
 <?php
 
-namespace EnumBundle\Tests\Form\Type;
+namespace Yokai\EnumBundle\Tests\Form\Type;
 
-use EnumBundle\Form\Type\EnumType;
-use EnumBundle\Tests\Fixtures\GenderEnum;
-use EnumBundle\Tests\Form\TestExtension;
+use Yokai\EnumBundle\Form\Type\EnumType;
+use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
+use Yokai\EnumBundle\Tests\Form\TestExtension;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
@@ -17,7 +17,7 @@ class EnumTypeTest extends TypeTestCase
 
     protected function setUp()
     {
-        $this->enumRegistry = $this->prophesize('EnumBundle\Registry\EnumRegistryInterface');
+        $this->enumRegistry = $this->prophesize('Yokai\EnumBundle\Registry\EnumRegistryInterface');
         $this->enumRegistry->has('state')->willReturn(false);
         $this->enumRegistry->has('gender')->willReturn(true);
         $this->enumRegistry->get('gender')->willReturn(new GenderEnum);

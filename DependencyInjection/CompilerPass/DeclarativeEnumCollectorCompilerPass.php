@@ -1,9 +1,9 @@
 <?php
 
-namespace EnumBundle\DependencyInjection\CompilerPass;
+namespace Yokai\EnumBundle\DependencyInjection\CompilerPass;
 
-use EnumBundle\Enum\AbstractTranslatedEnum;
-use EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\Enum\EnumInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

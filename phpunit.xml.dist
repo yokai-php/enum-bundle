@@ -13,7 +13,7 @@
         >
 
     <testsuites>
-        <testsuite name="EnumBundle Test Suite">
+        <testsuite name="YokaiEnumBundle Test Suite">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>

@@ -1,6 +1,6 @@
 <?php
 
-namespace EnumBundle\Validator\Constraints;
+namespace Yokai\EnumBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraints\Choice;
 
