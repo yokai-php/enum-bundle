@@ -15,7 +15,7 @@ class Enum extends Choice
     public $enum;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getDefaultOption()
     {
@@ -23,7 +23,7 @@ class Enum extends Choice
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function validatedBy()
     {

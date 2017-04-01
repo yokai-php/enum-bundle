@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function process(ContainerBuilder $container)
     {

@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ConventionedEnumCollectorCompilerPass implements CompilerPassInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function process(ContainerBuilder $container)
     {

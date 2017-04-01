@@ -27,7 +27,7 @@ class EnumValidator extends ChoiceValidator
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function validate($value, Constraint $constraint)
     {

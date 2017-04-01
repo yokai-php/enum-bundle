@@ -25,7 +25,7 @@ class TestExtension extends AbstractExtension
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function loadTypes()
     {

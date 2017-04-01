@@ -17,7 +17,7 @@ class EnumRegistry implements EnumRegistryInterface
     private $enums;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function add(EnumInterface $enum)
     {
@@ -29,7 +29,7 @@ class EnumRegistry implements EnumRegistryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function get($name)
     {
@@ -41,7 +41,7 @@ class EnumRegistry implements EnumRegistryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function has($name)
     {
