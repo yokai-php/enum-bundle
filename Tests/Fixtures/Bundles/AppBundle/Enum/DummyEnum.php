@@ -2,10 +2,10 @@
 
 namespace AppBundle\Enum;
 
-use EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
- * @author Yann Eugoné <yeugone@prestaconcept.net>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class DummyEnum implements EnumInterface
 {

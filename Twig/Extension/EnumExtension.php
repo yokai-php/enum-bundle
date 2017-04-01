@@ -1,12 +1,14 @@
 <?php
 
-namespace EnumBundle\Twig\Extension;
+namespace Yokai\EnumBundle\Twig\Extension;
 
-use EnumBundle\Registry\EnumRegistryInterface;
 use Twig_Extension;
+use Twig_SimpleFilter;
+use Twig_SimpleFunction;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumExtension extends Twig_Extension
 {
@@ -24,23 +26,23 @@ class EnumExtension extends Twig_Extension
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('enum_label', [ $this, 'getLabel' ]),
-            new \Twig_SimpleFunction('enum_choices', [ $this, 'getChoices' ]),
+            new Twig_SimpleFunction('enum_label', [ $this, 'getLabel' ]),
+            new Twig_SimpleFunction('enum_choices', [ $this, 'getChoices' ]),
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('enum_label', [ $this, 'getLabel' ]),
+            new Twig_SimpleFilter('enum_label', [ $this, 'getLabel' ]),
         ];
     }
 
@@ -72,7 +74,7 @@ class EnumExtension extends Twig_Extension
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getName()
     {

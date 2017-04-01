@@ -1,14 +1,13 @@
 <?php
 
-namespace EnumBundle\Tests\Form;
+namespace Yokai\EnumBundle\Tests\Form;
 
-use EnumBundle\Form\Type\EnumType;
-use EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Form\AbstractExtension;
-use Symfony\Component\Form\Exception;
+use Yokai\EnumBundle\Form\Type\EnumType;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class TestExtension extends AbstractExtension
 {
@@ -26,7 +25,7 @@ class TestExtension extends AbstractExtension
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function loadTypes()
     {

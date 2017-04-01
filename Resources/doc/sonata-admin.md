@@ -13,7 +13,7 @@ namespace AppBundle\Admin;
 
 use AppBundle\Enum\GenderEnum;
 use AppBundle\Enum\StateEnum;
-use EnumBundle\Form\Type\EnumType;
+use Yokai\EnumBundle\Form\Type\EnumType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;

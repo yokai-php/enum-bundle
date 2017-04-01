@@ -1,13 +1,13 @@
 <?php
 
-namespace EnumBundle\Tests\Registry;
+namespace Yokai\EnumBundle\Tests\Registry;
 
-use EnumBundle\Registry\EnumRegistry;
-use EnumBundle\Tests\Fixtures\GenderEnum;
-use EnumBundle\Tests\Fixtures\StateEnum;
+use Yokai\EnumBundle\Registry\EnumRegistry;
+use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
+use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 {
@@ -28,14 +28,14 @@ class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddDuplicatedException()
     {
-        $this->setExpectedException('EnumBundle\Exception\DuplicatedEnumException');
+        $this->setExpectedException('Yokai\EnumBundle\Exception\DuplicatedEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->add(new GenderEnum);
     }
 
     public function testGetInvalidException()
     {
-        $this->setExpectedException('EnumBundle\Exception\InvalidEnumException');
+        $this->setExpectedException('Yokai\EnumBundle\Exception\InvalidEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->get('type');
     }

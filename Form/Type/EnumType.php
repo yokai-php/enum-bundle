@@ -1,15 +1,15 @@
 <?php
 
-namespace EnumBundle\Form\Type;
+namespace Yokai\EnumBundle\Form\Type;
 
-use EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumType extends AbstractType
 {
@@ -27,7 +27,7 @@ class EnumType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -50,7 +50,7 @@ class EnumType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getParent()
     {
@@ -62,7 +62,7 @@ class EnumType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getBlockPrefix()
     {
@@ -70,7 +70,7 @@ class EnumType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getName()
     {

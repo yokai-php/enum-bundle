@@ -2,10 +2,10 @@
 
 namespace Acme\Bundle\AppBundle\Enum\Customer;
 
-use EnumBundle\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class StateEnum extends AbstractTranslatedEnum
 {

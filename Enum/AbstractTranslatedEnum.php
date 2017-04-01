@@ -1,12 +1,12 @@
 <?php
 
-namespace EnumBundle\Enum;
+namespace Yokai\EnumBundle\Enum;
 
-use EnumBundle\Exception\InvalidTranslatePatternException;
 use Symfony\Component\Translation\TranslatorInterface;
+use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 abstract class AbstractTranslatedEnum implements EnumInterface
 {

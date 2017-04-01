@@ -1,11 +1,13 @@
 <?php
 
-namespace EnumBundle\Exception;
+namespace Yokai\EnumBundle\Exception;
+
+use DomainException;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class InvalidEnumException extends \DomainException
+class InvalidEnumException extends DomainException
 {
     /**
      * @param string $name

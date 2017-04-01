@@ -1,12 +1,12 @@
 <?php
 
-namespace EnumBundle\Tests\DependencyInjection\CompilerPass;
+namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
 
-use EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 use Symfony\Component\DependencyInjection\Reference;
+use Yokai\EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class TaggedEnumCollectorCompilerPassTest extends \PHPUnit_Framework_TestCase
 {

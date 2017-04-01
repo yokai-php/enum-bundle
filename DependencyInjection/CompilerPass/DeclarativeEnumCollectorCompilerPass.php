@@ -1,9 +1,10 @@
 <?php
 
-namespace EnumBundle\DependencyInjection\CompilerPass;
+namespace Yokai\EnumBundle\DependencyInjection\CompilerPass;
 
-use EnumBundle\Enum\AbstractTranslatedEnum;
-use EnumBundle\Enum\EnumInterface;
+use ReflectionClass;
+use RuntimeException;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -11,9 +12,11 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
 {
@@ -43,7 +46,7 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
      */
     public function __construct($bundle, $transDomain = null)
     {
-        $reflection = new \ReflectionClass($bundle);
+        $reflection = new ReflectionClass($bundle);
         $this->bundleDir = dirname($reflection->getFileName());
         $this->bundleNamespace = $reflection->getNamespaceName();
         $this->bundleName = $reflection->getShortName();
@@ -52,12 +55,12 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function process(ContainerBuilder $container)
     {
         if (!class_exists('Symfony\Component\Finder\Finder')) {
-            throw new \RuntimeException('You need the symfony/finder component to register enums.');
+            throw new RuntimeException('You need the symfony/finder component to register enums.');
         }
 
         $enumDir = $this->bundleDir . '/Enum';
@@ -77,18 +80,28 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
             }
 
             $enumClass = $enumNamespace . '\\' . $file->getBasename('.php');
-            $enumReflection = new \ReflectionClass($enumClass);
+            $enumReflection = new ReflectionClass($enumClass);
 
             if (!$enumReflection->isSubclassOf(EnumInterface::class) || $enumReflection->isAbstract()) {
                 continue; //Not an enum or abstract enum
             }
 
             $definition = null;
-            $requiredParameters = $enumReflection->getConstructor() ? $enumReflection->getConstructor()->getNumberOfRequiredParameters() : 0;
+            $requiredParameters = 0;
+            if ($enumReflection->getConstructor()) {
+                $requiredParameters = $enumReflection->getConstructor()->getNumberOfRequiredParameters();
+            }
+
             if ($requiredParameters === 0) {
                 $definition = new Definition($enumClass);
             } elseif ($requiredParameters === 2 && $enumReflection->isSubclassOf(AbstractTranslatedEnum::class)) {
-                $definition = new DefinitionDecorator('enum.abstract_translated');
+                if (class_exists('Symfony\Component\DependencyInjection\ChildDefinition')) {
+                    // ChildDefinition was introduced as Symfony 3.3
+                    $definition = new ChildDefinition('enum.abstract_translated');
+                } else {
+                    // DefinitionDecorator was deprecated as Symfony 3.3
+                    $definition = new DefinitionDecorator('enum.abstract_translated');
+                }
                 $definition->setClass($enumClass);
                 $definition->addArgument(
                     $this->getTransPattern($enumClass)

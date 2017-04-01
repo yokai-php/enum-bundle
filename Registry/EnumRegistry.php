@@ -1,13 +1,13 @@
 <?php
 
-namespace EnumBundle\Registry;
+namespace Yokai\EnumBundle\Registry;
 
-use EnumBundle\Enum\EnumInterface;
-use EnumBundle\Exception\DuplicatedEnumException;
-use EnumBundle\Exception\InvalidEnumException;
+use Yokai\EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Exception\DuplicatedEnumException;
+use Yokai\EnumBundle\Exception\InvalidEnumException;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumRegistry implements EnumRegistryInterface
 {
@@ -17,7 +17,7 @@ class EnumRegistry implements EnumRegistryInterface
     private $enums;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function add(EnumInterface $enum)
     {
@@ -29,7 +29,7 @@ class EnumRegistry implements EnumRegistryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function get($name)
     {
@@ -41,7 +41,7 @@ class EnumRegistry implements EnumRegistryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function has($name)
     {

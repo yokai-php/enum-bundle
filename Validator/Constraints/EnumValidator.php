@@ -1,15 +1,15 @@
 <?php
 
-namespace EnumBundle\Validator\Constraints;
+namespace Yokai\EnumBundle\Validator\Constraints;
 
-use EnumBundle\Registry\EnumRegistryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\ChoiceValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumValidator extends ChoiceValidator
 {
@@ -27,7 +27,7 @@ class EnumValidator extends ChoiceValidator
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function validate($value, Constraint $constraint)
     {
