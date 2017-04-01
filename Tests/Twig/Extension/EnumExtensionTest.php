@@ -6,7 +6,7 @@ use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 use Yokai\EnumBundle\Twig\Extension\EnumExtension;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumExtensionTest extends \PHPUnit_Framework_TestCase
 {

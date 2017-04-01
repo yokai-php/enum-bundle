@@ -3,7 +3,7 @@
 namespace Yokai\EnumBundle\Exception;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class InvalidTranslatePatternException extends \InvalidArgumentException
 {

@@ -42,4 +42,4 @@ after_script:
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 notifications:
-  email: yann.eugone@gmail.com
+  email: eugone.yann@gmail.com

@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractExtension;
 use Symfony\Component\Form\Exception;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class TestExtension extends AbstractExtension
 {

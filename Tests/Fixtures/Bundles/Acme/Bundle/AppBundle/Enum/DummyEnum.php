@@ -5,7 +5,7 @@ namespace Acme\Bundle\AppBundle\Enum;
 use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
- * @author Yann Eugoné <yeugone@prestaconcept.net>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class DummyEnum implements EnumInterface
 {

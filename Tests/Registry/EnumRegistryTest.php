@@ -7,7 +7,7 @@ use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 {

@@ -15,7 +15,7 @@ use Yokai\EnumBundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorC
 use Prophecy\Argument;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class ConventionedEnumCollectorCompilerPassTest extends \PHPUnit_Framework_TestCase
 {

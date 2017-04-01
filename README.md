@@ -8,7 +8,7 @@ This repository aims to provide simple enumeration implementation to Symfony2 :
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/build-status/master)
-[![Total Downloads](https://poser.pugx.org/yeugone/enum-bundle/downloads.png)](https://packagist.org/packages/yeugone/enum-bundle)
+[![Total Downloads](https://poser.pugx.org/yokai-php/enum-bundle/downloads.png)](https://packagist.org/packages/yokai-php/enum-bundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338/mini.png)](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338)
 
 
@@ -18,7 +18,7 @@ Installation
 ### Add the bundle as dependency with Composer
 
 ``` bash
-$ php composer.phar require yeugone/enum-bundle
+$ php composer.phar require yokai-php/enum-bundle
 ```
 
 ### Enable the bundle in the kernel

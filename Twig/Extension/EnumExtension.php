@@ -6,7 +6,7 @@ use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 use Twig_Extension;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumExtension extends Twig_Extension
 {

@@ -3,7 +3,7 @@
 namespace Yokai\EnumBundle\Enum;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 interface EnumInterface
 {

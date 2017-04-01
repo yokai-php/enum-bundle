@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumValidatorTest extends AbstractConstraintValidatorTest
 {

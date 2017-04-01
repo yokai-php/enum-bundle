@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints\Choice;
  * @Annotation
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  *
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class Enum extends Choice
 {

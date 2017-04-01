@@ -1,11 +1,11 @@
 {
-    "name": "yeugone/enum-bundle",
+    "name": "yokai-php/enum-bundle",
     "description": "Bring simple enumeration implementation to Symfony2",
     "license": "MIT",
     "authors": [
         {
             "name": "Yann Eugoné",
-            "email": "yann.eugone@gmail.com"
+            "email": "eugone.yann@gmail.com"
         }
     ],
     "require": {

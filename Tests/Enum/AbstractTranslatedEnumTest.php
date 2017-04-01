@@ -5,7 +5,7 @@ namespace Tests\Enum;
 use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class AbstractTranslatedEnumTest extends \PHPUnit_Framework_TestCase
 {

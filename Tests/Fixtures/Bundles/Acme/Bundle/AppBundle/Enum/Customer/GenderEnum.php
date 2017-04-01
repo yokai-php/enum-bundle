@@ -5,7 +5,7 @@ namespace Acme\Bundle\AppBundle\Enum\Customer;
 use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
- * @author Yann Eugoné <yann.eugone@gmail.com>
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class GenderEnum implements EnumInterface
 {
