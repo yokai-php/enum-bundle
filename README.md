@@ -1,15 +1,17 @@
-Yokai\EnumBundle
+YokaiEnumBundle
 ==============
 
-This repository aims to provide simple enumeration implementation to Symfony2 :
-
+[![Latest Stable Version](https://poser.pugx.org/yokai/enum-bundle/v/stable)](https://packagist.org/packages/yokai/enum-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/yokai/enum-bundle/v/unstable)](https://packagist.org/packages/yokai/enum-bundle)
+[![Total Downloads](https://poser.pugx.org/yokai/enum-bundle/downloads)](https://packagist.org/packages/yokai/enum-bundle)
+[![License](https://poser.pugx.org/yokai/enum-bundle/license)](https://packagist.org/packages/yokai/enum-bundle)
 
 [![Build Status](https://api.travis-ci.org/yokai-php/enum-bundle.png?branch=master)](https://travis-ci.org/yokai-php/enum-bundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/build-status/master)
-[![Total Downloads](https://poser.pugx.org/yokai-php/enum-bundle/downloads.png)](https://packagist.org/packages/yokai-php/enum-bundle)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338/mini.png)](https://insight.sensiolabs.com/projects/a3246c63-abbf-4605-98ca-33295a547338)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/596d2076-90ee-49d9-a8b2-e3bcbd390874/mini.png)](https://insight.sensiolabs.com/projects/596d2076-90ee-49d9-a8b2-e3bcbd390874)
+
+This repository aims to provide simple enumeration implementation to Symfony2 :
 
 
 Installation
@@ -18,7 +20,7 @@ Installation
 ### Add the bundle as dependency with Composer
 
 ``` bash
-$ php composer.phar require yokai-php/enum-bundle
+$ php composer.phar require yokai/enum-bundle
 ```
 
 ### Enable the bundle in the kernel
@@ -31,7 +33,7 @@ public function registerBundles()
 {
     $bundles = [
         // ...
-        new Yokai\EnumBundle(),
+        new Yokai\EnumBundle\YokaiEnumBundle(),
     ];
 }
 ```
