@@ -3,6 +3,7 @@
 namespace Yokai\EnumBundle\Tests\Form;
 
 use Symfony\Component\Form\AbstractExtension;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yokai\EnumBundle\Form\Type\EnumType;
 use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
@@ -17,11 +18,18 @@ class TestExtension extends AbstractExtension
     private $enumRegistry;
 
     /**
-     * @param EnumRegistryInterface $enumRegistry
+     * @var TranslatorInterface
      */
-    public function __construct(EnumRegistryInterface $enumRegistry)
+    private $translator;
+
+    /**
+     * @param EnumRegistryInterface $enumRegistry
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(EnumRegistryInterface $enumRegistry, TranslatorInterface $translator)
     {
         $this->enumRegistry = $enumRegistry;
+        $this->translator = $translator;
     }
 
     /**
@@ -30,7 +38,7 @@ class TestExtension extends AbstractExtension
     protected function loadTypes()
     {
         return [
-            new EnumType($this->enumRegistry),
+            new EnumType($this->enumRegistry, $this->translator),
         ];
     }
 }

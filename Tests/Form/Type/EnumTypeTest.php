@@ -15,12 +15,18 @@ class EnumTypeTest extends TypeTestCase
 {
     private $enumRegistry;
 
+    private $translator;
+
     protected function setUp()
     {
         $this->enumRegistry = $this->prophesize('Yokai\EnumBundle\Registry\EnumRegistryInterface');
         $this->enumRegistry->has('state')->willReturn(false);
         $this->enumRegistry->has('gender')->willReturn(true);
         $this->enumRegistry->get('gender')->willReturn(new GenderEnum);
+
+        $this->translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface');
+        $this->translator->trans('Male', [], 'messages')->willReturn('Male');
+        $this->translator->trans('Female', [], 'messages')->willReturn('Female');
 
         parent::setUp();
     }
@@ -47,7 +53,7 @@ class EnumTypeTest extends TypeTestCase
     protected function getExtensions()
     {
         return [
-            new TestExtension($this->enumRegistry->reveal())
+            new TestExtension($this->enumRegistry->reveal(), $this->translator->reveal())
         ];
     }
 

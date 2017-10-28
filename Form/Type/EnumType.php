@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
 /**
@@ -19,11 +20,18 @@ class EnumType extends AbstractType
     private $enumRegistry;
 
     /**
-     * @param EnumRegistryInterface $enumRegistry
+     * @var TranslatorInterface
      */
-    public function __construct(EnumRegistryInterface $enumRegistry)
+    private $translator;
+
+    /**
+     * @param EnumRegistryInterface $enumRegistry
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(EnumRegistryInterface $enumRegistry, TranslatorInterface $translator)
     {
         $this->enumRegistry = $enumRegistry;
+        $this->translator = $translator;
     }
 
     /**
@@ -40,10 +48,20 @@ class EnumType extends AbstractType
                     return $this->enumRegistry->has($name);
                 }
             )
+            ->setDefault('enum_translation_parameters', [])
+            ->setDefault('enum_translation_domain', 'messages')
             ->setDefault(
                 'choices',
                 function (Options $options) {
-                    return array_flip($this->enumRegistry->get($options['enum'])->getChoices());
+                    $choices = array_map(function ($choice) use ($options) {
+                        return $this->translator->trans(
+                            $choice,
+                            $options['enum_translation_parameters'],
+                            $options['enum_translation_domain']
+                        );
+                    }, $this->enumRegistry->get($options['enum'])->getChoices());
+
+                    return array_flip($choices);
                 }
             )
         ;
