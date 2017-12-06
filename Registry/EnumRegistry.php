@@ -47,4 +47,12 @@ class EnumRegistry implements EnumRegistryInterface
     {
         return isset($this->enums[$name]);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function all()
+    {
+        return $this->enums;
+    }
 }

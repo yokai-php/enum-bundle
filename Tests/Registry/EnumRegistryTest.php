@@ -56,5 +56,6 @@ class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($gender, $this->registry->get('gender'));
         $this->assertSame($type, $this->registry->get('state'));
+        $this->assertSame(['gender' => $gender, 'state' => $type], $this->registry->all());
     }
 }

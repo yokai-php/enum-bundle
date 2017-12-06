@@ -32,4 +32,9 @@ interface EnumRegistryInterface
      * @return bool
      */
     public function has($name);
+
+    /**
+     * @return EnumInterface[]
+     */
+    public function all();
 }
