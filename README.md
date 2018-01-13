@@ -164,11 +164,15 @@ class MemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // For Symfony >= 2.8
+            // Let the bundle guess the form type for you (requires that you configured the validation)
+            ->add('state')
+            ->add('gender')
+
+            // Manual form type binding for Symfony >= 2.8
             ->add('state', EnumType::class, ['enum' => StateEnum::NAME])
             ->add('gender', EnumType::class, ['enum' => GenderEnum::NAME])
 
-            // For Symfony 2.7
+            // Manual form type binding for Symfony 2.7
             ->add('state', 'enum', ['enum' => StateEnum::NAME])
             ->add('gender', 'enum', ['enum' => GenderEnum::NAME])
         ;
