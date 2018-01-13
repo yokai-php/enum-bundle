@@ -24,7 +24,7 @@ class EnumExtension extends Extension
 
         $xmlLoader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $xmlLoader->load('services.xml');
-        $xmlLoader->load('form_types.xml');
+        $xmlLoader->load('forms.xml');
         $xmlLoader->load('validators.xml');
         $xmlLoader->load('twig.xml');
     }
