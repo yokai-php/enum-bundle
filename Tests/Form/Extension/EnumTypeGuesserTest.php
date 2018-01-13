@@ -17,6 +17,9 @@ use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Form\TestExtension;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 class EnumTypeGuesserTest extends TypeTestCase
 {
     const TEST_CLASS = 'Yokai\EnumBundle\Tests\Form\Extension\EnumTypeGuesserTest_TestClass';
@@ -64,7 +67,7 @@ class EnumTypeGuesserTest extends TypeTestCase
     public function testGuessType()
     {
         $guess = new TypeGuess(
-            'Yokai\EnumBundle\Form\Type\EnumType',
+            $this->getEnumType(),
             [
                 'enum' => 'gender',
                 'multiple' => false,
