@@ -27,19 +27,19 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
 
     public function testAcceptOnlyEnum()
     {
-        $this->setExpectedException('Symfony\Component\Validator\Exception\UnexpectedTypeException');
+        $this->expectException('Symfony\Component\Validator\Exception\UnexpectedTypeException');
         $this->validator->validate(null, new Choice);
     }
 
     public function testEnumIsRequired()
     {
-        $this->setExpectedException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
+        $this->expectException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
         $this->validator->validate('foo', new Enum);
     }
 
     public function testValidEnumIsRequired()
     {
-        $this->setExpectedException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
+        $this->expectException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
         $this->validator->validate('foo', new Enum('state'));
     }
 

@@ -27,13 +27,13 @@ class EnumTypeTest extends TypeTestCase
 
     public function testEnumOptionIsRequired()
     {
-        $this->setExpectedException('Symfony\Component\OptionsResolver\Exception\MissingOptionsException');
+        $this->expectException('Symfony\Component\OptionsResolver\Exception\MissingOptionsException');
         $this->createForm();
     }
 
     public function testEnumOptionIsInvalid()
     {
-        $this->setExpectedException('Symfony\Component\OptionsResolver\Exception\InvalidOptionsException');
+        $this->expectException('Symfony\Component\OptionsResolver\Exception\InvalidOptionsException');
         $this->createForm('state');
     }
 
