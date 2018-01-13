@@ -185,10 +185,10 @@ Displaying the label for an enum value within a template :
 ```
 
 
-Integrations
+Recipes
 ------------
 
-- [SonataAdminBundle](https://github.com/sonata-project/SonataAdminBundle) : see [doc](Resources/doc/sonata-admin.md)
+- Usage in [SonataAdminBundle](https://github.com/sonata-project/SonataAdminBundle) : see [doc](Resources/doc/sonata-admin.md)
 
 
 MIT License
