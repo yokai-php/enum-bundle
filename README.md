@@ -11,7 +11,7 @@ YokaiEnumBundle
 [![Code Coverage](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/596d2076-90ee-49d9-a8b2-e3bcbd390874/mini.png)](https://insight.sensiolabs.com/projects/596d2076-90ee-49d9-a8b2-e3bcbd390874)
 
-This repository aims to provide simple enumeration implementation to Symfony2 :
+This repository aims to provide simple enumeration implementation to Symfony :
 
 
 Installation
