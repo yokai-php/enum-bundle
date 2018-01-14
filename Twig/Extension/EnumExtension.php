@@ -31,8 +31,8 @@ class EnumExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('enum_label', [ $this, 'getLabel' ]),
-            new Twig_SimpleFunction('enum_choices', [ $this, 'getChoices' ]),
+            new Twig_SimpleFunction('enum_label', [$this, 'getLabel']),
+            new Twig_SimpleFunction('enum_choices', [$this, 'getChoices']),
         ];
     }
 
@@ -42,7 +42,7 @@ class EnumExtension extends Twig_Extension
     public function getFilters()
     {
         return [
-            new Twig_SimpleFilter('enum_label', [ $this, 'getLabel' ]),
+            new Twig_SimpleFilter('enum_label', [$this, 'getLabel']),
         ];
     }
 
