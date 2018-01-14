@@ -45,11 +45,30 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
     }
 
     /**
+     * @inheritdoc
+     */
+    public function guessTypeForConstraint(Constraint $constraint)
+    {
+        if (!$constraint instanceof Enum) {
+            return null;
+        }
+
+        return new TypeGuess(
+            $this->enumFormType,
+            [
+                'enum' => $constraint->enum,
+                'multiple' => $constraint->multiple,
+            ],
+            Guess::HIGH_CONFIDENCE
+        );
+    }
+
+    /**
      * @inheritDoc
      */
     public function guessRequired($class, $property)
     {
-        return null;
+        return null; //override parent : not able to guess
     }
 
     /**
@@ -57,7 +76,7 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
      */
     public function guessMaxLength($class, $property)
     {
-        return null;
+        return null; //override parent : not able to guess
     }
 
     /**
@@ -65,27 +84,6 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
      */
     public function guessPattern($class, $property)
     {
-        return null;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function guessTypeForConstraint(Constraint $constraint)
-    {
-        switch (get_class($constraint)) {
-            case 'Yokai\EnumBundle\Validator\Constraints\Enum':
-                /** @var $constraint Enum */
-                return new TypeGuess(
-                    $this->enumFormType,
-                    [
-                        'enum' => $constraint->enum,
-                        'multiple' => $constraint->multiple,
-                    ],
-                    Guess::HIGH_CONFIDENCE
-                );
-        }
-
-        return null;
+        return null; //override parent : not able to guess
     }
 }
