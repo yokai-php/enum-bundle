@@ -11,7 +11,7 @@ class AbstractTranslatedEnumTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructedWithInvalidPattern()
     {
-        $this->setExpectedException('Yokai\EnumBundle\Exception\InvalidTranslatePatternException');
+        $this->expectException('Yokai\EnumBundle\Exception\InvalidTranslatePatternException');
         $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface');
         new StateEnum($translator->reveal(), 'invalid.pattern');
     }

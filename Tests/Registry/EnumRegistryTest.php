@@ -28,14 +28,14 @@ class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddDuplicatedException()
     {
-        $this->setExpectedException('Yokai\EnumBundle\Exception\DuplicatedEnumException');
+        $this->expectException('Yokai\EnumBundle\Exception\DuplicatedEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->add(new GenderEnum);
     }
 
     public function testGetInvalidException()
     {
-        $this->setExpectedException('Yokai\EnumBundle\Exception\InvalidEnumException');
+        $this->expectException('Yokai\EnumBundle\Exception\InvalidEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->get('type');
     }
