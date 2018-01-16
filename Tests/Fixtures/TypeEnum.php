@@ -2,20 +2,15 @@
 
 namespace Yokai\EnumBundle\Tests\Fixtures;
 
-use Yokai\EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Enum\ConfigurableEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class TypeEnum implements EnumInterface
+class TypeEnum extends ConfigurableEnum
 {
-    public function getChoices()
+    public function __construct()
     {
-        return ['customer' => 'Customer', 'prospect' => 'Prospect'];
-    }
-
-    public function getName()
-    {
-        return 'type';
+        parent::__construct('type', ['customer' => 'Customer', 'prospect' => 'Prospect']);
     }
 }
