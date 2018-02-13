@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Yokai\EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Registry\EnumRegistryInterface;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -29,9 +30,13 @@ class EnumExtension extends Extension
         $xmlLoader->load('validators.xml');
         $xmlLoader->load('twig.xml');
 
-        if (method_exists($container, 'registerForAutoconfiguration')) {
+        if ($config['enum_autoconfiguration'] && method_exists($container, 'registerForAutoconfiguration')) {
             $container->registerForAutoconfiguration(EnumInterface::class)
                 ->addTag('enum');
+        }
+
+        if ($config['enum_registry_autoconfigurable']) {
+            $container->setAlias(EnumRegistryInterface::class, 'enum.registry');
         }
     }
 }

@@ -24,6 +24,14 @@ class Configuration implements ConfigurationInterface
                     ->info('[DEPRECATED] bundles for which to auto-register enums.')
                     ->defaultFalse()
                 ->end()
+                ->booleanNode('enum_autoconfiguration')
+                    ->info('If set to true, all services that implements EnumInterface, will obtain the "enum" tag automatically.')
+                    ->defaultTrue()
+                ->end()
+                ->booleanNode('enum_registry_autoconfigurable')
+                    ->info('If set to true, add an alias for the enum registry so your service can ask for it via autoconfiguration.')
+                    ->defaultTrue()
+                ->end()
             ->end()
         ;
 
