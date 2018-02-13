@@ -21,6 +21,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->variableNode('register_bundles')
+                    ->info('[DEPRECATED] bundles for which to auto-register enums.')
                     ->defaultFalse()
                 ->end()
             ->end()

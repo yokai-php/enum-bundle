@@ -17,6 +17,8 @@ use Yokai\EnumBundle\Enum\EnumInterface;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
+ *
+ * @deprecated
  */
 class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
 {
@@ -59,6 +61,11 @@ class DeclarativeEnumCollectorCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        @trigger_error(
+            '"' . __CLASS__ . '" is deprecated since v2.2. Please use Symfony\'s PSR4 Service discovery instead.',
+            E_USER_DEPRECATED
+        );
+
         if (!class_exists('Symfony\Component\Finder\Finder')) {
             throw new RuntimeException('You need the symfony/finder component to register enums.');
         }
