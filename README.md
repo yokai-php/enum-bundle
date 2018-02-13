@@ -25,7 +25,7 @@ $ composer require yokai/enum-bundle
 
 ### Enable the bundle in the kernel
 
-``` php
+```php
 <?php
 // config/bundles.php
 
@@ -39,16 +39,17 @@ return [
 Usage
 -----
 
-Let's take an example : our application has some members and each member has a `gender` which can be "male" (`m`) or "female" (`f`).
+Let's take an example : our application has some members 
+and each member has a `gender` which can be "male" (`m`) or "female" (`f`).
 
 We first need to create the classes that will handle our enums :
 
 > **Note** this example is optimized for latest versions of Symfony, you will find more in dedicated doc file.
 
-``` php
+```php
 <?php
-// src/App/Enum/Member/GenderEnum.php
-namespace App\Enum\Member;
+// src/App/Enum/GenderEnum.php
+namespace App\Enum;
 
 use Yokai\EnumBundle\Enum\EnumInterface;
 use Yokai\EnumBundle\Enum\EnumWithClassAsNameTrait;
@@ -64,16 +65,17 @@ class GenderEnum implements EnumInterface
 }
 ```
 
-If you are using PSR-4 service discovery, then your service is already registered.
+If you are using [PSR-4 service discovery](https://symfony.com/blog/new-in-symfony-3-3-psr-4-based-service-discovery),
+then your service is already registered.
 
 That's it, now the bundle know your enum services. You can start using it.
 
 Adding validation to your model :
 
-``` php
+```php
 <?php
-// src/AppBundle/Model/Member.php
-namespace AppBundle\Model;
+// src/App/Model/Member.php
+namespace App\Model;
 
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 
@@ -82,7 +84,7 @@ class Member
     /**
      * @var string
      *
-     * @Enum("App\Enum\Member\GenderEnum")
+     * @Enum("App\Enum\GenderEnum")
      */
     protected $gender;
 }
@@ -90,14 +92,16 @@ class Member
 
 Adding enum form types :
 
-``` php
+```php
 <?php
-// src/AppBundle/Form/Type/MemberType.php
-namespace AppBundle\Form\Type;
+// src/App/Form/Type/MemberType.php
+namespace App\Form\Type;
 
-use AppBundle\Enum\GenderEnum;
-use AppBundle\Enum\StateEnum;
+use App\Enum\GenderEnum;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+// For Symfony >= 2.8
+use Yokai\EnumBundle\Form\Type\EnumType;
 
 class MemberType extends AbstractType
 {
@@ -106,6 +110,12 @@ class MemberType extends AbstractType
         $builder
             // Let the bundle guess the form type for you (requires that you configured the validation)
             ->add('gender')
+
+            // Manual form type binding for Symfony >= 2.8
+            ->add('gender', EnumType::class, ['enum' => GenderEnum::class])
+
+            // Manual form type binding for Symfony 2.7
+            ->add('gender', 'enum', ['enum' => GenderEnum::class])
         ;
     }
 }
@@ -114,15 +124,15 @@ class MemberType extends AbstractType
 Displaying the label for an enum value within a template :
 
 ```twig
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\GenderEnum')) }}
+{{ value|enum_label('App\\Enum\\GenderEnum') }}
 ```
 
 
 Recipes
-------------
+-------
 
 - Usage in [SonataAdminBundle](https://github.com/sonata-project/SonataAdminBundle) : see [doc](Resources/doc/sonata-admin.md)
-- All the ways to [declare enums](Resources/doc/declaring-enum.md)
+- All the ways to declare [enums](Resources/doc/declaring-enum.md) or [translated enums](Resources/doc/declaring-translated-enum.md)
 
 
 MIT License
@@ -136,3 +146,7 @@ Authors
 
 The bundle was originally created by [Yann Eugoné](https://github.com/yann-eugone).
 See the list of [contributors](https://github.com/yokai-php/enum-bundle/contributors).
+
+---
+
+Thank's to [Prestaconcept](https://github.com/prestaconcept) for supporting this bundle.

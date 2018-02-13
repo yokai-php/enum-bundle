@@ -12,11 +12,11 @@ And let's say we want to build a SonataAdmin for this model.
 namespace App\Admin;
 
 use App\Enum\GenderEnum;
-use Yokai\EnumBundle\Form\Type\EnumType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Yokai\EnumBundle\Form\Type\EnumType;
 
 class MemberAdmin extends AbstractAdmin
 {
@@ -46,9 +46,8 @@ class MemberAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('gender', EnumType::class, [
-                'enum' => GenderEnum::NAME,
-            ])
+            // Let the bundle guess the form type for you (requires that you configured the validation)
+            ->add('gender')
             //...
         ;
     }
@@ -72,7 +71,7 @@ class MemberAdmin extends AbstractAdmin
 {% extends admin.getTemplate('base_list_field') %}
 
 {% block field %}
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\GenderEnum')) }}
+    {{ value|enum_label('App\\Enum\\GenderEnum') }}
 {% endblock %}
 ```
 
@@ -83,6 +82,6 @@ class MemberAdmin extends AbstractAdmin
 {% extends admin.getTemplate('base_show_field') %}
 
 {% block field %}
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\GenderEnum')) }}
+    {{ value|enum_label('App\\Enum\\GenderEnum') }}
 {% endblock %}
 ```

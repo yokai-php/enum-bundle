@@ -3,11 +3,14 @@ Declaring enum
 
 An enum is nothing more than a class with 2 methods : `getName` & `getChoices`, registered as a service.
 
-There is a lot of way to create and declare such classes
+There is a lot of way to create and declare such classes.
+
+> **Note :** If you wish to declare translation based enum, 
+> please see [dedicated documentation](declaring-translated-enum.md)
 
 
 The classic way
------
+---------------
 
 Create a new class, implement both `getName` & `getChoices` methods.
 
@@ -34,7 +37,7 @@ class GenderEnum implements EnumInterface
 
 Define an enum service for it.
 
-``` yaml
+```yaml
 services:
     enum.member.gender:
         class: 'App\Enum\GenderEnum'
@@ -44,7 +47,7 @@ services:
 
 
 The class as name way
------
+---------------------
 
 Create a new class, use `EnumWithClassAsNameTrait` trait and implement `getChoices` methods.
 
@@ -69,7 +72,7 @@ class GenderEnum implements EnumInterface
 
 Define an enum service for it.
 
-``` yaml
+```yaml
 services:
     enum.member.gender:
         class: 'App\Enum\GenderEnum'
@@ -79,11 +82,11 @@ services:
 
 
 The configurable way
------
+--------------------
 
 No need for a class, just use the `ConfigurableEnum` class and define a new enum service.
 
-``` yaml
+```yaml
 services:
     enum.member.gender:
         class: 'Yokai\EnumBundle\Enum\ConfigurableEnum'
@@ -94,4 +97,3 @@ services:
             - m: 'Male'
               f: 'Female'
 ```
-
