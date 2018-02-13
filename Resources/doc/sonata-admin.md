@@ -1,7 +1,7 @@
 SonataAdminBundle integration
 =============================
 
-If we take our example with member that has `gender` and `state`.
+If we take our example with member that has `gender`.
 And let's say we want to build a SonataAdmin for this model.
 
 ## The admin class
@@ -9,15 +9,14 @@ And let's say we want to build a SonataAdmin for this model.
 ```php
 <?php
 
-namespace AppBundle\Admin;
+namespace App\Admin;
 
-use AppBundle\Enum\GenderEnum;
-use AppBundle\Enum\StateEnum;
-use Yokai\EnumBundle\Form\Type\EnumType;
+use App\Enum\GenderEnum;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Yokai\EnumBundle\Form\Type\EnumType;
 
 class MemberAdmin extends AbstractAdmin
 {
@@ -25,10 +24,7 @@ class MemberAdmin extends AbstractAdmin
     {
         $list
             ->add('gender', null, [
-                'template' => 'admin/member/list_gender.html.twig',
-            ])
-            ->add('state', null, [
-                'template' => 'admin/member/list_state.html.twig',
+                'template' => 'admin/list_gender.html.twig',
             ])
             //...
         ;
@@ -40,13 +36,7 @@ class MemberAdmin extends AbstractAdmin
             ->add('gender', 'doctrine_orm_choice', [
                 'field_type' => EnumType::class,
                 'field_options' => [
-                    'enum' => GenderEnum::NAME,
-                ],
-            ])
-            ->add('gender', 'doctrine_orm_choice', [
-                'field_type' => EnumType::class,
-                'field_options' => [
-                    'enum' => StateEnum::NAME,
+                    'enum' => GenderEnum::class,
                 ],
             ])
             //...
@@ -56,12 +46,8 @@ class MemberAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('gender', EnumType::class, [
-                'enum' => GenderEnum::NAME,
-            ])
-            ->add('state', EnumType::class, [
-                'enum' => StateEnum::NAME,
-            ])
+            // Let the bundle guess the form type for you (requires that you configured the validation)
+            ->add('gender')
             //...
         ;
     }
@@ -70,10 +56,7 @@ class MemberAdmin extends AbstractAdmin
     {
         $form
             ->add('gender', null, [
-                'template' => 'admin/member/show_gender.html.twig',
-            ])
-            ->add('state', null, [
-                'template' => 'admin/member/show_state.html.twig',
+                'template' => 'admin/show_gender.html.twig',
             ])
             //...
         ;
@@ -84,39 +67,21 @@ class MemberAdmin extends AbstractAdmin
 ## The list templates
 
 ```twig
-{# admin/member/list_gender.html.twig #}
+{# admin/list_gender.html.twig #}
 {% extends admin.getTemplate('base_list_field') %}
 
 {% block field %}
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\GenderEnum::NAME')) }}
-{% endblock %}
-```
-
-```twig
-{# admin/member/list_state.html.twig #}
-{% extends admin.getTemplate('base_list_field') %}
-
-{% block field %}
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\StateEnum::NAME')) }}
+    {{ value|enum_label('App\\Enum\\GenderEnum') }}
 {% endblock %}
 ```
 
 ## The show templates
 
 ```twig
-{# admin/member/show_gender.html.twig #}
+{# admin/show_gender.html.twig #}
 {% extends admin.getTemplate('base_show_field') %}
 
 {% block field %}
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\GenderEnum::NAME')) }}
-{% endblock %}
-```
-
-```twig
-{# admin/member/show_state.html.twig #}
-{% extends admin.getTemplate('base_show_field') %}
-
-{% block field %}
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\StateEnum::NAME')) }}
+    {{ value|enum_label('App\\Enum\\GenderEnum') }}
 {% endblock %}
 ```

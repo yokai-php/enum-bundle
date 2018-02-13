@@ -50,11 +50,11 @@ class EnumTypeGuesserTest extends TypeTestCase
     {
         $this->enumRegistry = $this->prophesize('Yokai\EnumBundle\Registry\EnumRegistryInterface');
         $this->enumRegistry->has('state')->willReturn(false);
-        $this->enumRegistry->has('gender')->willReturn(true);
-        $this->enumRegistry->get('gender')->willReturn(new GenderEnum);
+        $this->enumRegistry->has(GenderEnum::class)->willReturn(true);
+        $this->enumRegistry->get(GenderEnum::class)->willReturn(new GenderEnum);
 
         $this->metadata = new ClassMetadata(self::TEST_CLASS);
-        $this->metadata->addPropertyConstraint(self::TEST_PROPERTY, new Enum(['enum' => 'gender']));
+        $this->metadata->addPropertyConstraint(self::TEST_PROPERTY, new Enum(['enum' => GenderEnum::class]));
         $this->metadataFactory = $this->prophesize('Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface');
         $this->metadataFactory->getMetadataFor(self::TEST_CLASS)
             ->willReturn($this->metadata);
@@ -69,7 +69,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         $guess = new TypeGuess(
             $this->getEnumType(),
             [
-                'enum' => 'gender',
+                'enum' => GenderEnum::class,
                 'multiple' => false,
             ],
             Guess::HIGH_CONFIDENCE

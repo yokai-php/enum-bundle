@@ -2,6 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests\Fixtures;
 
+use Symfony\Component\Translation\TranslatorInterface;
 use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
 
 /**
@@ -9,6 +10,14 @@ use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
  */
 class StateEnum extends AbstractTranslatedEnum
 {
+    /**
+     * @inheritDoc
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        parent::__construct($translator, 'choice.state.%s');
+    }
+
     protected function getValues()
     {
         return ['new', 'validated', 'disabled'];

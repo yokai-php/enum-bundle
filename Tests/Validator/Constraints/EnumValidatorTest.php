@@ -4,6 +4,7 @@ namespace Yokai\EnumBundle\Tests\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
+use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
@@ -18,7 +19,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
     {
         $registry = $this->prophesize('Yokai\EnumBundle\Registry\EnumRegistryInterface');
         $registry->has('state')->willReturn(false);
-        $registry->has('gender')->willReturn(true);
+        $registry->has(GenderEnum::class)->willReturn(true);
         $registry->has('type')->willReturn(true);
         $registry->get('type')->willReturn(new TypeEnum);
 

@@ -1,6 +1,7 @@
 {
     "name": "yokai/enum-bundle",
     "description": "Bring simple enumeration implementation to Symfony",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {

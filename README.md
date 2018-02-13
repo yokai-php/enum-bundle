@@ -20,142 +20,86 @@ Installation
 ### Add the bundle as dependency with Composer
 
 ``` bash
-$ php composer.phar require yokai/enum-bundle
+$ composer require yokai/enum-bundle
 ```
 
 ### Enable the bundle in the kernel
 
-``` php
+```php
 <?php
-// app/AppKernel.php
+// config/bundles.php
 
-public function registerBundles()
-{
-    $bundles = [
+return [
         // ...
-        new Yokai\EnumBundle\YokaiEnumBundle(),
-    ];
-}
+    Yokai\EnumBundle\YokaiEnumBundle::class => ['all' => true],
+];
 ```
 
 
 Usage
 -----
 
-Let's take an example : our application has some members and each member has a `gender` and a `state`.
+Let's take an example : our application has some members 
+and each member has a `gender` which can be "male" (`m`) or "female" (`f`).
 
 We first need to create the classes that will handle our enums :
 
-``` php
+> **Note** this example is optimized for latest versions of Symfony, you will find more in dedicated doc file.
+
+```php
 <?php
-// src/AppBundle/Enum/Member/GenderEnum.php
-namespace AppBundle\Enum\Member;
+// src/App/Enum/GenderEnum.php
+namespace App\Enum;
 
 use Yokai\EnumBundle\Enum\EnumInterface;
+use Yokai\EnumBundle\Enum\EnumWithClassAsNameTrait;
 
 class GenderEnum implements EnumInterface
 {
-    const NAME = 'member.gender';
+    use EnumWithClassAsNameTrait;
 
     public function getChoices()
     {
-        return ['male' => 'Male', 'female' => 'Female'];
-    }
-
-    public function getName()
-    {
-        return static::NAME;
+        return ['m' => 'Male', 'f' => 'Female'];
     }
 }
 ```
 
-``` php
-<?php
-// src/AppBundle/Enum/Member/StateEnum.php
-namespace AppBundle\Enum\Member;
-
-use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
-
-class StateEnum extends AbstractTranslatedEnum
-{
-    const NAME = 'member.state';
-
-    protected function getValues()
-    {
-        return ['new', 'validated', 'disabled'];
-    }
-
-    public function getName()
-    {
-        return static::NAME;
-    }
-}
-```
-
-Then we must declare these classes as services :
-
-``` xml
-<!-- src/AppBundle/Resources/config/services.xml -->
-<services>
-    <!-- ... -->
-
-    <service id="enum.member.gender" class="AppBundle\Enum\Member\GenderEnum" public="false">
-        <tag name="enum"/>
-    </service>
-
-    <service id="enum.member.state" class="AppBundle\Enum\Member\StateEnum" 
-             parent="enum.abstract_translated" public="false">
-        <argument>choice.member.state.%s</argument>
-
-        <tag name="enum"/>
-    </service>
-
-</services>
-```
+If you are using [PSR-4 service discovery](https://symfony.com/blog/new-in-symfony-3-3-psr-4-based-service-discovery),
+then your service is already registered.
 
 That's it, now the bundle know your enum services. You can start using it.
 
 Adding validation to your model :
 
-``` php
+```php
 <?php
-// src/AppBundle/Model/Member.php
-namespace AppBundle\Model;
+// src/App/Model/Member.php
+namespace App\Model;
 
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 
 class Member
 {
-    //...
-
     /**
      * @var string
      *
-     * @Enum("member.state")
-     */
-    protected $state;
-
-    /**
-     * @var string
-     *
-     * @Enum("member.gender")
+     * @Enum("App\Enum\GenderEnum")
      */
     protected $gender;
-
-    //...
 }
 ```
 
 Adding enum form types :
 
-``` php
+```php
 <?php
-// src/AppBundle/Form/Type/MemberType.php
-namespace AppBundle\Form\Type;
+// src/App/Form/Type/MemberType.php
+namespace App\Form\Type;
 
-use AppBundle\Enum\GenderEnum;
-use AppBundle\Enum\StateEnum;
+use App\Enum\GenderEnum;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 // For Symfony >= 2.8
 use Yokai\EnumBundle\Form\Type\EnumType;
 
@@ -165,34 +109,30 @@ class MemberType extends AbstractType
     {
         $builder
             // Let the bundle guess the form type for you (requires that you configured the validation)
-            ->add('state')
             ->add('gender')
 
             // Manual form type binding for Symfony >= 2.8
-            ->add('state', EnumType::class, ['enum' => StateEnum::NAME])
-            ->add('gender', EnumType::class, ['enum' => GenderEnum::NAME])
+            ->add('gender', EnumType::class, ['enum' => GenderEnum::class])
 
             // Manual form type binding for Symfony 2.7
-            ->add('state', 'enum', ['enum' => StateEnum::NAME])
-            ->add('gender', 'enum', ['enum' => GenderEnum::NAME])
+            ->add('gender', 'enum', ['enum' => GenderEnum::class])
         ;
     }
 }
 ```
 
-
 Displaying the label for an enum value within a template :
 
 ```twig
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\StateEnum::NAME')) }}
-    {{ value|enum_label(constant('AppBundle\\Enum\\Member\\GenderEnum::NAME')) }}
+{{ value|enum_label('App\\Enum\\GenderEnum') }}
 ```
 
 
 Recipes
-------------
+-------
 
 - Usage in [SonataAdminBundle](https://github.com/sonata-project/SonataAdminBundle) : see [doc](Resources/doc/sonata-admin.md)
+- All the ways to declare [enums](Resources/doc/declaring-enum.md) or [translated enums](Resources/doc/declaring-translated-enum.md)
 
 
 MIT License
@@ -206,3 +146,7 @@ Authors
 
 The bundle was originally created by [Yann Eugoné](https://github.com/yann-eugone).
 See the list of [contributors](https://github.com/yokai-php/enum-bundle/contributors).
+
+---
+
+Thank's to [Prestaconcept](https://github.com/prestaconcept) for supporting this bundle.

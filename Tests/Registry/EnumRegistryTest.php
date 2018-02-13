@@ -5,6 +5,8 @@ namespace Yokai\EnumBundle\Tests\Registry;
 use Yokai\EnumBundle\Registry\EnumRegistry;
 use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
+use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -42,20 +44,29 @@ class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddNominal()
     {
+        $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface')->reveal();
         $gender = new GenderEnum;
-        $type   = new StateEnum(
-            $this->prophesize('Symfony\Component\Translation\TranslatorInterface')->reveal(),
-            'choice.state.%s'
-        );
+        $state = new StateEnum($translator);
+        $subscription = new SubscriptionEnum($translator);
+        $type = new TypeEnum;
 
         $this->registry->add($gender);
+        $this->registry->add($state);
+        $this->registry->add($subscription);
         $this->registry->add($type);
 
-        $this->assertTrue($this->registry->has('gender'));
+        $this->assertTrue($this->registry->has(GenderEnum::class));
         $this->assertTrue($this->registry->has('state'));
+        $this->assertTrue($this->registry->has('subscription'));
+        $this->assertTrue($this->registry->has('type'));
 
-        $this->assertSame($gender, $this->registry->get('gender'));
-        $this->assertSame($type, $this->registry->get('state'));
-        $this->assertSame(['gender' => $gender, 'state' => $type], $this->registry->all());
+        $this->assertSame($gender, $this->registry->get(GenderEnum::class));
+        $this->assertSame($state, $this->registry->get('state'));
+        $this->assertSame($subscription, $this->registry->get('subscription'));
+        $this->assertSame($type, $this->registry->get('type'));
+        $this->assertSame(
+            [GenderEnum::class => $gender, 'state' => $state, 'subscription' => $subscription, 'type' => $type],
+            $this->registry->all()
+        );
     }
 }

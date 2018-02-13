@@ -19,8 +19,8 @@ class EnumTypeTest extends TypeTestCase
     {
         $this->enumRegistry = $this->prophesize('Yokai\EnumBundle\Registry\EnumRegistryInterface');
         $this->enumRegistry->has('state')->willReturn(false);
-        $this->enumRegistry->has('gender')->willReturn(true);
-        $this->enumRegistry->get('gender')->willReturn(new GenderEnum);
+        $this->enumRegistry->has(GenderEnum::class)->willReturn(true);
+        $this->enumRegistry->get(GenderEnum::class)->willReturn(new GenderEnum);
 
         parent::setUp();
     }
@@ -39,7 +39,7 @@ class EnumTypeTest extends TypeTestCase
 
     public function testEnumOptionValid()
     {
-        $form = $this->createForm('gender');
+        $form = $this->createForm(GenderEnum::class);
 
         $this->assertEquals(['Male' => 'male', 'Female' => 'female'], $form->getConfig()->getOption('choices'));
     }
