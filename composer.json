@@ -23,5 +23,10 @@
     "autoload": {
         "psr-4": { "Yokai\\EnumBundle\\": "" }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    }
 }
