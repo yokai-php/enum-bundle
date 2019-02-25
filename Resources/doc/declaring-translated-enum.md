@@ -19,7 +19,7 @@ Create a new class, implement both `getName` & `getValues` methods and specify t
 
 namespace App\Enum;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
 
 class GenderEnum extends AbstractTranslatedEnum
@@ -64,7 +64,7 @@ Create a new class, use `EnumWithClassAsNameTrait` trait, implement `getValues` 
 
 namespace App\Enum;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\Enum\AbstractTranslatedEnum;
 use Yokai\EnumBundle\Enum\EnumWithClassAsNameTrait;
 

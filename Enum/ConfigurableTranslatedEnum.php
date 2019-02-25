@@ -2,7 +2,7 @@
 
 namespace Yokai\EnumBundle\Enum;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

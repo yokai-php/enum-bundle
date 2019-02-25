@@ -3,7 +3,7 @@
 namespace Tests\Enum;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\Enum\ConfigurableTranslatedEnum;
 
 /**
