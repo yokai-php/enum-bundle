@@ -44,7 +44,7 @@ class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddNominal()
     {
-        $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface')->reveal();
+        $translator = $this->prophesize('Symfony\Contracts\Translation\TranslatorInterface')->reveal();
         $gender = new GenderEnum;
         $state = new StateEnum($translator);
         $subscription = new SubscriptionEnum($translator);
