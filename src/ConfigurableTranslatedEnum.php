@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum;
 
@@ -26,7 +26,7 @@ class ConfigurableTranslatedEnum extends AbstractTranslatedEnum
      * @param string              $name
      * @param array               $values
      */
-    public function __construct(TranslatorInterface $translator, $transPattern, $name, array $values)
+    public function __construct(TranslatorInterface $translator, string $transPattern, string $name, array $values)
     {
         parent::__construct($translator, $transPattern);
 
@@ -37,7 +37,7 @@ class ConfigurableTranslatedEnum extends AbstractTranslatedEnum
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -45,7 +45,7 @@ class ConfigurableTranslatedEnum extends AbstractTranslatedEnum
     /**
      * @inheritdoc
      */
-    public function getValues()
+    protected function getValues(): array
     {
         return $this->values;
     }

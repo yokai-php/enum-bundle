@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum;
 
@@ -29,7 +29,7 @@ abstract class AbstractTranslatedEnum implements EnumInterface
      * @param TranslatorInterface $translator
      * @param string              $transPattern
      */
-    public function __construct(TranslatorInterface $translator, $transPattern)
+    public function __construct(TranslatorInterface $translator, string $transPattern)
     {
         if (false === strpos($transPattern, '%s')) {
             throw InvalidTranslatePatternException::placeholderRequired($transPattern);
@@ -42,12 +42,12 @@ abstract class AbstractTranslatedEnum implements EnumInterface
     /**
      * @return array
      */
-    public function getChoices()
+    public function getChoices(): array
     {
         return array_combine(
             $this->getValues(),
             array_map(
-                function ($value) {
+                function (string $value): string {
                     return $this->translator->trans(
                         sprintf($this->transPattern, $value),
                         [],
@@ -62,7 +62,7 @@ abstract class AbstractTranslatedEnum implements EnumInterface
     /**
      * @param string $transDomain
      */
-    public function setTransDomain($transDomain)
+    public function setTransDomain(string $transDomain): void
     {
         $this->transDomain = $transDomain;
     }
@@ -70,5 +70,5 @@ abstract class AbstractTranslatedEnum implements EnumInterface
     /**
      * @return array
      */
-    abstract protected function getValues();
+    abstract protected function getValues(): array;
 }

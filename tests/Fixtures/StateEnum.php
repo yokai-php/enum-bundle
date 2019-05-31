@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Fixtures;
 
@@ -18,12 +18,12 @@ class StateEnum extends AbstractTranslatedEnum
         parent::__construct($translator, 'choice.state.%s');
     }
 
-    protected function getValues()
+    protected function getValues(): array
     {
         return ['new', 'validated', 'disabled'];
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'state';
     }

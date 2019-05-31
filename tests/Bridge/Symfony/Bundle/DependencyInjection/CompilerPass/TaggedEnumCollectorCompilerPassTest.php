@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Bundle\DependencyInjection\CompilerPass;
 
@@ -16,17 +16,17 @@ class TaggedEnumCollectorCompilerPassTest extends TestCase
      */
     private $compiler;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->compiler = new TaggedEnumCollectorCompilerPass;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->compiler);
     }
 
-    public function testCollectWhenServiceNotAvailable()
+    public function testCollectWhenServiceNotAvailable(): void
     {
         $compiler = $this->prophesize('Symfony\Component\DependencyInjection\ContainerBuilder');
         $compiler->hasDefinition('enum.registry')->shouldBeCalled()->willReturn(false);
@@ -34,7 +34,7 @@ class TaggedEnumCollectorCompilerPassTest extends TestCase
         $this->compiler->process($compiler->reveal());
     }
 
-    public function testCollectEnums()
+    public function testCollectEnums(): void
     {
         $registry = $this->prophesize('Symfony\Component\DependencyInjection\Definition');
         $registry->addMethodCall('add', [new Reference('enum.gender')])->shouldBeCalled();

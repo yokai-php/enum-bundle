@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Exception;
 
@@ -14,7 +14,7 @@ class InvalidTranslatePatternException extends InvalidArgumentException
      *
      * @return InvalidTranslatePatternException
      */
-    public static function placeholderRequired($transPattern)
+    public static function placeholderRequired(string $transPattern): self
     {
         return new self(sprintf('Translation pattern "%s" must contain %%s placeholder', $transPattern));
     }

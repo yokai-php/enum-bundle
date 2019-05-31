@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Exception;
 
@@ -14,7 +14,7 @@ class InvalidEnumException extends DomainException
      *
      * @return InvalidEnumException
      */
-    public static function nonexistent($name)
+    public static function nonexistent(string $name): self
     {
         return new self(sprintf('Nonexistent enum with name "%s" in registry', $name));
     }

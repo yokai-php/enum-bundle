@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Bridge\Symfony\Validator\Constraints;
 
@@ -12,12 +12,15 @@ use Symfony\Component\Validator\Constraints\Choice;
  */
 class Enum extends Choice
 {
+    /**
+     * @var string
+     */
     public $enum;
 
     /**
      * @inheritdoc
      */
-    public function getDefaultOption()
+    public function getDefaultOption(): string
     {
         return 'enum';
     }
@@ -25,7 +28,7 @@ class Enum extends Choice
     /**
      * @inheritdoc
      */
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'enum';
     }

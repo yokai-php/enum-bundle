@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests;
 
@@ -20,31 +20,31 @@ class EnumRegistryTest extends TestCase
      */
     private $registry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->registry = new EnumRegistry;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->registry);
     }
 
-    public function testAddDuplicatedException()
+    public function testAddDuplicatedException(): void
     {
         $this->expectException('Yokai\Enum\Exception\DuplicatedEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->add(new GenderEnum);
     }
 
-    public function testGetInvalidException()
+    public function testGetInvalidException(): void
     {
         $this->expectException('Yokai\Enum\Exception\InvalidEnumException');
         $this->registry->add(new GenderEnum);
         $this->registry->get('type');
     }
 
-    public function testAddNominal()
+    public function testAddNominal(): void
     {
         $translator = $this->prophesize(TranslatorInterface::class)->reveal();
         $gender = new GenderEnum;

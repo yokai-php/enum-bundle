@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Bridge\Symfony\Bundle\DependencyInjection\CompilerPass;
 
@@ -14,7 +14,7 @@ class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
     /**
      * @inheritdoc
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('enum.registry')) {
             return;

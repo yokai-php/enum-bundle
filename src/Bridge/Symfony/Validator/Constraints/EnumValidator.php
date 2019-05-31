@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Bridge\Symfony\Validator\Constraints;
 
@@ -29,7 +29,7 @@ class EnumValidator extends ChoiceValidator
     /**
      * @inheritdoc
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof Enum) {
             throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Enum');

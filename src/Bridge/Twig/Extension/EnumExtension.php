@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Bridge\Twig\Extension;
 
@@ -28,7 +28,7 @@ class EnumExtension extends Twig_Extension
     /**
      * @inheritdoc
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new Twig_SimpleFunction('enum_label', [$this, 'getLabel']),
@@ -39,7 +39,7 @@ class EnumExtension extends Twig_Extension
     /**
      * @inheritdoc
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new Twig_SimpleFilter('enum_label', [$this, 'getLabel']),
@@ -52,15 +52,9 @@ class EnumExtension extends Twig_Extension
      *
      * @return string
      */
-    public function getLabel($value, $enum)
+    public function getLabel(string $value, string $enum): string
     {
-        $choices = $this->getChoices($enum);
-
-        if (isset($choices[$value])) {
-            return $choices[$value];
-        }
-
-        return $value;
+        return $this->getChoices($enum)[$value] ?? $value;
     }
 
     /**
@@ -68,7 +62,7 @@ class EnumExtension extends Twig_Extension
      *
      * @return array
      */
-    public function getChoices($enum)
+    public function getChoices(string $enum): array
     {
         return $this->registry->get($enum)->getChoices();
     }
@@ -76,7 +70,7 @@ class EnumExtension extends Twig_Extension
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getName(): string
     {
         return 'enum';
     }

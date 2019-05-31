@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum;
 
@@ -20,7 +20,7 @@ class EnumRegistry
      *
      * @throws DuplicatedEnumException
      */
-    public function add(EnumInterface $enum)
+    public function add(EnumInterface $enum): void
     {
         if ($this->has($enum->getName())) {
             throw DuplicatedEnumException::alreadyRegistered($enum->getName());
@@ -35,7 +35,7 @@ class EnumRegistry
      * @return EnumInterface
      * @throws InvalidEnumException
      */
-    public function get($name)
+    public function get(string $name): EnumInterface
     {
         if (!$this->has($name)) {
             throw InvalidEnumException::nonexistent($name);
@@ -49,7 +49,7 @@ class EnumRegistry
      *
      * @return bool
      */
-    public function has($name)
+    public function has($name): bool
     {
         return isset($this->enums[$name]);
     }
@@ -57,7 +57,7 @@ class EnumRegistry
     /**
      * @return EnumInterface[]
      */
-    public function all()
+    public function all(): array
     {
         return $this->enums;
     }

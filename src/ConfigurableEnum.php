@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum;
 
@@ -21,7 +21,7 @@ class ConfigurableEnum implements EnumInterface
      * @param string $name
      * @param array  $choices
      */
-    public function __construct($name, array $choices)
+    public function __construct(string $name, array $choices)
     {
         $this->name = $name;
         $this->choices = $choices;
@@ -30,7 +30,7 @@ class ConfigurableEnum implements EnumInterface
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -38,7 +38,7 @@ class ConfigurableEnum implements EnumInterface
     /**
      * @inheritdoc
      */
-    public function getChoices()
+    public function getChoices(): array
     {
         return $this->choices;
     }

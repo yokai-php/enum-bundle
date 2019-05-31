@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Validator\Constraints;
 
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Validator\Constraints\Choice;
-use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
+use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Yokai\Enum\Bridge\Symfony\Validator\Constraints\Enum;
 use Yokai\Enum\Bridge\Symfony\Validator\Constraints\EnumValidator;
 use Yokai\Enum\EnumRegistry;
@@ -14,9 +14,9 @@ use Yokai\Enum\Tests\Fixtures\TypeEnum;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumValidatorTest extends AbstractConstraintValidatorTest
+class EnumValidatorTest extends ConstraintValidatorTestCase
 {
-    protected function createValidator()
+    protected function createValidator(): EnumValidator
     {
         /** @var EnumRegistry|ObjectProphecy $registry */
         $registry = $this->prophesize(EnumRegistry::class);
@@ -28,39 +28,39 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
         return new EnumValidator($registry->reveal());
     }
 
-    public function testAcceptOnlyEnum()
+    public function testAcceptOnlyEnum(): void
     {
         $this->expectException('Symfony\Component\Validator\Exception\UnexpectedTypeException');
         $this->validator->validate(null, new Choice);
     }
 
-    public function testEnumIsRequired()
+    public function testEnumIsRequired(): void
     {
         $this->expectException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
         $this->validator->validate('foo', new Enum);
     }
 
-    public function testValidEnumIsRequired()
+    public function testValidEnumIsRequired(): void
     {
         $this->expectException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
         $this->validator->validate('foo', new Enum('state'));
     }
 
-    public function testNullIsValid()
+    public function testNullIsValid(): void
     {
         $this->validator->validate(null, new Enum('type'));
 
         $this->assertNoViolation();
     }
 
-    public function testValidSingleEnum()
+    public function testValidSingleEnum(): void
     {
         $this->validator->validate('customer', new Enum('type'));
 
         $this->assertNoViolation();
     }
 
-    public function testInvalidSingleEnum()
+    public function testInvalidSingleEnum(): void
     {
         $constraint = new Enum(['enum' => 'type', 'message' => 'myMessage']);
 
@@ -73,7 +73,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
             ->assertRaised();
     }
 
-    public function testValidMultipleEnum()
+    public function testValidMultipleEnum(): void
     {
         $constraint = new Enum(['enum' => 'type', 'multiple' => true]);
 
@@ -82,7 +82,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
         $this->assertNoViolation();
     }
 
-    public function testInvalidMultipleEnum()
+    public function testInvalidMultipleEnum(): void
     {
         $constraint = new Enum(['enum' => 'type', 'multiple' => true, 'multipleMessage' => 'myMessage']);
 

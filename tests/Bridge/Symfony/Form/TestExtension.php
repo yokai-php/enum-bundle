@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Form;
 
@@ -36,7 +36,7 @@ class TestExtension extends AbstractExtension
     /**
      * @inheritdoc
      */
-    protected function loadTypes()
+    protected function loadTypes(): array
     {
         return [
             new EnumType($this->enumRegistry),
@@ -46,7 +46,7 @@ class TestExtension extends AbstractExtension
     /**
      * @inheritdoc
      */
-    protected function loadTypeGuesser()
+    protected function loadTypeGuesser(): ?EnumTypeGuesser
     {
         if ($this->metadataFactory === null) {
             return null;

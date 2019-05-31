@@ -20,7 +20,7 @@ use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
 
 class MemberAdmin extends AbstractAdmin
 {
-    protected function configureListFields(ListMapper $list)
+    protected function configureListFields(ListMapper $list): void
     {
         $list
             ->add('gender', null, [
@@ -30,7 +30,7 @@ class MemberAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $filter)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('gender', 'doctrine_orm_choice', [
@@ -43,7 +43,7 @@ class MemberAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureFormFields(FormMapper $form)
+    protected function configureFormFields(FormMapper $form): void
     {
         $form
             // Let the bundle guess the form type for you (requires that you configured the validation)
@@ -52,7 +52,7 @@ class MemberAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureShowFields(ShowMapper $form)
+    protected function configureShowFields(ShowMapper $form): void
     {
         $form
             ->add('gender', null, [

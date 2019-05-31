@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum;
 
@@ -10,10 +10,10 @@ interface EnumInterface
     /**
      * @return array
      */
-    public function getChoices();
+    public function getChoices(): array;
 
     /**
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 }

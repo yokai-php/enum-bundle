@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Fixtures;
 
@@ -12,7 +12,7 @@ class GenderEnum implements EnumInterface
 {
     use EnumWithClassAsNameTrait;
 
-    public function getChoices()
+    public function getChoices(): array
     {
         return ['male' => 'Male', 'female' => 'Female'];
     }

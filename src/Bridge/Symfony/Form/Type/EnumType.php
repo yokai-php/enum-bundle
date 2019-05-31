@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Bridge\Symfony\Form\Type;
 
@@ -29,20 +29,20 @@ class EnumType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('enum')
             ->setDefault('choices_as_values', true)
             ->setAllowedValues(
                 'enum',
-                function ($name) {
+                function (string $name): bool {
                     return $this->enumRegistry->has($name);
                 }
             )
             ->setDefault(
                 'choices',
-                function (Options $options) {
+                function (Options $options): array {
                     return array_flip($this->enumRegistry->get($options['enum'])->getChoices());
                 }
             )
@@ -52,7 +52,7 @@ class EnumType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getParent()
+    public function getParent(): string
     {
         if (!method_exists(AbstractType::class, 'getBlockPrefix')) {
             return 'choice'; //Symfony 2.x support
@@ -64,7 +64,7 @@ class EnumType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'enum';
     }
@@ -72,7 +72,7 @@ class EnumType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getBlockPrefix();
     }

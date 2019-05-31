@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Form\Extension;
 
@@ -46,7 +46,7 @@ class EnumTypeGuesserTest extends TypeTestCase
      */
     private $metadataFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->enumRegistry = $this->prophesize(EnumRegistry::class);
         $this->enumRegistry->has('state')->willReturn(false);
@@ -64,7 +64,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         parent::setUp();
     }
 
-    public function testGuessType()
+    public function testGuessType(): void
     {
         $guess = new TypeGuess(
             $this->getEnumType(),
@@ -78,22 +78,22 @@ class EnumTypeGuesserTest extends TypeTestCase
         $this->assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY));
     }
 
-    public function testGuessRequired()
+    public function testGuessRequired(): void
     {
         $this->assertNull($this->guesser->guessRequired(self::TEST_CLASS, self::TEST_PROPERTY));
     }
 
-    public function testGuessMaxLength()
+    public function testGuessMaxLength(): void
     {
         $this->assertNull($this->guesser->guessMaxLength(self::TEST_CLASS, self::TEST_PROPERTY));
     }
 
-    public function testGuessPattern()
+    public function testGuessPattern(): void
     {
         $this->assertNull($this->guesser->guessPattern(self::TEST_CLASS, self::TEST_PROPERTY));
     }
 
-    public function testCreateForm()
+    public function testCreateForm(): void
     {
         $class = self::TEST_CLASS;
         $form = $this->factory->create($this->getFormType(), new $class, ['data_class' => $class])
@@ -102,7 +102,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         $this->assertEquals(['Male' => 'male', 'Female' => 'female'], $form->get(self::TEST_PROPERTY)->getConfig()->getOption('choices'));
     }
 
-    protected function getFormType()
+    protected function getFormType(): string
     {
         if (method_exists(AbstractType::class, 'getBlockPrefix')) {
             $name = FormType::class; //Symfony 3.x support
@@ -113,7 +113,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         return $name;
     }
 
-    protected function getEnumType()
+    protected function getEnumType(): string
     {
         if (method_exists(AbstractType::class, 'getBlockPrefix')) {
             $name = EnumType::class; //Symfony 3.x support
@@ -124,7 +124,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         return $name;
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return [
             new TestExtension($this->enumRegistry->reveal(), $this->metadataFactory->reveal()),

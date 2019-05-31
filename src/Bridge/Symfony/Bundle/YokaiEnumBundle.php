@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Bridge\Symfony\Bundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Yokai\Enum\Bridge\Symfony\Bundle\DependencyInjection\CompilerPass\ConventionedEnumCollectorCompilerPass;
 use Yokai\Enum\Bridge\Symfony\Bundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 use Yokai\Enum\Bridge\Symfony\Bundle\DependencyInjection\EnumExtension;
 
@@ -16,10 +15,9 @@ class YokaiEnumBundle extends Bundle
     /**
      * @inheritdoc
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container
-            ->addCompilerPass(new ConventionedEnumCollectorCompilerPass())
             ->addCompilerPass(new TaggedEnumCollectorCompilerPass)
         ;
     }
@@ -27,7 +25,7 @@ class YokaiEnumBundle extends Bundle
     /**
      * @inheritdoc
      */
-    public function getContainerExtension()
+    public function getContainerExtension(): EnumExtension
     {
         return new EnumExtension;
     }

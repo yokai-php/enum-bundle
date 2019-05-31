@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Exception;
 
@@ -14,7 +14,7 @@ class DuplicatedEnumException extends BadMethodCallException
      *
      * @return DuplicatedEnumException
      */
-    public static function alreadyRegistered($name)
+    public static function alreadyRegistered(string $name): self
     {
         return new self(sprintf('Enum with name "%s" is already registered', $name));
     }

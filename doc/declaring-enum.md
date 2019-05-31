@@ -23,12 +23,12 @@ use Yokai\Enum\EnumInterface;
 
 class GenderEnum implements EnumInterface
 {
-    public function getName()
+    public function getName(): string
     {
         return 'gender';
     }
 
-    public function getChoices()
+    public function getChoices(): array
     {
         return ['m' => 'Male', 'f' => 'Female'];
     }
@@ -63,7 +63,7 @@ class GenderEnum implements EnumInterface
 {
     use EnumWithClassAsNameTrait;
 
-    public function getChoices()
+    public function getChoices(): array
     {
         return ['m' => 'Male', 'f' => 'Female'];
     }

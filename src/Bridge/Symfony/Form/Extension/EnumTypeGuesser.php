@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Bridge\Symfony\Form\Extension;
 
@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
+use Symfony\Component\Form\Guess\ValueGuess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
 use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
@@ -47,7 +48,7 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
     /**
      * @inheritdoc
      */
-    public function guessTypeForConstraint(Constraint $constraint)
+    public function guessTypeForConstraint(Constraint $constraint): ?TypeGuess
     {
         if (!$constraint instanceof Enum) {
             return null;
@@ -66,7 +67,7 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
     /**
      * @inheritDoc
      */
-    public function guessRequired($class, $property)
+    public function guessRequired($class, $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }
@@ -74,7 +75,7 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
     /**
      * @inheritDoc
      */
-    public function guessMaxLength($class, $property)
+    public function guessMaxLength($class, $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }
@@ -82,7 +83,7 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
     /**
      * @inheritDoc
      */
-    public function guessPattern($class, $property)
+    public function guessPattern($class, $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }

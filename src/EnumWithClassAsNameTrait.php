@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum;
 
@@ -10,7 +10,7 @@ trait EnumWithClassAsNameTrait
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return static::class;
     }

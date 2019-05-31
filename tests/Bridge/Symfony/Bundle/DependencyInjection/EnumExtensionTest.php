@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Bundle\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Yokai\Enum\Bridge\Symfony\Bundle\DependencyInjection\EnumExtension;
 use Yokai\Enum\EnumInterface;
@@ -14,10 +13,7 @@ use Yokai\Enum\EnumRegistry;
  */
 class EnumExtensionTest extends TestCase
 {
-    /**
-     * @return EnumExtension
-     */
-    public function extension()
+    public function extension(): EnumExtension
     {
         return new EnumExtension();
     }
@@ -25,7 +21,7 @@ class EnumExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_register_enum_for_autoconfiguration_by_default()
+    public function it_register_enum_for_autoconfiguration_by_default(): void
     {
         $container = new ContainerBuilder();
         $this->extension()->load([[]], $container);
@@ -42,7 +38,7 @@ class EnumExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_do_not_register_enum_for_autoconfiguration_if_asked_to()
+    public function it_do_not_register_enum_for_autoconfiguration_if_asked_to(): void
     {
         $container = new ContainerBuilder();
         $this->extension()->load([['enum_autoconfiguration' => false]], $container);
@@ -58,7 +54,7 @@ class EnumExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_register_enum_registry_alias_for_autowire_by_default()
+    public function it_register_enum_registry_alias_for_autowire_by_default(): void
     {
         $container = new ContainerBuilder();
         $this->extension()->load([[]], $container);
@@ -68,7 +64,7 @@ class EnumExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_do_not_register_enum_registry_alias_for_autowire_if_asked_to()
+    public function it_do_not_register_enum_registry_alias_for_autowire_if_asked_to(): void
     {
         $container = new ContainerBuilder();
         $this->extension()->load([['enum_registry_autoconfigurable' => false]], $container);
@@ -79,7 +75,7 @@ class EnumExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_register_services()
+    public function it_register_services(): void
     {
         $container = new ContainerBuilder();
         $this->extension()->load([[]], $container);

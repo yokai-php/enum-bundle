@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
 use Yokai\Enum\EnumRegistry;
@@ -16,7 +17,7 @@ class EnumTypeTest extends TypeTestCase
 {
     private $enumRegistry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->enumRegistry = $this->prophesize(EnumRegistry::class);
         $this->enumRegistry->has('state')->willReturn(false);
@@ -26,33 +27,33 @@ class EnumTypeTest extends TypeTestCase
         parent::setUp();
     }
 
-    public function testEnumOptionIsRequired()
+    public function testEnumOptionIsRequired(): void
     {
         $this->expectException('Symfony\Component\OptionsResolver\Exception\MissingOptionsException');
         $this->createForm();
     }
 
-    public function testEnumOptionIsInvalid()
+    public function testEnumOptionIsInvalid(): void
     {
         $this->expectException('Symfony\Component\OptionsResolver\Exception\InvalidOptionsException');
         $this->createForm('state');
     }
 
-    public function testEnumOptionValid()
+    public function testEnumOptionValid(): void
     {
         $form = $this->createForm(GenderEnum::class);
 
         $this->assertEquals(['Male' => 'male', 'Female' => 'female'], $form->getConfig()->getOption('choices'));
     }
 
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return [
             new TestExtension($this->enumRegistry->reveal())
         ];
     }
 
-    private function createForm($enum = null)
+    private function createForm($enum = null): FormInterface
     {
         $options = [];
         if ($enum) {

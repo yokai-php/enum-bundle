@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests;
 
@@ -12,14 +12,14 @@ use Yokai\Enum\ConfigurableTranslatedEnum;
  */
 class ConfigurableTranslatedEnumTest extends TestCase
 {
-    public function testConstructedWithInvalidPattern()
+    public function testConstructedWithInvalidPattern(): void
     {
         $this->expectException('Yokai\Enum\Exception\InvalidTranslatePatternException');
         $translator = $this->prophesize(TranslatorInterface::class);
         new ConfigurableTranslatedEnum($translator->reveal(), 'invalid.pattern', 'invalid', ['foo', 'bar']);
     }
 
-    public function testTranslatedChoices()
+    public function testTranslatedChoices(): void
     {
         /** @var ObjectProphecy|TranslatorInterface $translator */
         $translator = $this->prophesize(TranslatorInterface::class);
@@ -34,7 +34,7 @@ class ConfigurableTranslatedEnumTest extends TestCase
         $this->assertEquals($expectedChoices, $type->getChoices());
     }
 
-    public function testTranslatedWithDomainChoices()
+    public function testTranslatedWithDomainChoices(): void
     {
         /** @var ObjectProphecy|TranslatorInterface $translator */
         $translator = $this->prophesize(TranslatorInterface::class);

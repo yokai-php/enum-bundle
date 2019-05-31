@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Twig\Extension;
 
@@ -18,19 +18,19 @@ class EnumExtensionTest extends TestCase
      */
     private $registry;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->registry = $this->prophesize(EnumRegistry::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset(
             $this->registry
         );
     }
 
-    public function testEnumLabel()
+    public function testEnumLabel(): void
     {
         $enum = $this->prophesize(EnumInterface::class);
         $enum->getChoices()
@@ -60,7 +60,7 @@ class EnumExtensionTest extends TestCase
         );
     }
 
-    public function testEnumChoices()
+    public function testEnumChoices(): void
     {
         $enum = $this->prophesize(EnumInterface::class);
         $enum->getChoices()
@@ -80,7 +80,7 @@ class EnumExtensionTest extends TestCase
     /**
      * @return \Twig_Environment
      */
-    protected function createEnvironment()
+    protected function createEnvironment(): \Twig_Environment
     {
         $loader = new \Twig_Loader_Array([]);
         $twig = new \Twig_Environment($loader, ['debug' => true, 'cache' => false, 'autoescape' => false]);
@@ -92,7 +92,7 @@ class EnumExtensionTest extends TestCase
     /**
      * @return EnumExtension
      */
-    private function createExtension()
+    private function createExtension(): EnumExtension
     {
         return new EnumExtension($this->registry->reveal());
     }
