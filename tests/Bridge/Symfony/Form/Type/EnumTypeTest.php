@@ -2,7 +2,6 @@
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
@@ -60,12 +59,6 @@ class EnumTypeTest extends TypeTestCase
             $options['enum'] = $enum;
         }
 
-        if (method_exists(AbstractType::class, 'getBlockPrefix')) {
-            $name = EnumType::class; //Symfony 3.x support
-        } else {
-            $name = 'enum'; //Symfony 2.x support
-        }
-
-        return $this->factory->create($name, null, $options);
+        return $this->factory->create(EnumType::class, null, $options);
     }
 }

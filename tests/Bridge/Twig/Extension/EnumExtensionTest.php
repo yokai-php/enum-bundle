@@ -4,6 +4,8 @@ namespace Yokai\Enum\Tests\Bridge\Symfony\Twig\Extension;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 use Yokai\Enum\Bridge\Twig\Extension\EnumExtension;
 use Yokai\Enum\EnumInterface;
 use Yokai\Enum\EnumRegistry;
@@ -78,12 +80,12 @@ class EnumExtensionTest extends TestCase
     }
 
     /**
-     * @return \Twig_Environment
+     * @return Environment
      */
-    protected function createEnvironment(): \Twig_Environment
+    protected function createEnvironment(): Environment
     {
-        $loader = new \Twig_Loader_Array([]);
-        $twig = new \Twig_Environment($loader, ['debug' => true, 'cache' => false, 'autoescape' => false]);
+        $loader = new ArrayLoader([]);
+        $twig = new Environment($loader, ['debug' => true, 'cache' => false, 'autoescape' => false]);
         $twig->addExtension($this->createExtension());
 
         return $twig;

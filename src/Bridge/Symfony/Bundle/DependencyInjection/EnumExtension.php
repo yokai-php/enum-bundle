@@ -45,7 +45,7 @@ class EnumExtension extends Extension
             $xmlLoader->load('twig.xml');
         }
 
-        if ($config['enum_autoconfiguration'] && method_exists($container, 'registerForAutoconfiguration')) {
+        if ($config['enum_autoconfiguration']) {
             $container->registerForAutoconfiguration(EnumInterface::class)
                 ->addTag('enum');
         }

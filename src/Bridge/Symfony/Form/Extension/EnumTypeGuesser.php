@@ -2,7 +2,6 @@
 
 namespace Yokai\Enum\Bridge\Symfony\Form\Extension;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
@@ -24,11 +23,6 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
     private $enumRegistry;
 
     /**
-     * @var string
-     */
-    private $enumFormType;
-
-    /**
      * @param MetadataFactoryInterface $metadataFactory
      * @param EnumRegistry             $enumRegistry
      */
@@ -37,12 +31,6 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
         parent::__construct($metadataFactory);
 
         $this->enumRegistry = $enumRegistry;
-
-        if (method_exists(AbstractType::class, 'getBlockPrefix')) {
-            $this->enumFormType = EnumType::class; //Symfony 3.x support
-        } else {
-            $this->enumFormType = 'enum'; //Symfony 2.x support
-        }
     }
 
     /**
@@ -55,7 +43,7 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
         }
 
         return new TypeGuess(
-            $this->enumFormType,
+            EnumType::class,
             [
                 'enum' => $constraint->enum,
                 'multiple' => $constraint->multiple,

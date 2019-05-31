@@ -33,7 +33,6 @@ class EnumType extends AbstractType
     {
         $resolver
             ->setRequired('enum')
-            ->setDefault('choices_as_values', true)
             ->setAllowedValues(
                 'enum',
                 function (string $name): bool {
@@ -54,10 +53,6 @@ class EnumType extends AbstractType
      */
     public function getParent(): string
     {
-        if (!method_exists(AbstractType::class, 'getBlockPrefix')) {
-            return 'choice'; //Symfony 2.x support
-        }
-
         return ChoiceType::class;
     }
 
@@ -67,13 +62,5 @@ class EnumType extends AbstractType
     public function getBlockPrefix(): string
     {
         return 'enum';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getName(): string
-    {
-        return $this->getBlockPrefix();
     }
 }

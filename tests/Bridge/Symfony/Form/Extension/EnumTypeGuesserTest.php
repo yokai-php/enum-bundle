@@ -3,15 +3,14 @@
 namespace Yokai\Enum\Tests\Bridge\Symfony\Form\Extension;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
-use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
 use Yokai\Enum\Bridge\Symfony\Form\Extension\EnumTypeGuesser;
+use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
 use Yokai\Enum\Bridge\Symfony\Validator\Constraints\Enum;
 use Yokai\Enum\EnumRegistry;
 use Yokai\Enum\Tests\Bridge\Symfony\Form\TestExtension;
@@ -67,7 +66,7 @@ class EnumTypeGuesserTest extends TypeTestCase
     public function testGuessType(): void
     {
         $guess = new TypeGuess(
-            $this->getEnumType(),
+            EnumType::class,
             [
                 'enum' => GenderEnum::class,
                 'multiple' => false,
@@ -96,32 +95,10 @@ class EnumTypeGuesserTest extends TypeTestCase
     public function testCreateForm(): void
     {
         $class = self::TEST_CLASS;
-        $form = $this->factory->create($this->getFormType(), new $class, ['data_class' => $class])
+        $form = $this->factory->create(FormType::class, new $class, ['data_class' => $class])
             ->add(self::TEST_PROPERTY);
 
         $this->assertEquals(['Male' => 'male', 'Female' => 'female'], $form->get(self::TEST_PROPERTY)->getConfig()->getOption('choices'));
-    }
-
-    protected function getFormType(): string
-    {
-        if (method_exists(AbstractType::class, 'getBlockPrefix')) {
-            $name = FormType::class; //Symfony 3.x support
-        } else {
-            $name = 'form'; //Symfony 2.x support
-        }
-
-        return $name;
-    }
-
-    protected function getEnumType(): string
-    {
-        if (method_exists(AbstractType::class, 'getBlockPrefix')) {
-            $name = EnumType::class; //Symfony 3.x support
-        } else {
-            $name = 'enum'; //Symfony 2.x support
-        }
-
-        return $name;
     }
 
     protected function getExtensions(): array

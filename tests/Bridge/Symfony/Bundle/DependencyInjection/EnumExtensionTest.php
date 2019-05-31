@@ -26,13 +26,9 @@ class EnumExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $this->extension()->load([[]], $container);
 
-        if (method_exists($container, 'getAutoconfiguredInstanceof')) {
-            $autoconfigure = $container->getAutoconfiguredInstanceof();
-            $this->assertArrayHasKey(EnumInterface::class, $autoconfigure);
-            $this->assertEquals(['enum' => [[]]], $autoconfigure[EnumInterface::class]->getTags());
-        } else {
-            $this->assertTrue(true); // not in this version
-        }
+        $autoconfigure = $container->getAutoconfiguredInstanceof();
+        $this->assertArrayHasKey(EnumInterface::class, $autoconfigure);
+        $this->assertEquals(['enum' => [[]]], $autoconfigure[EnumInterface::class]->getTags());
     }
 
     /**
@@ -43,12 +39,8 @@ class EnumExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $this->extension()->load([['enum_autoconfiguration' => false]], $container);
 
-        if (method_exists($container, 'getAutoconfiguredInstanceof')) {
-            $autoconfigure = $container->getAutoconfiguredInstanceof();
-            $this->assertArrayNotHasKey(EnumInterface::class, $autoconfigure);
-        } else {
-            $this->assertTrue(true); // not in this version
-        }
+        $autoconfigure = $container->getAutoconfiguredInstanceof();
+        $this->assertArrayNotHasKey(EnumInterface::class, $autoconfigure);
     }
 
     /**

@@ -4,8 +4,8 @@ namespace Yokai\Enum\Tests\Bridge\Symfony\Form;
 
 use Symfony\Component\Form\AbstractExtension;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
-use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
 use Yokai\Enum\Bridge\Symfony\Form\Extension\EnumTypeGuesser;
+use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
 use Yokai\Enum\EnumRegistry;
 
 /**

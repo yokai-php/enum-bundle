@@ -3,6 +3,7 @@
 namespace Yokai\Enum\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\Enum\EnumRegistry;
 use Yokai\Enum\Tests\Fixtures\GenderEnum;
@@ -46,6 +47,7 @@ class EnumRegistryTest extends TestCase
 
     public function testAddNominal(): void
     {
+        /** @var TranslatorInterface|ObjectProphecy $translator */
         $translator = $this->prophesize(TranslatorInterface::class)->reveal();
         $gender = new GenderEnum;
         $state = new StateEnum($translator);

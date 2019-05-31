@@ -15,8 +15,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('yokai_enum');
+        $treeBuilder = new TreeBuilder('yokai_enum');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
