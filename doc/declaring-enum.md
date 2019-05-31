@@ -97,3 +97,22 @@ services:
             - m: 'Male'
               f: 'Female'
 ```
+
+
+The configurable way extracting constant list
+--------------------
+
+Let say that you already have a list of constant that for the gender.
+No need for a class, just use the `ConstantListEnum` class and define a new enum service.
+
+```yaml
+services:
+    enum.member.gender:
+        class: 'Yokai\Enum\ConstantListEnum'
+        public: false
+        tags: ['enum']
+        arguments:
+            - '@enum.constant_extractor'
+            - 'App\\Model\\Person::GENDER_*'
+            - "gender"
+```

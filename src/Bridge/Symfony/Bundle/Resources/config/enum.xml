@@ -5,6 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="enum.constant_extractor" class="Yokai\Enum\ConstantExtractor" public="false"/>
         <service id="enum.registry" class="Yokai\Enum\EnumRegistry"/>
         <service id="enum.abstract_translated" class="Yokai\Enum\AbstractTranslatedEnum" abstract="true">
             <argument type="service" id="translator"/>

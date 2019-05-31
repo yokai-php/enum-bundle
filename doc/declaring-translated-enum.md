@@ -6,7 +6,7 @@ If you wish to use Symfony's Translator for your enum labels, this bundle provid
 There is a lot of way to create and declare such classes.
 
 > **Note :** It is pretty much like [declaring classic enums](declaring-enum.md), 
-> but with a `extends` instead of an `implements`.
+> but with a dependency to `symfony/translator`.
 
 
 The classic way
@@ -113,4 +113,24 @@ services:
             - "enum.gender.%s"
             - "gender"
             - ['m', 'f']
+```
+
+The configurable way extracting constant list
+--------------------
+
+Let say that you already have a list of constant that for the gender.
+No need for a class, just use the `ConstantListTranslatedEnum` class and define a new enum service.
+
+```yaml
+services:
+    enum.member.gender:
+        class: 'Yokai\Enum\ConstantListTranslatedEnum'
+        public: false
+        tags: ['enum']
+        arguments:
+            - '@enum.constant_extractor'
+            - 'App\\Model\\Person::GENDER_*'
+            - "@translator"
+            - "enum.gender.%s"
+            - "gender"
 ```
