@@ -2,7 +2,7 @@
 
 namespace Yokai\Enum\Tests\Fixtures;
 
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\Enum\AbstractTranslatedEnum;
 
 /**

@@ -2,6 +2,7 @@
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Validator\Constraints;
 
+use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 use Yokai\Enum\Bridge\Symfony\Validator\Constraints\Enum;
@@ -17,6 +18,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
 {
     protected function createValidator()
     {
+        /** @var EnumRegistry|ObjectProphecy $registry */
         $registry = $this->prophesize(EnumRegistry::class);
         $registry->has('state')->willReturn(false);
         $registry->has(GenderEnum::class)->willReturn(true);
@@ -66,6 +68,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
 
         $this->buildViolation('myMessage')
             ->setParameter('{{ value }}', '"foo"')
+            ->setParameter('{{ choices }}', '"customer", "prospect"')
             ->setCode(Choice::NO_SUCH_CHOICE_ERROR)
             ->assertRaised();
     }
@@ -87,6 +90,7 @@ class EnumValidatorTest extends AbstractConstraintValidatorTest
 
         $this->buildViolation('myMessage')
             ->setParameter('{{ value }}', '"foo"')
+            ->setParameter('{{ choices }}', '"customer", "prospect"')
             ->setInvalidValue('foo')
             ->setCode(Choice::NO_SUCH_CHOICE_ERROR)
             ->assertRaised();

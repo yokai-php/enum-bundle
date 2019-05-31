@@ -2,6 +2,7 @@
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Twig\Extension;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Yokai\Enum\Bridge\Twig\Extension\EnumExtension;
 use Yokai\Enum\EnumInterface;
@@ -10,7 +11,7 @@ use Yokai\Enum\EnumRegistry;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumExtensionTest extends \PHPUnit_Framework_TestCase
+class EnumExtensionTest extends TestCase
 {
     /**
      * @var EnumRegistry|ObjectProphecy

@@ -2,26 +2,27 @@
 
 namespace Yokai\Enum\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\Enum\ConfigurableTranslatedEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class ConfigurableTranslatedEnumTest extends \PHPUnit_Framework_TestCase
+class ConfigurableTranslatedEnumTest extends TestCase
 {
     public function testConstructedWithInvalidPattern()
     {
         $this->expectException('Yokai\Enum\Exception\InvalidTranslatePatternException');
-        $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface');
+        $translator = $this->prophesize(TranslatorInterface::class);
         new ConfigurableTranslatedEnum($translator->reveal(), 'invalid.pattern', 'invalid', ['foo', 'bar']);
     }
 
     public function testTranslatedChoices()
     {
         /** @var ObjectProphecy|TranslatorInterface $translator */
-        $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface');
+        $translator = $this->prophesize(TranslatorInterface::class);
         $translator->trans('choice.something.foo', [], 'messages', null)->shouldBeCalled()->willReturn('FOO translated');
         $translator->trans('choice.something.bar', [], 'messages', null)->shouldBeCalled()->willReturn('BAR translated');
         $type = new ConfigurableTranslatedEnum($translator->reveal(), 'choice.something.%s', 'something', ['foo', 'bar']);
@@ -36,7 +37,7 @@ class ConfigurableTranslatedEnumTest extends \PHPUnit_Framework_TestCase
     public function testTranslatedWithDomainChoices()
     {
         /** @var ObjectProphecy|TranslatorInterface $translator */
-        $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface');
+        $translator = $this->prophesize(TranslatorInterface::class);
         $translator->trans('choice.something.foo', [], 'messages', null)->shouldNotBeCalled();
         $translator->trans('choice.something.bar', [], 'messages', null)->shouldNotBeCalled();
         $translator->trans('something.foo', [], 'choices', null)->shouldBeCalled()->willReturn('FOO translated');

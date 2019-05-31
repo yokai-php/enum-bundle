@@ -2,6 +2,7 @@
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Bundle\DependencyInjection;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Yokai\Enum\Bridge\Symfony\Bundle\DependencyInjection\EnumExtension;
@@ -11,7 +12,7 @@ use Yokai\Enum\EnumRegistry;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumExtensionTest extends \PHPUnit_Framework_TestCase
+class EnumExtensionTest extends TestCase
 {
     /**
      * @return EnumExtension

@@ -2,6 +2,8 @@
 
 namespace Yokai\Enum\Tests;
 
+use PHPUnit\Framework\TestCase;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\Enum\EnumRegistry;
 use Yokai\Enum\Tests\Fixtures\GenderEnum;
 use Yokai\Enum\Tests\Fixtures\StateEnum;
@@ -11,7 +13,7 @@ use Yokai\Enum\Tests\Fixtures\TypeEnum;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumRegistryTest extends \PHPUnit_Framework_TestCase
+class EnumRegistryTest extends TestCase
 {
     /**
      * @var EnumRegistry
@@ -44,7 +46,7 @@ class EnumRegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddNominal()
     {
-        $translator = $this->prophesize('Symfony\Component\Translation\TranslatorInterface')->reveal();
+        $translator = $this->prophesize(TranslatorInterface::class)->reveal();
         $gender = new GenderEnum;
         $state = new StateEnum($translator);
         $subscription = new SubscriptionEnum($translator);

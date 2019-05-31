@@ -2,13 +2,14 @@
 
 namespace Yokai\Enum\Tests\Bridge\Symfony\Bundle\DependencyInjection\CompilerPass;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Reference;
 use Yokai\Enum\Bridge\Symfony\Bundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class TaggedEnumCollectorCompilerPassTest extends \PHPUnit_Framework_TestCase
+class TaggedEnumCollectorCompilerPassTest extends TestCase
 {
     /**
      * @var TaggedEnumCollectorCompilerPass

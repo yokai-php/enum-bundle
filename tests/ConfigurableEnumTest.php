@@ -2,9 +2,10 @@
 
 namespace Yokai\Enum\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Yokai\Enum\ConfigurableEnum;
 
-class ConfigurableEnumTest extends \PHPUnit_Framework_TestCase
+class ConfigurableEnumTest extends TestCase
 {
     public function testConfigurability()
     {
