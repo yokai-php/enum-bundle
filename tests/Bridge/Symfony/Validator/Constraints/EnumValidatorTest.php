@@ -3,6 +3,7 @@
 namespace Yokai\Enum\Tests\Bridge\Symfony\Validator\Constraints;
 
 use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Yokai\Enum\Bridge\Symfony\Validator\Constraints\Enum;
@@ -66,11 +67,15 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
         $this->validator->validate('foo', $constraint);
 
-        $this->buildViolation('myMessage')
+        $violationAssertion = $this->buildViolation('myMessage')
             ->setParameter('{{ value }}', '"foo"')
-            ->setParameter('{{ choices }}', '"customer", "prospect"')
-            ->setCode(Choice::NO_SUCH_CHOICE_ERROR)
-            ->assertRaised();
+            ->setCode(Choice::NO_SUCH_CHOICE_ERROR);
+
+        if (version_compare(Kernel::VERSION, '4.3', '>=')) {
+            $violationAssertion->setParameter('{{ choices }}', '"customer", "prospect"');
+        }
+
+        $violationAssertion->assertRaised();
     }
 
     public function testValidMultipleEnum(): void
@@ -88,11 +93,15 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
         $this->validator->validate(['customer', 'foo'], $constraint);
 
-        $this->buildViolation('myMessage')
+        $violationAssertion = $this->buildViolation('myMessage')
             ->setParameter('{{ value }}', '"foo"')
-            ->setParameter('{{ choices }}', '"customer", "prospect"')
             ->setInvalidValue('foo')
-            ->setCode(Choice::NO_SUCH_CHOICE_ERROR)
-            ->assertRaised();
+            ->setCode(Choice::NO_SUCH_CHOICE_ERROR);
+
+        if (version_compare(Kernel::VERSION, '4.3', '>=')) {
+            $violationAssertion->setParameter('{{ choices }}', '"customer", "prospect"');
+        }
+
+        $violationAssertion->assertRaised();
     }
 }

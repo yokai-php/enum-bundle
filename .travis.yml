@@ -17,7 +17,10 @@ cache:
 
 before_install:
   - composer selfupdate
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/form:${SYMFONY_VERSION}" --no-update; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/framework-bundle:${SYMFONY_VERSION}" --no-update; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/twig-bundle:${SYMFONY_VERSION}" --no-update; fi;
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/validator:${SYMFONY_VERSION}" --no-update; fi;
 
 install: composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
