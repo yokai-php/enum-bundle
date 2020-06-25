@@ -6,6 +6,9 @@ namespace Yokai\EnumBundle;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 class ConstantListTranslatedEnum extends ConfigurableTranslatedEnum
 {
     /**

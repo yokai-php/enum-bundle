@@ -8,7 +8,12 @@ use ReflectionClass;
 use ReflectionException;
 use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
 
-final class ConstantExtractor
+/**
+ * @internal
+ *
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
+class ConstantExtractor
 {
     public function extract(string $pattern): array
     {
@@ -26,7 +31,7 @@ final class ConstantExtractor
         $matchingNames = preg_grep($regexp, array_keys($constants));
 
         if (count($matchingNames) === 0) {
-            throw CannotExtractConstantsException::noConstantMathingPattern($pattern);
+            throw CannotExtractConstantsException::noConstantMatchingPattern($pattern);
         }
 
         return array_values(array_intersect_key($constants, array_flip($matchingNames)));

@@ -6,7 +6,10 @@ namespace Yokai\EnumBundle\Exception;
 
 use InvalidArgumentException;
 
-final class CannotExtractConstantsException extends InvalidArgumentException
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
+class CannotExtractConstantsException extends InvalidArgumentException
 {
     public static function invalidPattern(string $pattern): self
     {
@@ -25,7 +28,7 @@ final class CannotExtractConstantsException extends InvalidArgumentException
         return new self("Class $class has no public constant.");
     }
 
-    public static function noConstantMathingPattern(string $pattern): self
+    public static function noConstantMatchingPattern(string $pattern): self
     {
         return new self("Pattern $pattern matches no constant.");
     }

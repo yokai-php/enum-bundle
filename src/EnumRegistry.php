@@ -51,7 +51,7 @@ class EnumRegistry
      *
      * @return bool
      */
-    public function has($name): bool
+    public function has(string $name): bool
     {
         return isset($this->enums[$name]);
     }
