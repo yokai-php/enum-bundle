@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Validator\Constraints;
 
@@ -32,7 +34,7 @@ class EnumValidator extends ChoiceValidator
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof Enum) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Enum');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Enum');
         }
 
         $constraint->choices  = null;

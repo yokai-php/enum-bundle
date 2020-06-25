@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yokai\EnumBundle;
 
@@ -18,7 +20,7 @@ class YokaiEnumBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $container
-            ->addCompilerPass(new TaggedEnumCollectorCompilerPass)
+            ->addCompilerPass(new TaggedEnumCollectorCompilerPass())
         ;
     }
 
@@ -27,6 +29,6 @@ class YokaiEnumBundle extends Bundle
      */
     public function getContainerExtension(): EnumExtension
     {
-        return new EnumExtension;
+        return new EnumExtension();
     }
 }
