@@ -6,6 +6,9 @@ use Generator;
 use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 class ConstantExtractorTest extends TestCase
 {
     public function getExtractor(): ConstantExtractor

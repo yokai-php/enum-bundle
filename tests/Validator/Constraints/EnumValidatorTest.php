@@ -4,8 +4,9 @@ namespace Yokai\EnumBundle\Tests\Validator\Constraints;
 
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
@@ -34,19 +35,19 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
     public function testAcceptOnlyEnum(): void
     {
-        $this->expectException('Symfony\Component\Validator\Exception\UnexpectedTypeException');
+        $this->expectException(UnexpectedTypeException::class);
         $this->validator->validate(null, new Choice);
     }
 
     public function testEnumIsRequired(): void
     {
-        $this->expectException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
+        $this->expectException(ConstraintDefinitionException::class);
         $this->validator->validate('foo', new Enum);
     }
 
     public function testValidEnumIsRequired(): void
     {
-        $this->expectException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
+        $this->expectException(ConstraintDefinitionException::class);
         $this->validator->validate('foo', new Enum('state'));
     }
 
@@ -70,15 +71,11 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
         $this->validator->validate('foo', $constraint);
 
-        $violationAssertion = $this->buildViolation('myMessage')
+        $this->buildViolation('myMessage')
             ->setParameter('{{ value }}', '"foo"')
-            ->setCode(Choice::NO_SUCH_CHOICE_ERROR);
-
-        if (version_compare(Kernel::VERSION, '4.3', '>=')) {
-            $violationAssertion->setParameter('{{ choices }}', '"customer", "prospect"');
-        }
-
-        $violationAssertion->assertRaised();
+            ->setCode(Choice::NO_SUCH_CHOICE_ERROR)
+            ->setParameter('{{ choices }}', '"customer", "prospect"')
+            ->assertRaised();
     }
 
     public function testValidMultipleEnum(): void
@@ -96,15 +93,11 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
         $this->validator->validate(['customer', 'foo'], $constraint);
 
-        $violationAssertion = $this->buildViolation('myMessage')
+        $this->buildViolation('myMessage')
             ->setParameter('{{ value }}', '"foo"')
             ->setInvalidValue('foo')
-            ->setCode(Choice::NO_SUCH_CHOICE_ERROR);
-
-        if (version_compare(Kernel::VERSION, '4.3', '>=')) {
-            $violationAssertion->setParameter('{{ choices }}', '"customer", "prospect"');
-        }
-
-        $violationAssertion->assertRaised();
+            ->setCode(Choice::NO_SUCH_CHOICE_ERROR)
+            ->setParameter('{{ choices }}', '"customer", "prospect"')
+            ->assertRaised();
     }
 }

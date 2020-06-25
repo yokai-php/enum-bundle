@@ -4,6 +4,9 @@ namespace Yokai\EnumBundle\Tests;
 
 use Yokai\EnumBundle\ConfigurableEnum;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 class ConfigurableEnumTest extends TestCase
 {
     public function testConfigurability(): void

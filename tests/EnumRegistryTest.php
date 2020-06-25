@@ -27,11 +27,6 @@ class EnumRegistryTest extends TestCase
         $this->registry = new EnumRegistry;
     }
 
-    protected function tearDown(): void
-    {
-        unset($this->registry);
-    }
-
     public function testAddDuplicatedException(): void
     {
         $this->expectException(DuplicatedEnumException::class);

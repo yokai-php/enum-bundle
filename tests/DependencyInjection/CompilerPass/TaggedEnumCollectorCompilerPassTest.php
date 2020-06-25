@@ -2,6 +2,8 @@
 
 namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Yokai\EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 use Yokai\EnumBundle\Tests\TestCase;
@@ -21,14 +23,9 @@ class TaggedEnumCollectorCompilerPassTest extends TestCase
         $this->compiler = new TaggedEnumCollectorCompilerPass;
     }
 
-    protected function tearDown(): void
-    {
-        unset($this->compiler);
-    }
-
     public function testCollectWhenServiceNotAvailable(): void
     {
-        $compiler = $this->prophesize('Symfony\Component\DependencyInjection\ContainerBuilder');
+        $compiler = $this->prophesize(ContainerBuilder::class);
         $compiler->hasDefinition('enum.registry')->shouldBeCalled()->willReturn(false);
 
         $this->compiler->process($compiler->reveal());
@@ -36,16 +33,16 @@ class TaggedEnumCollectorCompilerPassTest extends TestCase
 
     public function testCollectEnums(): void
     {
-        $registry = $this->prophesize('Symfony\Component\DependencyInjection\Definition');
+        $registry = $this->prophesize(Definition::class);
         $registry->addMethodCall('add', [new Reference('enum.gender')])->shouldBeCalled();
         $registry->addMethodCall('add', [new Reference('enum.type')])->shouldBeCalled();
 
-        $compiler = $this->prophesize('Symfony\Component\DependencyInjection\ContainerBuilder');
+        $compiler = $this->prophesize(ContainerBuilder::class);
         $compiler->hasDefinition('enum.registry')->shouldBeCalled()->willReturn(true);
         $compiler->getDefinition('enum.registry')->shouldBeCalled()->willReturn($registry);
         $compiler->findTaggedServiceIds('enum')->shouldBeCalled()->willReturn([
-            'enum.gender' => $this->prophesize('Symfony\Component\DependencyInjection\Definition')->reveal(),
-            'enum.type' => $this->prophesize('Symfony\Component\DependencyInjection\Definition')->reveal(),
+            'enum.gender' => $this->prophesize(Definition::class)->reveal(),
+            'enum.type' => $this->prophesize(Definition::class)->reveal(),
         ]);
 
         $this->compiler->process($compiler->reveal());

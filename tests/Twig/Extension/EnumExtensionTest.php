@@ -25,13 +25,6 @@ class EnumExtensionTest extends TestCase
         $this->registry = $this->prophesize(EnumRegistry::class);
     }
 
-    protected function tearDown(): void
-    {
-        unset(
-            $this->registry
-        );
-    }
-
     public function testEnumLabel(): void
     {
         $enum = $this->prophesize(EnumInterface::class);

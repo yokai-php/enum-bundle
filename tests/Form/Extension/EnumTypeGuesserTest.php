@@ -57,9 +57,7 @@ class EnumTypeGuesserTest extends TypeTestCase
 
         $this->metadata = new ClassMetadata(self::TEST_CLASS);
         $this->metadata->addPropertyConstraint(self::TEST_PROPERTY, new Enum(['enum' => GenderEnum::class]));
-        $this->metadataFactory = $this->prophesize(
-            'Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface'
-        );
+        $this->metadataFactory = $this->prophesize(MetadataFactoryInterface::class);
         $this->metadataFactory->getMetadataFor(self::TEST_CLASS)
             ->willReturn($this->metadata);
 

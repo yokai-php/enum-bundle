@@ -8,6 +8,9 @@ use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\ConstantListTranslatedEnum;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 class ConstantListTranslatedEnumTest extends TestCase
 {
     /**
@@ -18,11 +21,6 @@ class ConstantListTranslatedEnumTest extends TestCase
     protected function setUp(): void
     {
         $this->translator = $this->prophesize(TranslatorInterface::class);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->translator = null;
     }
 
     public function getEnum(string $pattern, string $name): ConstantListTranslatedEnum

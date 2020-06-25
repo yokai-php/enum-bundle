@@ -6,6 +6,9 @@ use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\ConstantListEnum;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 class ConstantListEnumTest extends TestCase
 {
     public function getEnum(string $pattern, string $name): ConstantListEnum

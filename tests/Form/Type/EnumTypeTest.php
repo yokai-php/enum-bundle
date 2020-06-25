@@ -5,6 +5,8 @@ namespace Yokai\EnumBundle\Tests\Form\Type;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Form\Type\EnumType;
 use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
@@ -31,13 +33,13 @@ class EnumTypeTest extends TypeTestCase
 
     public function testEnumOptionIsRequired(): void
     {
-        $this->expectException('Symfony\Component\OptionsResolver\Exception\MissingOptionsException');
+        $this->expectException(MissingOptionsException::class);
         $this->createForm();
     }
 
     public function testEnumOptionIsInvalid(): void
     {
-        $this->expectException('Symfony\Component\OptionsResolver\Exception\InvalidOptionsException');
+        $this->expectException(InvalidOptionsException::class);
         $this->createForm('state');
     }
 
