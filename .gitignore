@@ -1,6 +1,6 @@
-/phpunit.xml
-composer.lock
+/.idea/
 /vendor/
-/build/
-.idea/
-docker-compose.yml
+/.phpcs-cache
+/composer.lock
+/docker-compose.yml
+/phpunit.xml
