@@ -2,6 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests\Form\Extension;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Guess\Guess;
@@ -21,6 +22,8 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
  */
 class EnumTypeGuesserTest extends TypeTestCase
 {
+    use ProphecyTrait;
+
     const TEST_CLASS = EnumTypeGuesserTest_TestClass::class;
 
     const TEST_PROPERTY = 'property';

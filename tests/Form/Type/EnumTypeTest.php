@@ -2,6 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests\Form\Type;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Yokai\EnumBundle\EnumRegistry;
@@ -14,6 +15,8 @@ use Yokai\EnumBundle\Tests\Form\TestExtension;
  */
 class EnumTypeTest extends TypeTestCase
 {
+    use ProphecyTrait;
+
     private $enumRegistry;
 
     protected function setUp(): void

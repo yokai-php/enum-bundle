@@ -2,7 +2,6 @@
 
 namespace Yokai\EnumBundle\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\EnumRegistry;

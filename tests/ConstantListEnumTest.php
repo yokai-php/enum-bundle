@@ -2,7 +2,6 @@
 
 namespace Yokai\EnumBundle\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\ConstantListEnum;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;

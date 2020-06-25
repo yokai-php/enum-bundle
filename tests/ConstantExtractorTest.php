@@ -3,7 +3,6 @@
 namespace Yokai\EnumBundle\Tests;
 
 use Generator;
-use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
 
@@ -20,7 +19,7 @@ class ConstantExtractorTest extends TestCase
     public function testExtractMalformedPattern(string $pattern, string $exceptionMessage): void
     {
         $this->expectException(CannotExtractConstantsException::class);
-        $this->expectExceptionMessageRegExp($exceptionMessage);
+        $this->expectExceptionMessageMatches($exceptionMessage);
 
         $this->getExtractor()->extract($pattern);
     }
@@ -31,7 +30,7 @@ class ConstantExtractorTest extends TestCase
     public function testExtractEmpty(string $pattern, string $exceptionMessage): void
     {
         $this->expectException(CannotExtractConstantsException::class);
-        $this->expectExceptionMessageRegExp($exceptionMessage);
+        $this->expectExceptionMessageMatches($exceptionMessage);
 
         $this->getExtractor()->extract($pattern);
     }

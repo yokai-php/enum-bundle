@@ -2,12 +2,12 @@
 
 namespace Yokai\EnumBundle\Tests\Twig\Extension;
 
-use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\EnumRegistry;
+use Yokai\EnumBundle\Tests\TestCase;
 use Yokai\EnumBundle\Twig\Extension\EnumExtension;
 
 /**

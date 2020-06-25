@@ -2,11 +2,11 @@
 
 namespace Yokai\EnumBundle\Tests\DependencyInjection;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Yokai\EnumBundle\DependencyInjection\EnumExtension;
 use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\EnumRegistry;
+use Yokai\EnumBundle\Tests\TestCase;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

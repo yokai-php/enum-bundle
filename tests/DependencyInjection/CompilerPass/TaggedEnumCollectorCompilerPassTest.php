@@ -2,9 +2,9 @@
 
 namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Reference;
 use Yokai\EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
+use Yokai\EnumBundle\Tests\TestCase;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

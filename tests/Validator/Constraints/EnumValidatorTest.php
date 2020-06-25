@@ -2,6 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests\Validator\Constraints;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Validator\Constraints\Choice;
@@ -17,6 +18,8 @@ use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
  */
 class EnumValidatorTest extends ConstraintValidatorTestCase
 {
+    use ProphecyTrait;
+
     protected function createValidator(): EnumValidator
     {
         /** @var EnumRegistry|ObjectProphecy $registry */
