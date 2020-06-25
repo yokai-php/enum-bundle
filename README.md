@@ -34,7 +34,7 @@ $ composer require yokai/enum-bundle
 
 return [
         // ...
-    Yokai\Enum\Bridge\Symfony\Bundle\YokaiEnumBundle::class => ['all' => true],
+    Yokai\EnumBundle\YokaiEnumBundle::class => ['all' => true],
 ];
 ```
 
@@ -54,14 +54,14 @@ We first need to create the classes that will handle our enums :
 // src/Enum/GenderEnum.php
 namespace App\Enum;
 
-use Yokai\Enum\EnumInterface;
-use Yokai\Enum\EnumWithClassAsNameTrait;
+use Yokai\EnumBundle\EnumInterface;
+use Yokai\EnumBundle\EnumWithClassAsNameTrait;
 
 class GenderEnum implements EnumInterface
 {
     use EnumWithClassAsNameTrait;
 
-    public function getChoices()
+    public function getChoices(): array
     {
         return ['m' => 'Male', 'f' => 'Female'];
     }
@@ -80,14 +80,15 @@ Adding validation to your model :
 // src/Model/Member.php
 namespace App\Model;
 
-use Yokai\Enum\Bridge\Symfony\Validator\Constraints\Enum;
+use App\Enum\GenderEnum;
+use Yokai\EnumBundle\Validator\Constraints\Enum;
 
 class Member
 {
     /**
      * @var string
      *
-     * @Enum("App\Enum\GenderEnum")
+     * @Enum(GenderEnum::class)
      */
     protected $gender;
 }
@@ -103,8 +104,7 @@ namespace App\Form\Type;
 use App\Enum\GenderEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-// For Symfony >= 2.8
-use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
+use Yokai\EnumBundle\Form\Type\EnumType;
 
 class MemberType extends AbstractType
 {
@@ -114,11 +114,8 @@ class MemberType extends AbstractType
             // Let the bundle guess the form type for you (requires that you configured the validation)
             ->add('gender')
 
-            // Manual form type binding for Symfony >= 2.8
+            // Manual form type binding
             ->add('gender', EnumType::class, ['enum' => GenderEnum::class])
-
-            // Manual form type binding for Symfony 2.7
-            ->add('gender', 'enum', ['enum' => GenderEnum::class])
         ;
     }
 }

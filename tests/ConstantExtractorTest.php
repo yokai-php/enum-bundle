@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests;
+namespace Yokai\EnumBundle\Tests;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use Yokai\Enum\ConstantExtractor;
-use Yokai\Enum\Exception\CannotExtractConstantsException;
+use Yokai\EnumBundle\ConstantExtractor;
+use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
 
 class ConstantExtractorTest extends TestCase
 {

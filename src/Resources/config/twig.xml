@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="yokai_enum.twig_extension.enum_extension" class="Yokai\EnumBundle\Twig\Extension\EnumExtension">
+            <argument type="service" id="yokai_enum.enum_registry"/>
+            <tag name="twig.extension" alias="enum"/>
+        </service>
+    </services>
+
+</container>

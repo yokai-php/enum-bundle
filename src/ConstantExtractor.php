@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum;
+namespace Yokai\EnumBundle;
 
 use ReflectionClass;
 use ReflectionException;
-use Yokai\Enum\Exception\CannotExtractConstantsException;
+use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
 
 final class ConstantExtractor
 {

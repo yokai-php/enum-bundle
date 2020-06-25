@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests\Fixtures;
+namespace Yokai\EnumBundle\Tests\Fixtures;
 
-use Yokai\Enum\ConfigurableEnum;
+use Yokai\EnumBundle\ConfigurableEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

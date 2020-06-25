@@ -16,7 +16,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Yokai\Enum\Bridge\Symfony\Form\Type\EnumType;
+use Yokai\EnumBundle\Form\Type\EnumType;
 
 class MemberAdmin extends AbstractAdmin
 {

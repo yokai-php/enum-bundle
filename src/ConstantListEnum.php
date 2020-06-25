@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum;
+namespace Yokai\EnumBundle;
 
 class ConstantListEnum extends ConfigurableEnum
 {

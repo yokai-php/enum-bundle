@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests;
+namespace Yokai\EnumBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\Enum\ConstantExtractor;
-use Yokai\Enum\ConstantListTranslatedEnum;
-use Yokai\Enum\Tests\Fixtures\Vehicle;
+use Yokai\EnumBundle\ConstantExtractor;
+use Yokai\EnumBundle\ConstantListTranslatedEnum;
+use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
 class ConstantListTranslatedEnumTest extends TestCase
 {

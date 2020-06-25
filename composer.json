@@ -1,7 +1,7 @@
 {
     "name": "yokai/enum-bundle",
     "description": "Simple enumeration system with Symfony integration",
-    "type": "library",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
@@ -28,10 +28,10 @@
         "twig/twig": "Add enum util functions"
     },
     "autoload": {
-        "psr-4": { "Yokai\\Enum\\": "src" }
+        "psr-4": { "Yokai\\EnumBundle\\": "src" }
     },
     "autoload-dev": {
-        "psr-4": { "Yokai\\Enum\\Tests\\": "tests" }
+        "psr-4": { "Yokai\\EnumBundle\\Tests\\": "tests" }
     },
     "minimum-stability": "stable",
     "extra": {

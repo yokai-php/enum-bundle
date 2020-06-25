@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests\Fixtures;
+namespace Yokai\EnumBundle\Tests\Fixtures;
 
 class Vehicle
 {

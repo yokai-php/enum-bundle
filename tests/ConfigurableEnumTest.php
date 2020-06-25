@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests;
+namespace Yokai\EnumBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Yokai\Enum\ConfigurableEnum;
+use Yokai\EnumBundle\ConfigurableEnum;
 
 class ConfigurableEnumTest extends TestCase
 {

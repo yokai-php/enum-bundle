@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum;
+namespace Yokai\EnumBundle;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\Enum\Exception\InvalidTranslatePatternException;
+use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

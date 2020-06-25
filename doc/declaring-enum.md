@@ -19,7 +19,7 @@ Create a new class, implement both `getName` & `getChoices` methods.
 
 namespace App\Enum;
 
-use Yokai\Enum\EnumInterface;
+use Yokai\EnumBundle\EnumInterface;
 
 class GenderEnum implements EnumInterface
 {
@@ -56,8 +56,8 @@ Create a new class, use `EnumWithClassAsNameTrait` trait and implement `getChoic
 
 namespace App\Enum;
 
-use Yokai\Enum\EnumInterface;
-use Yokai\Enum\EnumWithClassAsNameTrait;
+use Yokai\EnumBundle\EnumInterface;
+use Yokai\EnumBundle\EnumWithClassAsNameTrait;
 
 class GenderEnum implements EnumInterface
 {
@@ -89,7 +89,7 @@ No need for a class, just use the `ConfigurableEnum` class and define a new enum
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\Enum\ConfigurableEnum'
+        class: 'Yokai\EnumBundle\ConfigurableEnum'
         public: false
         tags: ['enum']
         arguments:
@@ -108,7 +108,7 @@ No need for a class, just use the `ConstantListEnum` class and define a new enum
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\Enum\ConstantListEnum'
+        class: 'Yokai\EnumBundle\ConstantListEnum'
         public: false
         tags: ['enum']
         arguments:

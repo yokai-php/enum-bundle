@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests\Fixtures;
+namespace Yokai\EnumBundle\Tests\Fixtures;
 
-use Yokai\Enum\EnumInterface;
-use Yokai\Enum\EnumWithClassAsNameTrait;
+use Yokai\EnumBundle\EnumInterface;
+use Yokai\EnumBundle\EnumWithClassAsNameTrait;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests;
+namespace Yokai\EnumBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\Enum\ConfigurableTranslatedEnum;
+use Yokai\EnumBundle\ConfigurableTranslatedEnum;
+use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -14,7 +15,7 @@ class ConfigurableTranslatedEnumTest extends TestCase
 {
     public function testConstructedWithInvalidPattern(): void
     {
-        $this->expectException('Yokai\Enum\Exception\InvalidTranslatePatternException');
+        $this->expectException(InvalidTranslatePatternException::class);
         $translator = $this->prophesize(TranslatorInterface::class);
         new ConfigurableTranslatedEnum($translator->reveal(), 'invalid.pattern', 'invalid', ['foo', 'bar']);
     }

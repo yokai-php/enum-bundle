@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests;
+namespace Yokai\EnumBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Yokai\Enum\ConstantExtractor;
-use Yokai\Enum\ConstantListEnum;
-use Yokai\Enum\Tests\Fixtures\Vehicle;
+use Yokai\EnumBundle\ConstantExtractor;
+use Yokai\EnumBundle\ConstantListEnum;
+use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
 class ConstantListEnumTest extends TestCase
 {

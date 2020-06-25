@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum;
-
+namespace Yokai\EnumBundle;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 

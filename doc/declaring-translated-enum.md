@@ -20,7 +20,7 @@ Create a new class, implement both `getName` & `getValues` methods and specify t
 namespace App\Enum;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\AbstractTranslatedEnum;
 
 class GenderEnum extends AbstractTranslatedEnum
 {
@@ -65,8 +65,8 @@ Create a new class, use `EnumWithClassAsNameTrait` trait, implement `getValues` 
 namespace App\Enum;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\Enum\AbstractTranslatedEnum;
-use Yokai\Enum\EnumWithClassAsNameTrait;
+use Yokai\EnumBundle\AbstractTranslatedEnum;
+use Yokai\EnumBundle\EnumWithClassAsNameTrait;
 
 class GenderEnum extends AbstractTranslatedEnum
 {
@@ -105,7 +105,7 @@ No need for a class, just use the `ConfigurableTranslatedEnum` class and define 
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\Enum\ConfigurableTranslatedEnum'
+        class: 'Yokai\EnumBundle\ConfigurableTranslatedEnum'
         public: false
         tags: ['enum']
         arguments:
@@ -124,11 +124,11 @@ No need for a class, just use the `ConstantListTranslatedEnum` class and define 
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\Enum\ConstantListTranslatedEnum'
+        class: 'Yokai\EnumBundle\ConstantListTranslatedEnum'
         public: false
         tags: ['enum']
         arguments:
-            - '@enum.constant_extractor'
+            - '@yokai_enum.constant_extractor'
             - 'App\\Model\\Person::GENDER_*'
             - "@translator"
             - "enum.gender.%s"

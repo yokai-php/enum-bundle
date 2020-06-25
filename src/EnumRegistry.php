@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum;
+namespace Yokai\EnumBundle;
 
-use Yokai\Enum\Exception\DuplicatedEnumException;
-use Yokai\Enum\Exception\InvalidEnumException;
+use Yokai\EnumBundle\Exception\DuplicatedEnumException;
+use Yokai\EnumBundle\Exception\InvalidEnumException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

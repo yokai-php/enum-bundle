@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests\Fixtures;
+namespace Yokai\EnumBundle\Tests\Fixtures;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\Enum\AbstractTranslatedEnum;
+use Yokai\EnumBundle\AbstractTranslatedEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

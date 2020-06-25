@@ -1,15 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Yokai\Enum\Tests;
+namespace Yokai\EnumBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\Enum\EnumRegistry;
-use Yokai\Enum\Tests\Fixtures\GenderEnum;
-use Yokai\Enum\Tests\Fixtures\StateEnum;
-use Yokai\Enum\Tests\Fixtures\SubscriptionEnum;
-use Yokai\Enum\Tests\Fixtures\TypeEnum;
+use Yokai\EnumBundle\EnumRegistry;
+use Yokai\EnumBundle\Exception\DuplicatedEnumException;
+use Yokai\EnumBundle\Exception\InvalidEnumException;
+use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
+use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
+use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -33,14 +35,14 @@ class EnumRegistryTest extends TestCase
 
     public function testAddDuplicatedException(): void
     {
-        $this->expectException('Yokai\Enum\Exception\DuplicatedEnumException');
+        $this->expectException(DuplicatedEnumException::class);
         $this->registry->add(new GenderEnum);
         $this->registry->add(new GenderEnum);
     }
 
     public function testGetInvalidException(): void
     {
-        $this->expectException('Yokai\Enum\Exception\InvalidEnumException');
+        $this->expectException(InvalidEnumException::class);
         $this->registry->add(new GenderEnum);
         $this->registry->get('type');
     }
