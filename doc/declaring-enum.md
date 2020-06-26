@@ -113,6 +113,6 @@ services:
     enum.member.gender:
         class: Yokai\EnumBundle\ConstantListEnum
         arguments:
-            $constantsPattern: 'App\\Model\\Person::GENDER_*'
+            $constantsPattern: 'App\Model\Person::GENDER_*'
             $name: 'gender'
 ```

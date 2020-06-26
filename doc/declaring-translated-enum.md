@@ -123,7 +123,7 @@ services:
     enum.member.gender:
         class: Yokai\EnumBundle\ConstantListTranslatedEnum
         arguments:
-            $constantsPattern: 'App\\Model\\Person::GENDER_*'
+            $constantsPattern: 'App\Model\Person::GENDER_*'
             $transPattern: 'enum.gender.%s'
             $name: 'gender'
 ```
