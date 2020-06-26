@@ -44,6 +44,6 @@ class EnumExtension extends Extension
         }
 
         $container->registerForAutoconfiguration(EnumInterface::class)
-            ->addTag('enum');
+            ->addTag('yokai_enum.enum');
     }
 }

@@ -63,6 +63,6 @@ class EnumType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'enum';
+        return 'yokai_enum';
     }
 }

@@ -18,13 +18,13 @@ class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('enum.registry')) {
+        if (!$container->hasDefinition('yokai_enum.enum_registry')) {
             return;
         }
 
-        $registry = $container->getDefinition('enum.registry');
+        $registry = $container->getDefinition('yokai_enum.enum_registry');
 
-        foreach (array_keys($container->findTaggedServiceIds('enum')) as $enum) {
+        foreach (array_keys($container->findTaggedServiceIds('yokai_enum.enum')) as $enum) {
             $registry->addMethodCall('add', [new Reference($enum)]);
         }
     }
