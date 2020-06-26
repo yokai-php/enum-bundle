@@ -11,11 +11,6 @@ use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
  */
 class ConstantExtractorTest extends TestCase
 {
-    public function getExtractor(): ConstantExtractor
-    {
-        return new ConstantExtractor();
-    }
-
     /**
      * @dataProvider malformed
      */
@@ -24,7 +19,7 @@ class ConstantExtractorTest extends TestCase
         $this->expectException(CannotExtractConstantsException::class);
         $this->expectExceptionMessageMatches($exceptionMessage);
 
-        $this->getExtractor()->extract($pattern);
+        ConstantExtractor::extract($pattern);
     }
 
     /**
@@ -35,7 +30,7 @@ class ConstantExtractorTest extends TestCase
         $this->expectException(CannotExtractConstantsException::class);
         $this->expectExceptionMessageMatches($exceptionMessage);
 
-        $this->getExtractor()->extract($pattern);
+        ConstantExtractor::extract($pattern);
     }
 
     /**
@@ -43,7 +38,7 @@ class ConstantExtractorTest extends TestCase
      */
     public function testExtractSuccessful(string $pattern, array $expectedList): void
     {
-        self::assertEquals($expectedList, $this->getExtractor()->extract($pattern));
+        self::assertEquals($expectedList, ConstantExtractor::extract($pattern));
     }
 
     public function empty(): Generator

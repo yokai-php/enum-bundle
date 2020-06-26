@@ -8,6 +8,16 @@ There is a lot of way to create and declare such classes.
 > **Note :** It is pretty much like [declaring classic enums](declaring-enum.md), 
 > but with a dependency to `symfony/translator`.
 
+Services declarations assume that your services files has the following defaults section :
+
+```yaml
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autconfigure: true
+```
+
 
 The classic way
 ---------------
@@ -41,16 +51,11 @@ class GenderEnum extends AbstractTranslatedEnum
 }
 ```
 
-Define an enum service for it.
+Define an enum service for it (optional if you are using the default Symfony services file).
 
 ```yaml
 services:
-    enum.member.gender:
-        class: 'App\Enum\GenderEnum'
-        public: false
-        tags: ['enum']
-        arguments:
-            - "@translator"
+    App\Enum\GenderEnum: ~
 ```
 
 
@@ -84,16 +89,11 @@ class GenderEnum extends AbstractTranslatedEnum
 }
 ```
 
-Define an enum service for it.
+Define an enum service for it (optional if you are using the default Symfony services file).
 
 ```yaml
 services:
-    enum.member.gender:
-        class: 'App\Enum\GenderEnum'
-        public: false
-        tags: ['enum']
-        arguments:
-            - "@translator"
+    App\Enum\GenderEnum: ~
 ```
 
 
@@ -105,14 +105,11 @@ No need for a class, just use the `ConfigurableTranslatedEnum` class and define 
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\EnumBundle\ConfigurableTranslatedEnum'
-        public: false
-        tags: ['enum']
+        class: Yokai\EnumBundle\ConfigurableTranslatedEnum
         arguments:
-            - "@translator"
-            - "enum.gender.%s"
-            - "gender"
-            - ['m', 'f']
+            $transPattern: 'enum.gender.%s'
+            $name: 'gender'
+            $values: ['m', 'f']
 ```
 
 The configurable way extracting constant list
@@ -124,13 +121,9 @@ No need for a class, just use the `ConstantListTranslatedEnum` class and define 
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\EnumBundle\ConstantListTranslatedEnum'
-        public: false
-        tags: ['enum']
+        class: Yokai\EnumBundle\ConstantListTranslatedEnum
         arguments:
-            - '@yokai_enum.constant_extractor'
-            - 'App\\Model\\Person::GENDER_*'
-            - "@translator"
-            - "enum.gender.%s"
-            - "gender"
+            $constantsPattern: 'App\\Model\\Person::GENDER_*'
+            $transPattern: 'enum.gender.%s'
+            $name: 'gender'
 ```

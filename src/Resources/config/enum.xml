@@ -7,7 +7,6 @@
     <services>
         <service id="Yokai\EnumBundle\EnumRegistry" alias="yokai_enum.enum_registry"/>
 
-        <service id="yokai_enum.constant_extractor" class="Yokai\EnumBundle\ConstantExtractor" public="false"/>
         <service id="yokai_enum.enum_registry" class="Yokai\EnumBundle\EnumRegistry"/>
         <service id="yokai_enum.abstract_translated_enum" class="Yokai\EnumBundle\AbstractTranslatedEnum" abstract="true">
             <argument type="service" id="translator"/>
