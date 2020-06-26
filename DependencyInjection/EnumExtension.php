@@ -22,6 +22,16 @@ class EnumExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        if ($config['register_bundles']) {
+            @trigger_error('"register_bundles" config var with value "true" is deprecated since v2.3 and will be removed in v3.0', \E_USER_DEPRECATED);
+        }
+        if (!$config['enum_autoconfiguration']) {
+            @trigger_error('"enum_autoconfiguration" config var with value "false" is deprecated since v2.3 and will be removed in v3.0', \E_USER_DEPRECATED);
+        }
+        if ($config['enum_registry_autoconfigurable']) {
+            @trigger_error('"enum_registry_autoconfigurable" config var with value "false" is deprecated since v2.3 and will be removed in v3.0', \E_USER_DEPRECATED);
+        }
+
         $container->setParameter('enum.register_bundles', $config['register_bundles']);
 
         $xmlLoader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
