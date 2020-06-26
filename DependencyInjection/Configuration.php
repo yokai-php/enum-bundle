@@ -18,11 +18,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         if (version_compare(Kernel::VERSION, '4.2') >= 0) {
-            $treeBuilder = new TreeBuilder('presta_sitemap');
+            $treeBuilder = new TreeBuilder('yokai_enum');
             $rootNode = $treeBuilder->getRootNode();
         } else {
             $treeBuilder = new TreeBuilder();
-            $rootNode = $treeBuilder->root('presta_sitemap');
+            $rootNode = $treeBuilder->root('yokai_enum');
         }
 
         $rootNode
