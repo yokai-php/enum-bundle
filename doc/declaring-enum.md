@@ -8,6 +8,16 @@ There is a lot of way to create and declare such classes.
 > **Note :** If you wish to declare translation based enum, 
 > please see [dedicated documentation](declaring-translated-enum.md)
 
+Services declarations assume that your services files has the following defaults section :
+
+```yaml
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autconfigure: true
+```
+
 
 The classic way
 ---------------
@@ -35,14 +45,11 @@ class GenderEnum implements EnumInterface
 }
 ```
 
-Define an enum service for it.
+Define an enum service for it (optional if you are using the default Symfony services file).
 
 ```yaml
 services:
-    enum.member.gender:
-        class: 'App\Enum\GenderEnum'
-        public: false
-        tags: ['enum']
+    App\Enum\GenderEnum: ~
 ```
 
 
@@ -70,14 +77,11 @@ class GenderEnum implements EnumInterface
 }
 ```
 
-Define an enum service for it.
+Define an enum service for it (optional if you are using the default Symfony services file).
 
 ```yaml
 services:
-    enum.member.gender:
-        class: 'App\Enum\GenderEnum'
-        public: false
-        tags: ['enum']
+    App\Enum\GenderEnum: ~
 ```
 
 
@@ -89,13 +93,12 @@ No need for a class, just use the `ConfigurableEnum` class and define a new enum
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\EnumBundle\ConfigurableEnum'
-        public: false
-        tags: ['enum']
+        class: Yokai\EnumBundle\ConfigurableEnum
         arguments:
-            - "gender"
-            - m: 'Male'
-              f: 'Female'
+            $name: 'gender'
+            $choices: 
+                m: 'Male'
+                f: 'Female'
 ```
 
 
@@ -108,11 +111,8 @@ No need for a class, just use the `ConstantListEnum` class and define a new enum
 ```yaml
 services:
     enum.member.gender:
-        class: 'Yokai\EnumBundle\ConstantListEnum'
-        public: false
-        tags: ['enum']
+        class: Yokai\EnumBundle\ConstantListEnum
         arguments:
-            - '@enum.constant_extractor'
-            - 'App\\Model\\Person::GENDER_*'
-            - "gender"
+            $constantsPattern: 'App\\Model\\Person::GENDER_*'
+            $name: 'gender'
 ```

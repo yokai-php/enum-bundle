@@ -4,7 +4,6 @@ namespace Yokai\EnumBundle\Tests;
 
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\ConstantListTranslatedEnum;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
@@ -26,7 +25,6 @@ class ConstantListTranslatedEnumTest extends TestCase
     public function getEnum(string $pattern, string $name): ConstantListTranslatedEnum
     {
         return new ConstantListTranslatedEnum(
-            new ConstantExtractor(),
             $pattern,
             $this->translator->reveal(),
             $name.'.%s',

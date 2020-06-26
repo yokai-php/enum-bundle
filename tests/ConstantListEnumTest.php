@@ -2,7 +2,6 @@
 
 namespace Yokai\EnumBundle\Tests;
 
-use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\ConstantListEnum;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
@@ -13,7 +12,7 @@ class ConstantListEnumTest extends TestCase
 {
     public function getEnum(string $pattern, string $name): ConstantListEnum
     {
-        return new ConstantListEnum(new ConstantExtractor(), $pattern, $name);
+        return new ConstantListEnum($pattern, $name);
     }
 
     public function testVehicleEnums(): void

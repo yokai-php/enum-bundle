@@ -15,18 +15,18 @@ use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
  */
 class ConstantExtractor
 {
-    public function extract(string $pattern): array
+    public static function extract(string $pattern): array
     {
-        [$class, $patternRegex] = $this->explode($pattern);
+        [$class, $patternRegex] = self::explode($pattern);
 
-        return $this->filter(
-            $this->publicConstants($class),
+        return self::filter(
+            self::publicConstants($class),
             $patternRegex,
             $pattern
         );
     }
 
-    private function filter(array $constants, string $regexp, string $pattern): array
+    private static function filter(array $constants, string $regexp, string $pattern): array
     {
         $matchingNames = preg_grep($regexp, array_keys($constants));
 
@@ -37,7 +37,7 @@ class ConstantExtractor
         return array_values(array_intersect_key($constants, array_flip($matchingNames)));
     }
 
-    private function publicConstants(string $class): array
+    private static function publicConstants(string $class): array
     {
         try {
             $constants = (new ReflectionClass($class))->getReflectionConstants();
@@ -61,7 +61,7 @@ class ConstantExtractor
         return $list;
     }
 
-    private function explode(string $pattern): array
+    private static function explode(string $pattern): array
     {
         if (substr_count($pattern, '::') !== 1) {
             throw CannotExtractConstantsException::invalidPattern($pattern);

@@ -12,9 +12,9 @@ class ConstantListEnum extends ConfigurableEnum
     /**
      * @inheritDoc
      */
-    public function __construct(ConstantExtractor $extractor, string $constantsPattern, string $name)
+    public function __construct(string $constantsPattern, string $name)
     {
-        $values = $extractor->extract($constantsPattern);
+        $values = ConstantExtractor::extract($constantsPattern);
         parent::__construct($name, array_combine($values, $values));
     }
 }
