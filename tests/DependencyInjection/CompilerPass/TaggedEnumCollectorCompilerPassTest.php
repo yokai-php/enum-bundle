@@ -40,7 +40,7 @@ class TaggedEnumCollectorCompilerPassTest extends TestCase
         $compiler = $this->prophesize(ContainerBuilder::class);
         $compiler->hasDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn(true);
         $compiler->getDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn($registry);
-        $compiler->findTaggedServiceIds('enum')->shouldBeCalled()->willReturn([
+        $compiler->findTaggedServiceIds('yokai_enum.enum')->shouldBeCalled()->willReturn([
             'enum.gender' => $this->prophesize(Definition::class)->reveal(),
             'enum.type' => $this->prophesize(Definition::class)->reveal(),
         ]);
