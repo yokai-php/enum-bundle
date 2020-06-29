@@ -22,10 +22,7 @@ $ composer require yokai/enum-bundle
 
 ```php
 <?php
-// config/bundles.php
-
 return [
-    // ...
     Yokai\EnumBundle\YokaiEnumBundle::class => ['all' => true],
 ];
 ```
@@ -43,7 +40,9 @@ We first need to create the classes that will handle our enums :
 
 ```php
 <?php
-// src/Enum/GenderEnum.php
+
+declare(strict_types=1);
+
 namespace App\Enum;
 
 use Yokai\EnumBundle\EnumInterface;
@@ -60,16 +59,18 @@ class GenderEnum implements EnumInterface
 }
 ```
 
-If you are using [PSR-4 service discovery](https://symfony.com/blog/new-in-symfony-3-3-psr-4-based-service-discovery),
-then your service is already registered.
+If you are using [PSR-4 service discovery](https://symfony.com/blog/new-in-symfony-3-3-psr-4-based-service-discovery) 
+(or Symfony default services file), then your service is already registered.
 
 That's it, now the bundle know your enum services. You can start using it.
 
-Adding validation to your model :
+Add validation to any model :
 
 ```php
 <?php
-// src/Model/Member.php
+
+declare(strict_types=1);
+
 namespace App\Model;
 
 use App\Enum\GenderEnum;
@@ -78,42 +79,44 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
 class Member
 {
     /**
-     * @var string
-     *
      * @Enum(GenderEnum::class)
      */
-    protected $gender;
+    public ?string $gender = null;
 }
 ```
 
-Adding enum form types :
+Add enumerated form fields to any form :
 
 ```php
 <?php
-// src/Form/Type/MemberType.php
+
+declare(strict_types=1);
+
 namespace App\Form\Type;
 
-use App\Enum\GenderEnum;
+use App\Model\Member;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Yokai\EnumBundle\Form\Type\EnumType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MemberType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Let the bundle guess the form type for you (requires that you configured the validation)
+            // The bundle will find out the form type for you (thanks to the Enum constraint we added to model)
             ->add('gender')
-
-            // Manual form type binding
-            ->add('gender', EnumType::class, ['enum' => GenderEnum::class])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefault('data_class', Member::class);
     }
 }
 ```
 
-Displaying the label for an enum value within a template :
+Display label of any enum value within a Twig template :
 
 ```twig
 {{ value|enum_label('App\\Enum\\GenderEnum') }}
