@@ -26,7 +26,7 @@ class TaggedEnumCollectorCompilerPassTest extends TestCase
     public function testCollectWhenServiceNotAvailable(): void
     {
         $compiler = $this->prophesize(ContainerBuilder::class);
-        $compiler->hasDefinition('enum.registry')->shouldBeCalled()->willReturn(false);
+        $compiler->hasDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn(false);
 
         $this->compiler->process($compiler->reveal());
     }
@@ -38,8 +38,8 @@ class TaggedEnumCollectorCompilerPassTest extends TestCase
         $registry->addMethodCall('add', [new Reference('enum.type')])->shouldBeCalled();
 
         $compiler = $this->prophesize(ContainerBuilder::class);
-        $compiler->hasDefinition('enum.registry')->shouldBeCalled()->willReturn(true);
-        $compiler->getDefinition('enum.registry')->shouldBeCalled()->willReturn($registry);
+        $compiler->hasDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn(true);
+        $compiler->getDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn($registry);
         $compiler->findTaggedServiceIds('enum')->shouldBeCalled()->willReturn([
             'enum.gender' => $this->prophesize(Definition::class)->reveal(),
             'enum.type' => $this->prophesize(Definition::class)->reveal(),
