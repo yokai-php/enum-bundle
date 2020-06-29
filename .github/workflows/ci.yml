@@ -32,8 +32,20 @@ jobs:
           composer require --no-update --dev symfony/symfony:${{ matrix.symfony-version }}
           composer update --no-interaction --no-progress --no-suggest
 
-      - name: "Run checkstyle with squizlabs/php_codesniffer"
-        run: vendor/bin/phpcs
-
       - name: "Run tests with phpunit/phpunit"
         run: vendor/bin/phpunit --coverage-text
+
+  checkstyke:
+    name: "Checkstyle"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2.0.0
+
+      - name: "Install dependencies with composer"
+        run: |
+          composer update --no-interaction --no-progress --no-suggest
+
+      - name: "Run checkstyle with squizlabs/php_codesniffer"
+        run: vendor/bin/phpcs
