@@ -6,21 +6,13 @@ YokaiEnumBundle
 [![Total Downloads](https://poser.pugx.org/yokai/enum-bundle/downloads)](https://packagist.org/packages/yokai/enum-bundle)
 [![License](https://poser.pugx.org/yokai/enum-bundle/license)](https://packagist.org/packages/yokai/enum-bundle)
 
-[![Build Status](https://api.travis-ci.org/yokai-php/enum-bundle.png?branch=master)](https://travis-ci.org/yokai-php/enum-bundle)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yokai-php/enum-bundle/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/596d2076-90ee-49d9-a8b2-e3bcbd390874/mini.png)](https://insight.sensiolabs.com/projects/596d2076-90ee-49d9-a8b2-e3bcbd390874)
-
-This library aims to provide simple enumeration implementation for PHP projects.
-
-First created as a Symfony bundle only, the doc is focused on integration with it.
-But if you love this library, feel free to propose a bridge for you framework.
+This repository aims to provide simple enumeration implementation to Symfony.
 
 
 Installation
 ------------
 
-### Add the library as a dependency with Composer
+### Add the bundle as a dependency with Composer
 
 ``` bash
 $ composer require yokai/enum-bundle
@@ -33,7 +25,7 @@ $ composer require yokai/enum-bundle
 // config/bundles.php
 
 return [
-        // ...
+    // ...
     Yokai\EnumBundle\YokaiEnumBundle::class => ['all' => true],
 ];
 ```
