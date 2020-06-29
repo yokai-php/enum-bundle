@@ -36,8 +36,6 @@ and each member has a `gender` which can be "male" (`m`) or "female" (`f`).
 
 We first need to create the classes that will handle our enums :
 
-> **Note** this example is optimized for latest versions of Symfony, you will find more in dedicated doc file.
-
 ```php
 <?php
 
