@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\Validator\Constraints\Compound;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
 use Yokai\EnumBundle\EnumRegistry;
@@ -26,7 +27,8 @@ class EnumTypeGuesserTest extends TypeTestCase
 
     const TEST_CLASS = EnumTypeGuesserTest_TestClass::class;
 
-    const TEST_PROPERTY = 'property';
+    const TEST_PROPERTY_DIRECT = 'direct';
+    const TEST_PROPERTY_COMPOUND = 'compound';
 
     /**
      * @var EnumTypeGuesser
@@ -56,7 +58,15 @@ class EnumTypeGuesserTest extends TypeTestCase
         $this->enumRegistry->get(GenderEnum::class)->willReturn(new GenderEnum);
 
         $this->metadata = new ClassMetadata(self::TEST_CLASS);
-        $this->metadata->addPropertyConstraint(self::TEST_PROPERTY, new Enum(['enum' => GenderEnum::class]));
+        $this->metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => GenderEnum::class]));
+        if (class_exists(Compound::class)) {
+            $this->metadata->addPropertyConstraint(self::TEST_PROPERTY_COMPOUND, new class extends Compound {
+                protected function getConstraints(array $options): array
+                {
+                    return [new Enum(['enum' => GenderEnum::class])];
+                }
+            });
+        }
         $this->metadataFactory = $this->prophesize(MetadataFactoryInterface::class);
         $this->metadataFactory->getMetadataFor(self::TEST_CLASS)
             ->willReturn($this->metadata);
@@ -66,7 +76,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         parent::setUp();
     }
 
-    public function testGuessType(): void
+    public function testGuessTypeDirect(): void
     {
         $guess = new TypeGuess(
             EnumType::class,
@@ -77,33 +87,51 @@ class EnumTypeGuesserTest extends TypeTestCase
             Guess::HIGH_CONFIDENCE
         );
 
-        $this->assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY));
+        $this->assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
+    }
+
+    public function testGuessTypeCompound(): void
+    {
+        if (!class_exists(Compound::class)) {
+            $this->markTestSkipped();
+        }
+
+        $guess = new TypeGuess(
+            EnumType::class,
+            [
+                'enum' => GenderEnum::class,
+                'multiple' => false,
+            ],
+            Guess::HIGH_CONFIDENCE
+        );
+
+        $this->assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_COMPOUND));
     }
 
     public function testGuessRequired(): void
     {
-        $this->assertNull($this->guesser->guessRequired(self::TEST_CLASS, self::TEST_PROPERTY));
+        $this->assertNull($this->guesser->guessRequired(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
     }
 
     public function testGuessMaxLength(): void
     {
-        $this->assertNull($this->guesser->guessMaxLength(self::TEST_CLASS, self::TEST_PROPERTY));
+        $this->assertNull($this->guesser->guessMaxLength(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
     }
 
     public function testGuessPattern(): void
     {
-        $this->assertNull($this->guesser->guessPattern(self::TEST_CLASS, self::TEST_PROPERTY));
+        $this->assertNull($this->guesser->guessPattern(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
     }
 
     public function testCreateForm(): void
     {
         $class = self::TEST_CLASS;
         $form = $this->factory->create(FormType::class, new $class, ['data_class' => $class])
-            ->add(self::TEST_PROPERTY);
+            ->add(self::TEST_PROPERTY_DIRECT);
 
         $this->assertEquals(
             ['Male' => 'male', 'Female' => 'female'],
-            $form->get(self::TEST_PROPERTY)->getConfig()->getOption('choices')
+            $form->get(self::TEST_PROPERTY_DIRECT)->getConfig()->getOption('choices')
         );
     }
 
@@ -117,5 +145,6 @@ class EnumTypeGuesserTest extends TypeTestCase
 
 class EnumTypeGuesserTest_TestClass
 {
-    public $property;
+    public $direct;
+    public $compound;
 }
