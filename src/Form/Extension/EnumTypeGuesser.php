@@ -9,6 +9,7 @@ use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\Compound;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Form\Type\EnumType;
@@ -40,15 +41,16 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
      */
     public function guessTypeForConstraint(Constraint $constraint): ?TypeGuess
     {
-        if (!$constraint instanceof Enum) {
+        $enum = $this->getEnum($constraint);
+        if ($enum === null) {
             return null;
         }
 
         return new TypeGuess(
             EnumType::class,
             [
-                'enum' => $constraint->enum,
-                'multiple' => $constraint->multiple,
+                'enum' => $enum->enum,
+                'multiple' => $enum->multiple,
             ],
             Guess::HIGH_CONFIDENCE
         );
@@ -76,5 +78,23 @@ class EnumTypeGuesser extends ValidatorTypeGuesser
     public function guessPattern($class, $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
+    }
+
+    private function getEnum(Constraint $constraint): ?Enum
+    {
+        if ($constraint instanceof Enum) {
+            return $constraint;
+        }
+
+        if ($constraint instanceof Compound) {
+            foreach ($constraint->constraints as $compositeConstraint) {
+                $enum = $this->getEnum($compositeConstraint);
+                if ($enum !== null) {
+                    return $enum;
+                }
+            }
+        }
+
+        return null;
     }
 }
