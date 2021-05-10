@@ -38,20 +38,20 @@ class EnumExtensionTest extends TestCase
 
         $twig = $this->createEnvironment();
 
-        $this->assertSame(
+        self::assertSame(
             'FOO',
             $twig->createTemplate("{{ 'foo'|enum_label('test') }}")->render([])
         );
-        $this->assertSame(
+        self::assertSame(
             'BAR',
             $twig->createTemplate("{{ enum_label('bar', 'test') }}")->render([])
         );
 
-        $this->assertSame(
+        self::assertSame(
             'not_exist',
             $twig->createTemplate("{{ 'not_exist'|enum_label('test') }}")->render([])
         );
-        $this->assertSame(
+        self::assertSame(
             'not_exist',
             $twig->createTemplate("{{ enum_label('not_exist', 'test') }}")->render([])
         );
@@ -68,7 +68,7 @@ class EnumExtensionTest extends TestCase
 
         $twig = $this->createEnvironment();
 
-        $this->assertSame(
+        self::assertSame(
             'foo,FOO|bar,BAR|',
             $twig->createTemplate("{% for value,label in enum_choices('test') %}{{ value }},{{ label }}|{% endfor %}")->render([])
         );

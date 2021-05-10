@@ -32,9 +32,9 @@ class ConfigurableTranslatedEnumTest extends TestCase
             'foo' => 'FOO translated',
             'bar' => 'BAR translated',
         ];
-        $this->assertEquals($expectedChoices, $enum->getChoices());
-        $this->assertSame('FOO translated', $enum->getLabel('foo'));
-        $this->assertSame('BAR translated', $enum->getLabel('bar'));
+        self::assertEquals($expectedChoices, $enum->getChoices());
+        self::assertSame('FOO translated', $enum->getLabel('foo'));
+        self::assertSame('BAR translated', $enum->getLabel('bar'));
     }
 
     public function testTranslatedWithDomainChoices(): void
@@ -52,9 +52,9 @@ class ConfigurableTranslatedEnumTest extends TestCase
             'foo' => 'FOO translated',
             'bar' => 'BAR translated',
         ];
-        $this->assertEquals($expectedChoices, $enum->getChoices());
-        $this->assertSame('FOO translated', $enum->getLabel('foo'));
-        $this->assertSame('BAR translated', $enum->getLabel('bar'));
+        self::assertEquals($expectedChoices, $enum->getChoices());
+        self::assertSame('FOO translated', $enum->getLabel('foo'));
+        self::assertSame('BAR translated', $enum->getLabel('bar'));
     }
 
     public function testLabelNotFound(): void

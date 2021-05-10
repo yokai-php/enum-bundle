@@ -55,16 +55,16 @@ class EnumRegistryTest extends TestCase
         $this->registry->add($subscription);
         $this->registry->add($type);
 
-        $this->assertTrue($this->registry->has(GenderEnum::class));
-        $this->assertTrue($this->registry->has('state'));
-        $this->assertTrue($this->registry->has('subscription'));
-        $this->assertTrue($this->registry->has('type'));
+        self::assertTrue($this->registry->has(GenderEnum::class));
+        self::assertTrue($this->registry->has('state'));
+        self::assertTrue($this->registry->has('subscription'));
+        self::assertTrue($this->registry->has('type'));
 
-        $this->assertSame($gender, $this->registry->get(GenderEnum::class));
-        $this->assertSame($state, $this->registry->get('state'));
-        $this->assertSame($subscription, $this->registry->get('subscription'));
-        $this->assertSame($type, $this->registry->get('type'));
-        $this->assertSame(
+        self::assertSame($gender, $this->registry->get(GenderEnum::class));
+        self::assertSame($state, $this->registry->get('state'));
+        self::assertSame($subscription, $this->registry->get('subscription'));
+        self::assertSame($type, $this->registry->get('type'));
+        self::assertSame(
             [GenderEnum::class => $gender, 'state' => $state, 'subscription' => $subscription, 'type' => $type],
             $this->registry->all()
         );

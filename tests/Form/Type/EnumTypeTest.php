@@ -47,7 +47,7 @@ class EnumTypeTest extends TypeTestCase
     {
         $form = $this->createForm(GenderEnum::class);
 
-        $this->assertEquals(['Male' => 'male', 'Female' => 'female'], $form->getConfig()->getOption('choices'));
+        self::assertEquals(['Male' => 'male', 'Female' => 'female'], $form->getConfig()->getOption('choices'));
     }
 
     protected function getExtensions(): array

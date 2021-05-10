@@ -13,10 +13,10 @@ class ConfigurableEnumTest extends TestCase
     public function testConfigurability(): void
     {
         $fooEnum = new ConfigurableEnum('foo', ['foo' => 'FOO', 'bar' => 'BAR']);
-        $this->assertSame('foo', $fooEnum->getName());
-        $this->assertSame(['foo' => 'FOO', 'bar' => 'BAR'], $fooEnum->getChoices());
-        $this->assertSame('FOO', $fooEnum->getLabel('foo'));
-        $this->assertSame('BAR', $fooEnum->getLabel('bar'));
+        self::assertSame('foo', $fooEnum->getName());
+        self::assertSame(['foo' => 'FOO', 'bar' => 'BAR'], $fooEnum->getChoices());
+        self::assertSame('FOO', $fooEnum->getLabel('foo'));
+        self::assertSame('BAR', $fooEnum->getLabel('bar'));
     }
 
     public function testLabelNotFound(): void
