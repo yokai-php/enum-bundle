@@ -74,7 +74,8 @@ Create a new class, use `EnumWithClassAsNameTrait` trait and implement `getChoic
 namespace App\Enum;
 
 use Yokai\EnumBundle\EnumInterface;
-use Yokai\EnumBundle\EnumLabelTrait;use Yokai\EnumBundle\EnumWithClassAsNameTrait;
+use Yokai\EnumBundle\EnumLabelTrait;
+use Yokai\EnumBundle\EnumWithClassAsNameTrait;
 
 class GenderEnum implements EnumInterface
 {
