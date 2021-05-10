@@ -8,6 +8,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Yokai\EnumBundle\EnumRegistry;
+use Yokai\EnumBundle\Exception\InvalidEnumValueException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -56,7 +57,16 @@ class EnumExtension extends AbstractExtension
      */
     public function getLabel(string $value, string $enum): string
     {
-        return $this->getChoices($enum)[$value] ?? $value;
+        $enum = $this->registry->get($enum);
+        if (\method_exists($enum, 'getLabel')) {
+            try {
+                return $enum->getLabel($value);
+            } catch (InvalidEnumValueException $exception) {
+                return $value;
+            }
+        }
+
+        return $enum->getChoices()[$value] ?? $value;
     }
 
     /**

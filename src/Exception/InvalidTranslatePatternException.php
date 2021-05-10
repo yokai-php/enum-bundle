@@ -9,7 +9,7 @@ use InvalidArgumentException;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class InvalidTranslatePatternException extends InvalidArgumentException
+class InvalidTranslatePatternException extends InvalidArgumentException implements ExceptionInterface
 {
     /**
      * @param string $transPattern

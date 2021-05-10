@@ -3,6 +3,7 @@
 namespace Yokai\EnumBundle\Tests;
 
 use Yokai\EnumBundle\ConstantListEnum;
+use Yokai\EnumBundle\Exception\InvalidEnumValueException;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
 /**
@@ -23,6 +24,8 @@ class ConstantListEnumTest extends TestCase
             ['bike' => 'bike', 'car' => 'car', 'bus' => 'bus'],
             $type->getChoices()
         );
+        self::assertSame('bike', $type->getLabel('bike'));
+        self::assertSame('bus', $type->getLabel('bus'));
 
         $engine = $this->getEnum(Vehicle::class.'::ENGINE_*', 'vehicle.engine');
         self::assertSame('vehicle.engine', $engine->getName());
@@ -30,6 +33,8 @@ class ConstantListEnumTest extends TestCase
             ['electic' => 'electic', 'combustion' => 'combustion'],
             $engine->getChoices()
         );
+        self::assertSame('electic', $engine->getLabel('electic'));
+        self::assertSame('combustion', $engine->getLabel('combustion'));
 
         $brand = $this->getEnum(Vehicle::class.'::BRAND_*', 'vehicle.brand');
         self::assertSame('vehicle.brand', $brand->getName());
@@ -37,5 +42,16 @@ class ConstantListEnumTest extends TestCase
             ['renault' => 'renault', 'volkswagen' => 'volkswagen', 'toyota' => 'toyota'],
             $brand->getChoices()
         );
+        self::assertSame('renault', $brand->getLabel('renault'));
+        self::assertSame('toyota', $brand->getLabel('toyota'));
+    }
+
+    public function testLabelNotFound(): void
+    {
+        $this->expectException(InvalidEnumValueException::class);
+
+        $enum = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type');
+
+        $enum->getLabel('unknown');
     }
 }

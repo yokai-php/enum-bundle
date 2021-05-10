@@ -12,6 +12,8 @@ use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
  */
 abstract class AbstractTranslatedEnum implements EnumInterface
 {
+    use EnumLabelTrait;
+
     /**
      * @var TranslatorInterface
      */

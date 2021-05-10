@@ -7,6 +7,7 @@ use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\EnumRegistry;
+use Yokai\EnumBundle\Exception\InvalidEnumValueException;
 use Yokai\EnumBundle\Tests\TestCase;
 use Yokai\EnumBundle\Twig\Extension\EnumExtension;
 
@@ -28,8 +29,9 @@ class EnumExtensionTest extends TestCase
     public function testEnumLabel(): void
     {
         $enum = $this->prophesize(EnumInterface::class);
-        $enum->getChoices()
-            ->willReturn(['foo' => 'FOO', 'bar' => 'BAR']);
+        $enum->getLabel('foo')->willReturn('FOO');
+        $enum->getLabel('bar')->willReturn('BAR');
+        $enum->getLabel('not_exist')->willThrow(new InvalidEnumValueException());
 
         $this->registry->get('test')
             ->willReturn($enum->reveal());

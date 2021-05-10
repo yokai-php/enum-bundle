@@ -30,6 +30,7 @@ Create a new class, implement both `getName` & `getChoices` methods.
 namespace App\Enum;
 
 use Yokai\EnumBundle\EnumInterface;
+use Yokai\EnumBundle\Exception\InvalidEnumValueException;
 
 class GenderEnum implements EnumInterface
 {
@@ -41,6 +42,15 @@ class GenderEnum implements EnumInterface
     public function getChoices(): array
     {
         return ['m' => 'Male', 'f' => 'Female'];
+    }
+
+    public function getLabel(string $value): string
+    {
+        if (!isset($this->getChoices()[$value])) {
+            throw InvalidEnumValueException::create($this, $value);
+        }
+
+        return $this->getChoices()[$value];
     }
 }
 ```
@@ -64,11 +74,12 @@ Create a new class, use `EnumWithClassAsNameTrait` trait and implement `getChoic
 namespace App\Enum;
 
 use Yokai\EnumBundle\EnumInterface;
-use Yokai\EnumBundle\EnumWithClassAsNameTrait;
+use Yokai\EnumBundle\EnumLabelTrait;use Yokai\EnumBundle\EnumWithClassAsNameTrait;
 
 class GenderEnum implements EnumInterface
 {
     use EnumWithClassAsNameTrait;
+    use EnumLabelTrait;
 
     public function getChoices(): array
     {

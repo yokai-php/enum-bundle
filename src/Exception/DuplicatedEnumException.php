@@ -9,7 +9,7 @@ use BadMethodCallException;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class DuplicatedEnumException extends BadMethodCallException
+class DuplicatedEnumException extends BadMethodCallException implements ExceptionInterface
 {
     /**
      * @param string $name
