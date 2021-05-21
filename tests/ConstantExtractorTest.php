@@ -4,7 +4,7 @@ namespace Yokai\EnumBundle\Tests;
 
 use Generator;
 use Yokai\EnumBundle\ConstantExtractor;
-use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
+use Yokai\EnumBundle\Exception\LogicException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -16,7 +16,7 @@ class ConstantExtractorTest extends TestCase
      */
     public function testExtractMalformedPattern(string $pattern, string $exceptionMessage): void
     {
-        $this->expectException(CannotExtractConstantsException::class);
+        $this->expectException(LogicException::class);
         $this->expectExceptionMessageMatches($exceptionMessage);
 
         ConstantExtractor::extract($pattern);
@@ -27,7 +27,7 @@ class ConstantExtractorTest extends TestCase
      */
     public function testExtractEmpty(string $pattern, string $exceptionMessage): void
     {
-        $this->expectException(CannotExtractConstantsException::class);
+        $this->expectException(LogicException::class);
         $this->expectExceptionMessageMatches($exceptionMessage);
 
         ConstantExtractor::extract($pattern);
@@ -53,20 +53,20 @@ class ConstantExtractorTest extends TestCase
         ];
         yield 'class with constant but no match' => [
             ClassWithConstant::class.'::NO_MATCH*',
-            '/Pattern .+ matches no constant/',
+            '/Pattern matches no constant/',
         ];
     }
 
     public function malformed(): Generator
     {
-        $invalidPatternRegexp = '/Constant extraction pattern must look like Fully\\\\Qualified\\\\ClassName::CONSTANT_\*\..+/';
+        $invalidPatternRegexp = '/Pattern must look like Fully\\\\Qualified\\\\ClassName::CONSTANT_\*/';
         yield 'no class no constant pattern' => [
             'not a pattern',
             $invalidPatternRegexp,
         ];
-        yield 'class that do not exists' => [
+        yield 'class that does not exists' => [
             'SomeClassThatDoNotExists::STATUS_*',
-            '/Class SomeClassThatDoNotExists do not exists\./',
+            '/Class SomeClassThatDoNotExists does not exists\./',
         ];
         yield 'missing constant pattern and separator' => [
             ClassWithConstant::class,

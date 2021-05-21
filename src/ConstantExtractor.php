@@ -6,7 +6,7 @@ namespace Yokai\EnumBundle;
 
 use ReflectionClass;
 use ReflectionException;
-use Yokai\EnumBundle\Exception\CannotExtractConstantsException;
+use Yokai\EnumBundle\Exception\LogicException;
 
 /**
  * @internal
@@ -20,7 +20,7 @@ class ConstantExtractor
         [$class, $patternRegex] = self::explode($pattern);
 
         return self::filter(
-            self::publicConstants($class),
+            self::publicConstants($class, $pattern),
             $patternRegex,
             $pattern
         );
@@ -31,18 +31,18 @@ class ConstantExtractor
         $matchingNames = preg_grep($regexp, array_keys($constants));
 
         if (count($matchingNames) === 0) {
-            throw CannotExtractConstantsException::noConstantMatchingPattern($pattern);
+            throw LogicException::cannotExtractConstants($pattern, 'Pattern matches no constant.');
         }
 
         return array_values(array_intersect_key($constants, array_flip($matchingNames)));
     }
 
-    private static function publicConstants(string $class): array
+    private static function publicConstants(string $class, string $pattern): array
     {
         try {
             $constants = (new ReflectionClass($class))->getReflectionConstants();
         } catch (ReflectionException $exception) {
-            throw CannotExtractConstantsException::classDoNotExists($class);
+            throw LogicException::cannotExtractConstants($pattern, sprintf('Class %s does not exists.', $class));
         }
 
         $list = [];
@@ -55,7 +55,7 @@ class ConstantExtractor
         }
 
         if (count($list) === 0) {
-            throw CannotExtractConstantsException::classHasNoPublicConstant($class);
+            throw LogicException::cannotExtractConstants($pattern, sprintf('Class %s has no public constant.', $class));
         }
 
         return $list;
@@ -64,13 +64,19 @@ class ConstantExtractor
     private static function explode(string $pattern): array
     {
         if (substr_count($pattern, '::') !== 1) {
-            throw CannotExtractConstantsException::invalidPattern($pattern);
+            throw LogicException::cannotExtractConstants(
+                $pattern,
+                'Pattern must look like Fully\\Qualified\\ClassName::CONSTANT_*.'
+            );
         }
 
         [$class, $constantsNamePattern] = explode('::', $pattern);
 
         if (substr_count($constantsNamePattern, '*') === 0) {
-            throw CannotExtractConstantsException::invalidPattern($pattern);
+            throw LogicException::cannotExtractConstants(
+                $pattern,
+                'Pattern must look like Fully\\Qualified\\ClassName::CONSTANT_*.'
+            );
         }
 
         $constantsNameRegexp = sprintf(
