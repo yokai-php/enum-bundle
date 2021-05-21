@@ -38,6 +38,8 @@ class TranslatedEnum extends Enum
      * @param TranslatorInterface      $translator
      * @param string                   $transPattern
      * @param string                   $transDomain
+     *
+     * @throws LogicException
      */
     public function __construct(
         string $name,

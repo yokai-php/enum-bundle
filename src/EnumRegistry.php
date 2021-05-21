@@ -6,6 +6,7 @@ namespace Yokai\EnumBundle;
 
 use Yokai\EnumBundle\Exception\DuplicatedEnumException;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
+use Yokai\EnumBundle\Exception\LogicException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -20,12 +21,12 @@ class EnumRegistry
     /**
      * @param EnumInterface $enum
      *
-     * @throws DuplicatedEnumException
+     * @throws LogicException
      */
     public function add(EnumInterface $enum): void
     {
         if ($this->has($enum->getName())) {
-            throw DuplicatedEnumException::alreadyRegistered($enum->getName());
+            throw LogicException::alreadyRegistered($enum->getName());
         }
 
         $this->enums[$enum->getName()] = $enum;

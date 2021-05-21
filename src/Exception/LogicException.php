@@ -18,8 +18,16 @@ final class LogicException extends \LogicException implements ExceptionInterface
     public static function placeholderRequired(string $transPattern): self
     {
         return new self(sprintf(
-            'Translation pattern "%s" must contain %%s placeholder',
+            'Translation pattern "%s" must contain %%s placeholder.',
             $transPattern
+        ));
+    }
+
+    public static function alreadyRegistered(string $name): self
+    {
+        return new self(sprintf(
+            'Enum with name "%s" is already registered.',
+            $name
         ));
     }
 }

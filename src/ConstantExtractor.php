@@ -15,6 +15,12 @@ use Yokai\EnumBundle\Exception\LogicException;
  */
 class ConstantExtractor
 {
+    /**
+     * @param string $pattern
+     *
+     * @return array
+     * @throws LogicException
+     */
     public static function extract(string $pattern): array
     {
         [$class, $patternRegex] = self::explode($pattern);

@@ -5,8 +5,8 @@ namespace Yokai\EnumBundle\Tests;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Exception\DuplicatedEnumException;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
+use Yokai\EnumBundle\Exception\LogicException;
 use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
 use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
@@ -29,7 +29,7 @@ class EnumRegistryTest extends TestCase
 
     public function testAddDuplicatedException(): void
     {
-        $this->expectException(DuplicatedEnumException::class);
+        $this->expectException(LogicException::class);
         $this->registry->add(new GenderEnum);
         $this->registry->add(new GenderEnum);
     }
