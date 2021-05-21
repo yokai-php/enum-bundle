@@ -2,12 +2,14 @@
 
 namespace Yokai\EnumBundle\Tests\Twig\Extension;
 
+use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
-use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Exception\InvalidArgumentException;
-use Yokai\EnumBundle\Tests\TestCase;
+use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
+use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
+use Yokai\EnumBundle\Tests\Translator;
 use Yokai\EnumBundle\Twig\Extension\EnumExtension;
 
 /**
@@ -17,58 +19,54 @@ class EnumExtensionTest extends TestCase
 {
     public function testEnumLabel(): void
     {
-        $enum = $this->prophesize(EnumInterface::class);
-        $enum->getName()->willReturn('test');
-        $enum->getLabel('foo')->willReturn('FOO');
-        $enum->getLabel('bar')->willReturn('BAR');
-        $enum->getLabel('not_exist')->willThrow(new InvalidArgumentException());
-
         $registry = new EnumRegistry();
-        $registry->add($enum->reveal());
+        $registry->add(new TypeEnum());
 
         $twig = $this->createEnvironment($registry);
 
         self::assertSame(
-            'FOO',
-            $twig->createTemplate("{{ 'foo'|enum_label('test') }}")->render([])
+            'Customer',
+            $twig->createTemplate("{{ 'customer'|enum_label('type') }}")->render([])
         );
         self::assertSame(
-            'BAR',
-            $twig->createTemplate("{{ 'bar'|enum_label('test') }}")->render([])
+            'Prospect',
+            $twig->createTemplate("{{ 'prospect'|enum_label('type') }}")->render([])
         );
     }
 
     public function testEnumChoices(): void
     {
-        $enum = $this->prophesize(EnumInterface::class);
-        $enum->getName()->willReturn('test');
-        $enum->getChoices()->willReturn(['foo' => 'FOO', 'bar' => 'BAR']);
-
         $registry = new EnumRegistry();
-        $registry->add($enum->reveal());
+        $registry->add(new StateEnum(new Translator([
+            'choice.state.new' => 'Nouveau',
+            'choice.state.validated' => 'Validé',
+            'choice.state.disabled' => 'Désactivé',
+        ])));
 
         $twig = $this->createEnvironment($registry);
 
         self::assertSame(
-            'foo,FOO|bar,BAR|',
-            $twig->createTemplate("{% for value,label in enum_choices('test') %}{{ value }},{{ label }}|{% endfor %}")->render([])
+            'new,Nouveau|validated,Validé|disabled,Désactivé|',
+            $twig->createTemplate(<<<TWIG
+{% for label,value in enum_choices('state') %}{{ value }},{{ label }}|{% endfor %}
+TWIG
+            )->render([])
         );
     }
 
     public function testEnumValues(): void
     {
-        $enum = $this->prophesize(EnumInterface::class);
-        $enum->getName()->willReturn('test');
-        $enum->getValues()->willReturn(['foo', 'bar']);
-
         $registry = new EnumRegistry();
-        $registry->add($enum->reveal());
+        $registry->add(new GenderEnum());
 
         $twig = $this->createEnvironment($registry);
 
         self::assertSame(
-            'foo|bar|',
-            $twig->createTemplate("{% for value in enum_values('test') %}{{ value }}|{% endfor %}")->render([])
+            'male|female|',
+            $twig->createTemplate(<<<TWIG
+{% for value in enum_values('Yokai\\\\EnumBundle\\\\Tests\\\\Fixtures\\\\GenderEnum') %}{{ value }}|{% endfor %}
+TWIG
+            )->render([])
         );
     }
 

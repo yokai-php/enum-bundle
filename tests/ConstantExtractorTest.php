@@ -3,6 +3,7 @@
 namespace Yokai\EnumBundle\Tests;
 
 use Generator;
+use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\ConstantExtractor;
 use Yokai\EnumBundle\Exception\LogicException;
 

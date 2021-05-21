@@ -2,6 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\ConstantListTranslatedEnum;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;

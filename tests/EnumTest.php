@@ -4,6 +4,7 @@ namespace Yokai\EnumBundle\Tests;
 
 use DateTimeImmutable;
 use LogicException;
+use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\Enum;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 

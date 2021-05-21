@@ -2,8 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests;
 
-use Prophecy\Prophecy\ObjectProphecy;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Exception\LogicException;
@@ -17,56 +16,48 @@ use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
  */
 class EnumRegistryTest extends TestCase
 {
-    /**
-     * @var EnumRegistry
-     */
-    private $registry;
-
-    protected function setUp(): void
-    {
-        $this->registry = new EnumRegistry;
-    }
-
     public function testAddDuplicatedException(): void
     {
         $this->expectException(LogicException::class);
-        $this->registry->add(new GenderEnum);
-        $this->registry->add(new GenderEnum);
+        $registry = new EnumRegistry();
+        $registry->add(new GenderEnum());
+        $registry->add(new GenderEnum());
     }
 
     public function testGetInvalidException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->registry->add(new GenderEnum);
-        $this->registry->get('type');
+        $registry = new EnumRegistry();
+        $registry->add(new GenderEnum());
+        $registry->get('type');
     }
 
     public function testAddNominal(): void
     {
-        /** @var TranslatorInterface|ObjectProphecy $translator */
-        $translator = $this->prophesize(TranslatorInterface::class)->reveal();
-        $gender = new GenderEnum;
+        $translator = new Translator([]);
+        $gender = new GenderEnum();
         $state = new StateEnum($translator);
         $subscription = new SubscriptionEnum($translator);
-        $type = new TypeEnum;
+        $type = new TypeEnum();
 
-        $this->registry->add($gender);
-        $this->registry->add($state);
-        $this->registry->add($subscription);
-        $this->registry->add($type);
+        $registry = new EnumRegistry();
+        $registry->add($gender);
+        $registry->add($state);
+        $registry->add($subscription);
+        $registry->add($type);
 
-        self::assertTrue($this->registry->has(GenderEnum::class));
-        self::assertTrue($this->registry->has('state'));
-        self::assertTrue($this->registry->has('subscription'));
-        self::assertTrue($this->registry->has('type'));
+        self::assertTrue($registry->has(GenderEnum::class));
+        self::assertTrue($registry->has('state'));
+        self::assertTrue($registry->has('subscription'));
+        self::assertTrue($registry->has('type'));
 
-        self::assertSame($gender, $this->registry->get(GenderEnum::class));
-        self::assertSame($state, $this->registry->get('state'));
-        self::assertSame($subscription, $this->registry->get('subscription'));
-        self::assertSame($type, $this->registry->get('type'));
+        self::assertSame($gender, $registry->get(GenderEnum::class));
+        self::assertSame($state, $registry->get('state'));
+        self::assertSame($subscription, $registry->get('subscription'));
+        self::assertSame($type, $registry->get('type'));
         self::assertSame(
             [GenderEnum::class => $gender, 'state' => $state, 'subscription' => $subscription, 'type' => $type],
-            $this->registry->all()
+            $registry->all()
         );
     }
 }

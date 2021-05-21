@@ -2,49 +2,43 @@
 
 namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Yokai\EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
-use Yokai\EnumBundle\Tests\TestCase;
+use Yokai\EnumBundle\EnumRegistry;
+use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
+use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class TaggedEnumCollectorCompilerPassTest extends TestCase
 {
-    /**
-     * @var TaggedEnumCollectorCompilerPass
-     */
-    private $compiler;
-
-    protected function setUp(): void
-    {
-        $this->compiler = new TaggedEnumCollectorCompilerPass;
-    }
-
     public function testCollectWhenServiceNotAvailable(): void
     {
-        $compiler = $this->prophesize(ContainerBuilder::class);
-        $compiler->hasDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn(false);
+        $container = new ContainerBuilder();
 
-        $this->compiler->process($compiler->reveal());
+        (new TaggedEnumCollectorCompilerPass())->process($container);
+
+        self::assertTrue(true); // no exception thrown
     }
 
     public function testCollectEnums(): void
     {
-        $registry = $this->prophesize(Definition::class);
-        $registry->addMethodCall('add', [new Reference('enum.gender')])->shouldBeCalled();
-        $registry->addMethodCall('add', [new Reference('enum.type')])->shouldBeCalled();
+        $container = new ContainerBuilder();
+        $container->register('yokai_enum.enum_registry', EnumRegistry::class);
+        $container->register('enum.gender', GenderEnum::class)
+            ->addTag('yokai_enum.enum');
+        $container->register('enum.type', TypeEnum::class)
+            ->addTag('yokai_enum.enum');
 
-        $compiler = $this->prophesize(ContainerBuilder::class);
-        $compiler->hasDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn(true);
-        $compiler->getDefinition('yokai_enum.enum_registry')->shouldBeCalled()->willReturn($registry);
-        $compiler->findTaggedServiceIds('yokai_enum.enum')->shouldBeCalled()->willReturn([
-            'enum.gender' => $this->prophesize(Definition::class)->reveal(),
-            'enum.type' => $this->prophesize(Definition::class)->reveal(),
-        ]);
+        (new TaggedEnumCollectorCompilerPass())->process($container);
 
-        $this->compiler->process($compiler->reveal());
+        $registry = $container->getDefinition('yokai_enum.enum_registry');
+        self::assertEquals([
+            ['add', [new Reference('enum.gender')]],
+            ['add', [new Reference('enum.type')]],
+        ], $registry->getMethodCalls());
     }
 }

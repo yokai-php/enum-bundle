@@ -2,7 +2,6 @@
 
 namespace Yokai\EnumBundle\Tests\Form\Type;
 
-use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
@@ -17,20 +16,6 @@ use Yokai\EnumBundle\Tests\Form\TestExtension;
  */
 class EnumTypeTest extends TypeTestCase
 {
-    use ProphecyTrait;
-
-    private $enumRegistry;
-
-    protected function setUp(): void
-    {
-        $this->enumRegistry = $this->prophesize(EnumRegistry::class);
-        $this->enumRegistry->has('state')->willReturn(false);
-        $this->enumRegistry->has(GenderEnum::class)->willReturn(true);
-        $this->enumRegistry->get(GenderEnum::class)->willReturn(new GenderEnum);
-
-        parent::setUp();
-    }
-
     public function testEnumOptionIsRequired(): void
     {
         $this->expectException(MissingOptionsException::class);
@@ -52,8 +37,11 @@ class EnumTypeTest extends TypeTestCase
 
     protected function getExtensions(): array
     {
+        $enumRegistry = new EnumRegistry();
+        $enumRegistry->add(new GenderEnum());
+
         return [
-            new TestExtension($this->enumRegistry->reveal())
+            new TestExtension($enumRegistry)
         ];
     }
 

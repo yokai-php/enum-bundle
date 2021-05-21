@@ -2,14 +2,11 @@
 
 namespace Yokai\EnumBundle\Tests\Validator\Constraints;
 
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
@@ -19,30 +16,24 @@ use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
  */
 class EnumValidatorTest extends ConstraintValidatorTestCase
 {
-    use ProphecyTrait;
-
     protected function createValidator(): EnumValidator
     {
-        /** @var EnumRegistry|ObjectProphecy $registry */
-        $registry = $this->prophesize(EnumRegistry::class);
-        $registry->has('state')->willReturn(false);
-        $registry->has(GenderEnum::class)->willReturn(true);
-        $registry->has('type')->willReturn(true);
-        $registry->get('type')->willReturn(new TypeEnum);
+        $registry = new EnumRegistry();
+        $registry->add(new TypeEnum());
 
-        return new EnumValidator($registry->reveal());
+        return new EnumValidator($registry);
     }
 
     public function testAcceptOnlyEnum(): void
     {
         $this->expectException(UnexpectedTypeException::class);
-        $this->validator->validate(null, new Choice);
+        $this->validator->validate(null, new Choice());
     }
 
     public function testEnumIsRequired(): void
     {
         $this->expectException(ConstraintDefinitionException::class);
-        $this->validator->validate('foo', new Enum);
+        $this->validator->validate('foo', new Enum());
     }
 
     public function testValidEnumIsRequired(): void

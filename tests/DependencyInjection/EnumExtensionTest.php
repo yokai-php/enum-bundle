@@ -2,29 +2,21 @@
 
 namespace Yokai\EnumBundle\Tests\DependencyInjection;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Yokai\EnumBundle\DependencyInjection\EnumExtension;
 use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Tests\TestCase;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class EnumExtensionTest extends TestCase
 {
-    public function extension(): EnumExtension
-    {
-        return new EnumExtension();
-    }
-
-    /**
-     * @test
-     */
-    public function it_register_services(): void
+    public function testLoad(): void
     {
         $container = new ContainerBuilder();
-        $this->extension()->load([[]], $container);
+        (new EnumExtension())->load([[]], $container);
 
         $services = [
             'yokai_enum.form_type.enum_type',

@@ -52,10 +52,8 @@ class EnumTypeGuesserTest extends TypeTestCase
 
     protected function setUp(): void
     {
-        $this->enumRegistry = $this->prophesize(EnumRegistry::class);
-        $this->enumRegistry->has('state')->willReturn(false);
-        $this->enumRegistry->has(GenderEnum::class)->willReturn(true);
-        $this->enumRegistry->get(GenderEnum::class)->willReturn(new GenderEnum);
+        $this->enumRegistry = new EnumRegistry();
+        $this->enumRegistry->add(new GenderEnum());
 
         $this->metadata = new ClassMetadata(self::TEST_CLASS);
         $this->metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => GenderEnum::class]));
@@ -71,7 +69,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         $this->metadataFactory->getMetadataFor(self::TEST_CLASS)
             ->willReturn($this->metadata);
 
-        $this->guesser = new EnumTypeGuesser($this->metadataFactory->reveal(), $this->enumRegistry->reveal());
+        $this->guesser = new EnumTypeGuesser($this->metadataFactory->reveal(), $this->enumRegistry);
 
         parent::setUp();
     }
@@ -138,7 +136,7 @@ class EnumTypeGuesserTest extends TypeTestCase
     protected function getExtensions(): array
     {
         return [
-            new TestExtension($this->enumRegistry->reveal(), $this->metadataFactory->reveal()),
+            new TestExtension($this->enumRegistry, $this->metadataFactory->reveal()),
         ];
     }
 }

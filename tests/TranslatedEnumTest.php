@@ -2,6 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Exception\LogicException;
 use Yokai\EnumBundle\TranslatedEnum;
