@@ -6,7 +6,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Exception\DuplicatedEnumException;
-use Yokai\EnumBundle\Exception\InvalidEnumException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
 use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
@@ -36,7 +36,7 @@ class EnumRegistryTest extends TestCase
 
     public function testGetInvalidException(): void
     {
-        $this->expectException(InvalidEnumException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->registry->add(new GenderEnum);
         $this->registry->get('type');
     }

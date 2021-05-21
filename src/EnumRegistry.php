@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Yokai\EnumBundle;
 
 use Yokai\EnumBundle\Exception\DuplicatedEnumException;
-use Yokai\EnumBundle\Exception\InvalidEnumException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -35,12 +35,12 @@ class EnumRegistry
      * @param string $name
      *
      * @return EnumInterface
-     * @throws InvalidEnumException
+     * @throws InvalidArgumentException
      */
     public function get(string $name): EnumInterface
     {
         if (!$this->has($name)) {
-            throw InvalidEnumException::nonexistent($name);
+            throw InvalidArgumentException::unregisteredEnum($name);
         }
 
         return $this->enums[$name];
