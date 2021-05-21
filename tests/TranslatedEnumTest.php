@@ -3,7 +3,7 @@
 namespace Yokai\EnumBundle\Tests;
 
 use Yokai\EnumBundle\Exception\InvalidEnumValueException;
-use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
+use Yokai\EnumBundle\Exception\LogicException;
 use Yokai\EnumBundle\TranslatedEnum;
 
 /**
@@ -13,7 +13,7 @@ class TranslatedEnumTest extends TestCase
 {
     public function testConstructedWithInvalidPattern(): void
     {
-        $this->expectException(InvalidTranslatePatternException::class);
+        $this->expectException(LogicException::class);
         new TranslatedEnum('invalid', ['foo', 'bar'], new Translator([]), 'invalid.pattern');
     }
 

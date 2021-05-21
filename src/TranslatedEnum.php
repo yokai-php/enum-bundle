@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Yokai\EnumBundle;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
+use Yokai\EnumBundle\Exception\LogicException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -47,7 +47,7 @@ class TranslatedEnum extends Enum
         string $transDomain = 'messages'
     ) {
         if (false === strpos($transPattern, '%s')) {
-            throw InvalidTranslatePatternException::placeholderRequired($transPattern);
+            throw LogicException::placeholderRequired($transPattern);
         }
 
         $this->values = $values;

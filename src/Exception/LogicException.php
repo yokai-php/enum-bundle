@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yokai\EnumBundle\Exception;
 
 final class LogicException extends \LogicException implements ExceptionInterface
@@ -10,6 +12,14 @@ final class LogicException extends \LogicException implements ExceptionInterface
             'Cannot extract constants for pattern "%s". %s',
             $pattern,
             $reason
+        ));
+    }
+
+    public static function placeholderRequired(string $transPattern): self
+    {
+        return new self(sprintf(
+            'Translation pattern "%s" must contain %%s placeholder',
+            $transPattern
         ));
     }
 }
