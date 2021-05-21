@@ -2,7 +2,6 @@
 
 namespace Yokai\EnumBundle\Tests;
 
-use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\ConstantListTranslatedEnum;
 use Yokai\EnumBundle\Exception\InvalidEnumValueException;
@@ -13,60 +12,51 @@ use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
  */
 class ConstantListTranslatedEnumTest extends TestCase
 {
-    /**
-     * @var TranslatorInterface|ObjectProphecy
-     */
-    private $translator;
-
-    protected function setUp(): void
+    public function getEnum(string $pattern, string $name, TranslatorInterface $translator): ConstantListTranslatedEnum
     {
-        $this->translator = $this->prophesize(TranslatorInterface::class);
-    }
-
-    public function getEnum(string $pattern, string $name): ConstantListTranslatedEnum
-    {
-        return new ConstantListTranslatedEnum(
-            $pattern,
-            $this->translator->reveal(),
-            $name.'.%s',
-            $name
-        );
+        return new ConstantListTranslatedEnum($name, $pattern, $translator, $name . '.%s');
     }
 
     public function testVehicleEnums(): void
     {
-        $type = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type');
-        $this->translator->trans('vehicle.type.bike', [], 'messages')->shouldBeCalled()->willReturn('Moto');
-        $this->translator->trans('vehicle.type.car', [], 'messages')->shouldBeCalled()->willReturn('Voiture');
-        $this->translator->trans('vehicle.type.bus', [], 'messages')->shouldBeCalled()->willReturn('Bus');
+        $translator = new Translator([
+            'vehicle.type.bike' => 'Moto',
+            'vehicle.type.car' => 'Voiture',
+            'vehicle.type.bus' => 'Bus',
+            'vehicle.engine.electic' => 'Electrique',
+            'vehicle.engine.combustion' => 'Combustion',
+            'vehicle.brand.renault' => 'Renault',
+            'vehicle.brand.volkswagen' => 'Volkswagen',
+            'vehicle.brand.toyota' => 'Toyota',
+        ]);
+
+        $type = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type', $translator);
         self::assertSame('vehicle.type', $type->getName());
         self::assertSame(
-            ['bike' => 'Moto', 'car' => 'Voiture', 'bus' => 'Bus'],
+            ['Moto' => 'bike', 'Voiture' => 'car', 'Bus' => 'bus'],
             $type->getChoices()
         );
+        self::assertSame(['bike', 'car', 'bus'], $type->getValues());
         self::assertSame('Moto', $type->getLabel('bike'));
         self::assertSame('Bus', $type->getLabel('bus'));
 
-        $engine = $this->getEnum(Vehicle::class.'::ENGINE_*', 'vehicle.engine');
-        $this->translator->trans('vehicle.engine.electic', [], 'messages')->shouldBeCalled()->willReturn('Electrique');
-        $this->translator->trans('vehicle.engine.combustion', [], 'messages')->shouldBeCalled()->willReturn('Combustion');
+        $engine = $this->getEnum(Vehicle::class.'::ENGINE_*', 'vehicle.engine', $translator);
         self::assertSame('vehicle.engine', $engine->getName());
         self::assertSame(
-            ['electic' => 'Electrique', 'combustion' => 'Combustion'],
+            ['Electrique' => 'electic', 'Combustion' => 'combustion'],
             $engine->getChoices()
         );
+        self::assertSame(['electic', 'combustion'], $engine->getValues());
         self::assertSame('Electrique', $engine->getLabel('electic'));
         self::assertSame('Combustion', $engine->getLabel('combustion'));
 
-        $brand = $this->getEnum(Vehicle::class.'::BRAND_*', 'vehicle.brand');
-        $this->translator->trans('vehicle.brand.renault', [], 'messages')->shouldBeCalled()->willReturn('Renault');
-        $this->translator->trans('vehicle.brand.volkswagen', [], 'messages')->shouldBeCalled()->willReturn('Volkswagen');
-        $this->translator->trans('vehicle.brand.toyota', [], 'messages')->shouldBeCalled()->willReturn('Toyota');
+        $brand = $this->getEnum(Vehicle::class.'::BRAND_*', 'vehicle.brand', $translator);
         self::assertSame('vehicle.brand', $brand->getName());
         self::assertSame(
-            ['renault' => 'Renault', 'volkswagen' => 'Volkswagen', 'toyota' => 'Toyota'],
+            ['Renault' => 'renault', 'Volkswagen' => 'volkswagen', 'Toyota' => 'toyota'],
             $brand->getChoices()
         );
+        self::assertSame(['renault', 'volkswagen', 'toyota'], $brand->getValues());
         self::assertSame('Renault', $brand->getLabel('renault'));
         self::assertSame('Toyota', $brand->getLabel('toyota'));
     }
@@ -75,10 +65,13 @@ class ConstantListTranslatedEnumTest extends TestCase
     {
         $this->expectException(InvalidEnumValueException::class);
 
-        $enum = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type');
-        $this->translator->trans('vehicle.type.bike', [], 'messages')->shouldBeCalled()->willReturn('Moto');
-        $this->translator->trans('vehicle.type.car', [], 'messages')->shouldBeCalled()->willReturn('Voiture');
-        $this->translator->trans('vehicle.type.bus', [], 'messages')->shouldBeCalled()->willReturn('Bus');
+        $translator = new Translator([
+            'vehicle.type.bike' => 'Moto',
+            'vehicle.type.car' => 'Voiture',
+            'vehicle.type.bus' => 'Bus',
+        ]);
+
+        $enum = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type', $translator);
 
         $enum->getLabel('unknown');
     }

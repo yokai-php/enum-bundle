@@ -2,15 +2,15 @@
 
 namespace Yokai\EnumBundle\Tests\Fixtures;
 
-use Yokai\EnumBundle\ConfigurableEnum;
+use Yokai\EnumBundle\Enum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class TypeEnum extends ConfigurableEnum
+class TypeEnum extends Enum
 {
     public function __construct()
     {
-        parent::__construct('type', ['customer' => 'Customer', 'prospect' => 'Prospect']);
+        parent::__construct('type', ['Customer' => 'customer', 'Prospect' => 'prospect']);
     }
 }

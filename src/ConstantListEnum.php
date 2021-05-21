@@ -7,10 +7,11 @@ namespace Yokai\EnumBundle;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class ConstantListEnum extends ConfigurableEnum
+class ConstantListEnum extends Enum
 {
     /**
-     * @inheritDoc
+     * @param string $constantsPattern
+     * @param string $name
      */
     public function __construct(string $constantsPattern, string $name)
     {

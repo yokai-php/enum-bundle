@@ -9,17 +9,28 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class ConstantListTranslatedEnum extends ConfigurableTranslatedEnum
+class ConstantListTranslatedEnum extends TranslatedEnum
 {
     /**
-     * @inheritDoc
+     * @param string              $name
+     * @param string              $constantsPattern
+     * @param TranslatorInterface $translator
+     * @param string              $transPattern
+     * @param string              $transDomain
      */
     public function __construct(
+        string $name,
         string $constantsPattern,
         TranslatorInterface $translator,
         string $transPattern,
-        string $name
+        string $transDomain = 'messages'
     ) {
-        parent::__construct($translator, $transPattern, $name, ConstantExtractor::extract($constantsPattern));
+        parent::__construct(
+            $name,
+            ConstantExtractor::extract($constantsPattern),
+            $translator,
+            $transPattern,
+            $transDomain
+        );
     }
 }

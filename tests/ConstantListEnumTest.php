@@ -24,6 +24,7 @@ class ConstantListEnumTest extends TestCase
             ['bike' => 'bike', 'car' => 'car', 'bus' => 'bus'],
             $type->getChoices()
         );
+        self::assertSame(['bike', 'car', 'bus'], $type->getValues());
         self::assertSame('bike', $type->getLabel('bike'));
         self::assertSame('bus', $type->getLabel('bus'));
 
@@ -33,6 +34,7 @@ class ConstantListEnumTest extends TestCase
             ['electic' => 'electic', 'combustion' => 'combustion'],
             $engine->getChoices()
         );
+        self::assertSame(['electic', 'combustion'], $engine->getValues());
         self::assertSame('electic', $engine->getLabel('electic'));
         self::assertSame('combustion', $engine->getLabel('combustion'));
 
@@ -42,6 +44,7 @@ class ConstantListEnumTest extends TestCase
             ['renault' => 'renault', 'volkswagen' => 'volkswagen', 'toyota' => 'toyota'],
             $brand->getChoices()
         );
+        self::assertSame(['renault', 'volkswagen', 'toyota'], $brand->getValues());
         self::assertSame('renault', $brand->getLabel('renault'));
         self::assertSame('toyota', $brand->getLabel('toyota'));
     }

@@ -3,7 +3,6 @@
 namespace Yokai\EnumBundle\Tests\Fixtures;
 
 use Yokai\EnumBundle\EnumInterface;
-use Yokai\EnumBundle\EnumWithClassAsNameTrait;
 use Yokai\EnumBundle\Exception\InvalidEnumValueException;
 
 /**
@@ -11,17 +10,34 @@ use Yokai\EnumBundle\Exception\InvalidEnumValueException;
  */
 class GenderEnum implements EnumInterface
 {
-    use EnumWithClassAsNameTrait;
+    /**
+     * @inheritDoc
+     */
+    public function getName(): string
+    {
+        return __CLASS__;
+    }
 
+    /**
+     * @inheritDoc
+     */
+    public function getValues(): array
+    {
+        return ['male', 'female'];
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getChoices(): array
     {
-        return ['male' => 'Male', 'female' => 'Female'];
+        return ['Male' => 'male', 'Female' => 'female'];
     }
 
     /**
      * @inheritdoc
      */
-    public function getLabel(string $value): string
+    public function getLabel($value): string
     {
         $choices = $this->getChoices();
         if (!isset($choices[$value])) {

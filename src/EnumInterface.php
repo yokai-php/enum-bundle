@@ -6,31 +6,36 @@ namespace Yokai\EnumBundle;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
- *
- * NEXT_MAJOR: Add all these methods to the interface by uncommenting them.
- *
- * @method string getLabel(string $value)
  */
 interface EnumInterface
 {
     /**
-     * Returns enum choices (value as keys, labels as values)
+     * Returns enum choices (labels as keys, values as labels)
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getChoices(): array;
 
     /**
-     * Returns enum identifier (must be unique across your app).
+     * Returns enum values.
+     *
+     * @return array<int, mixed>
+     */
+    public function getValues(): array;
+
+    /**
+     * Returns enum value label.
+     *
+     * @param mixed $value
+     *
+     * @return string
+     */
+    public function getLabel($value): string;
+
+    /**
+     * Returns enum identifier (must be unique across app).
      *
      * @return string
      */
     public function getName(): string;
-
-    /**
-     * NEXT_MAJOR: uncomment this method
-     *
-     * @return string
-     */
-//    public function getLabel(string $value): string;
 }

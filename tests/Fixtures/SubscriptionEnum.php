@@ -3,12 +3,12 @@
 namespace Yokai\EnumBundle\Tests\Fixtures;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\EnumBundle\ConfigurableTranslatedEnum;
+use Yokai\EnumBundle\TranslatedEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class SubscriptionEnum extends ConfigurableTranslatedEnum
+class SubscriptionEnum extends TranslatedEnum
 {
     /**
      * @inheritDoc
@@ -16,10 +16,10 @@ class SubscriptionEnum extends ConfigurableTranslatedEnum
     public function __construct(TranslatorInterface $translator)
     {
         parent::__construct(
-            $translator,
-            'choice.subscription.%s',
             'subscription',
-            ['none', 'daily', 'weekly', 'monthly']
+            ['none', 'daily', 'weekly', 'monthly'],
+            $translator,
+            'choice.subscription.%s'
         );
     }
 }

@@ -34,7 +34,7 @@ class EnumValidator extends ChoiceValidator
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof Enum) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Enum');
+            throw new UnexpectedTypeException($constraint, Enum::class);
         }
 
         $constraint->choices  = null;
@@ -51,7 +51,7 @@ class EnumValidator extends ChoiceValidator
             ));
         }
 
-        $constraint->choices = array_keys($this->enumRegistry->get($constraint->enum)->getChoices());
+        $constraint->choices = $this->enumRegistry->get($constraint->enum)->getValues();
 
         parent::validate($value, $constraint);
     }
