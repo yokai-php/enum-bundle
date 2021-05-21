@@ -3,7 +3,7 @@
 namespace Yokai\EnumBundle\Tests;
 
 use Yokai\EnumBundle\ConstantListEnum;
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
 /**
@@ -51,7 +51,7 @@ class ConstantListEnumTest extends TestCase
 
     public function testLabelNotFound(): void
     {
-        $this->expectException(InvalidEnumValueException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $enum = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type');
 

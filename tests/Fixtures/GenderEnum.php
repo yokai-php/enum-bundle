@@ -3,7 +3,7 @@
 namespace Yokai\EnumBundle\Tests\Fixtures;
 
 use Yokai\EnumBundle\EnumInterface;
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -41,7 +41,7 @@ class GenderEnum implements EnumInterface
     {
         $choices = $this->getChoices();
         if (!isset($choices[$value])) {
-            throw InvalidEnumValueException::create($this, $value);
+            throw InvalidArgumentException::enumMissingValue($this, $value);
         }
 
         return $choices[$value];

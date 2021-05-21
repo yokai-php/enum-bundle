@@ -3,7 +3,7 @@
 namespace Yokai\EnumBundle;
 
 use LogicException;
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -65,7 +65,7 @@ class Enum implements EnumInterface
 
         $label = \array_search($value, $this->choices);
         if ($label === false) {
-            throw InvalidEnumValueException::create($this, $value);
+            throw InvalidArgumentException::enumMissingValue($this, $value);
         }
 
         return $label;

@@ -4,7 +4,7 @@ namespace Yokai\EnumBundle\Tests;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\ConstantListTranslatedEnum;
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
 /**
@@ -63,7 +63,7 @@ class ConstantListTranslatedEnumTest extends TestCase
 
     public function testLabelNotFound(): void
     {
-        $this->expectException(InvalidEnumValueException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $translator = new Translator([
             'vehicle.type.bike' => 'Moto',

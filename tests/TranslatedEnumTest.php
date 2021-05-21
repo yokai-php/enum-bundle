@@ -2,7 +2,7 @@
 
 namespace Yokai\EnumBundle\Tests;
 
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Exception\LogicException;
 use Yokai\EnumBundle\TranslatedEnum;
 
@@ -109,7 +109,7 @@ class TranslatedEnumTest extends TestCase
 
     public function testLabelNotFound(): void
     {
-        $this->expectException(InvalidEnumValueException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $translator = new Translator([
             'choice.something.foo' => 'FOO translated',

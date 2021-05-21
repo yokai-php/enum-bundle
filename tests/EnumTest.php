@@ -5,7 +5,7 @@ namespace Yokai\EnumBundle\Tests;
 use DateTimeImmutable;
 use LogicException;
 use Yokai\EnumBundle\Enum;
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -39,7 +39,7 @@ class EnumTest extends TestCase
 
     public function testLabelNotFound(): void
     {
-        $this->expectException(InvalidEnumValueException::class);
+        $this->expectException(InvalidArgumentException::class);
         $fooEnum = new Enum('foo', ['foo' => 'FOO', 'bar' => 'BAR']);
         $fooEnum->getLabel('unknown enum value');
     }
