@@ -8,12 +8,11 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumExtension extends AbstractExtension
+final class EnumExtension extends AbstractExtension
 {
     /**
      * @var EnumRegistry
@@ -34,8 +33,12 @@ class EnumExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('enum_label', [$this, 'getLabel']),
-            new TwigFunction('enum_choices', [$this, 'getChoices']),
+            new TwigFunction('enum_values', function ($enum) {
+                return $this->registry->get($enum)->getValues();
+            }),
+            new TwigFunction('enum_choices', function ($enum) {
+                return $this->registry->get($enum)->getChoices();
+            }),
         ];
     }
 
@@ -45,37 +48,9 @@ class EnumExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('enum_label', [$this, 'getLabel']),
+            new TwigFilter('enum_label', function ($value, $enum) {
+                return $this->registry->get($enum)->getLabel($value);
+            }),
         ];
-    }
-
-    /**
-     * @param string $value
-     * @param string $enum
-     *
-     * @return string
-     */
-    public function getLabel(string $value, string $enum): string
-    {
-        $enum = $this->registry->get($enum);
-        if (\method_exists($enum, 'getLabel')) {
-            try {
-                return $enum->getLabel($value);
-            } catch (InvalidEnumValueException $exception) {
-                return $value;
-            }
-        }
-
-        return $enum->getChoices()[$value] ?? $value;
-    }
-
-    /**
-     * @param string $enum
-     *
-     * @return array
-     */
-    public function getChoices(string $enum): array
-    {
-        return $this->registry->get($enum)->getChoices();
     }
 }

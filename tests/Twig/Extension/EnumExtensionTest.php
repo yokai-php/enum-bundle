@@ -2,12 +2,11 @@
 
 namespace Yokai\EnumBundle\Tests\Twig\Extension;
 
-use Prophecy\Prophecy\ObjectProphecy;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Exception\InvalidEnumValueException;
+use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Tests\TestCase;
 use Yokai\EnumBundle\Twig\Extension\EnumExtension;
 
@@ -16,27 +15,18 @@ use Yokai\EnumBundle\Twig\Extension\EnumExtension;
  */
 class EnumExtensionTest extends TestCase
 {
-    /**
-     * @var EnumRegistry|ObjectProphecy
-     */
-    private $registry;
-
-    protected function setUp(): void
-    {
-        $this->registry = $this->prophesize(EnumRegistry::class);
-    }
-
     public function testEnumLabel(): void
     {
         $enum = $this->prophesize(EnumInterface::class);
+        $enum->getName()->willReturn('test');
         $enum->getLabel('foo')->willReturn('FOO');
         $enum->getLabel('bar')->willReturn('BAR');
-        $enum->getLabel('not_exist')->willThrow(new InvalidEnumValueException());
+        $enum->getLabel('not_exist')->willThrow(new InvalidArgumentException());
 
-        $this->registry->get('test')
-            ->willReturn($enum->reveal());
+        $registry = new EnumRegistry();
+        $registry->add($enum->reveal());
 
-        $twig = $this->createEnvironment();
+        $twig = $this->createEnvironment($registry);
 
         self::assertSame(
             'FOO',
@@ -44,29 +34,20 @@ class EnumExtensionTest extends TestCase
         );
         self::assertSame(
             'BAR',
-            $twig->createTemplate("{{ enum_label('bar', 'test') }}")->render([])
-        );
-
-        self::assertSame(
-            'not_exist',
-            $twig->createTemplate("{{ 'not_exist'|enum_label('test') }}")->render([])
-        );
-        self::assertSame(
-            'not_exist',
-            $twig->createTemplate("{{ enum_label('not_exist', 'test') }}")->render([])
+            $twig->createTemplate("{{ 'bar'|enum_label('test') }}")->render([])
         );
     }
 
     public function testEnumChoices(): void
     {
         $enum = $this->prophesize(EnumInterface::class);
-        $enum->getChoices()
-            ->willReturn(['foo' => 'FOO', 'bar' => 'BAR']);
+        $enum->getName()->willReturn('test');
+        $enum->getChoices()->willReturn(['foo' => 'FOO', 'bar' => 'BAR']);
 
-        $this->registry->get('test')
-            ->willReturn($enum->reveal());
+        $registry = new EnumRegistry();
+        $registry->add($enum->reveal());
 
-        $twig = $this->createEnvironment();
+        $twig = $this->createEnvironment($registry);
 
         self::assertSame(
             'foo,FOO|bar,BAR|',
@@ -74,23 +55,29 @@ class EnumExtensionTest extends TestCase
         );
     }
 
-    /**
-     * @return Environment
-     */
-    protected function createEnvironment(): Environment
+    public function testEnumValues(): void
+    {
+        $enum = $this->prophesize(EnumInterface::class);
+        $enum->getName()->willReturn('test');
+        $enum->getValues()->willReturn(['foo', 'bar']);
+
+        $registry = new EnumRegistry();
+        $registry->add($enum->reveal());
+
+        $twig = $this->createEnvironment($registry);
+
+        self::assertSame(
+            'foo|bar|',
+            $twig->createTemplate("{% for value in enum_values('test') %}{{ value }}|{% endfor %}")->render([])
+        );
+    }
+
+    protected function createEnvironment(EnumRegistry $registry): Environment
     {
         $loader = new ArrayLoader([]);
         $twig = new Environment($loader, ['debug' => true, 'cache' => false, 'autoescape' => false]);
-        $twig->addExtension($this->createExtension());
+        $twig->addExtension(new EnumExtension($registry));
 
         return $twig;
-    }
-
-    /**
-     * @return EnumExtension
-     */
-    private function createExtension(): EnumExtension
-    {
-        return new EnumExtension($this->registry->reveal());
     }
 }
