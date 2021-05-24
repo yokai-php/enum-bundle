@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Form\Type\EnumType;
-use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
+use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
 use Yokai\EnumBundle\Tests\Form\TestExtension;
 
 /**
@@ -32,15 +32,18 @@ class EnumTypeTest extends TypeTestCase
 
     public function testEnumOptionValid(): void
     {
-        $form = $this->createForm(GenderEnum::class);
+        $form = $this->createForm(StateEnum::class);
 
-        self::assertEquals(['Male' => 'male', 'Female' => 'female'], $form->getConfig()->getOption('choices'));
+        self::assertEquals(
+            ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled'],
+            $form->getConfig()->getOption('choices')
+        );
     }
 
     protected function getExtensions(): array
     {
         $enumRegistry = new EnumRegistry();
-        $enumRegistry->add(new GenderEnum());
+        $enumRegistry->add(new StateEnum());
 
         return [
             new TestExtension($enumRegistry)

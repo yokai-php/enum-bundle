@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Form\Extension\EnumTypeGuesser;
 use Yokai\EnumBundle\Form\Type\EnumType;
-use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
+use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
 use Yokai\EnumBundle\Tests\Form\TestExtension;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 
@@ -50,17 +50,17 @@ class EnumTypeGuesserTest extends TypeTestCase
     protected function setUp(): void
     {
         $this->enumRegistry = new EnumRegistry();
-        $this->enumRegistry->add(new GenderEnum());
+        $this->enumRegistry->add(new StateEnum());
 
         $metadata = new ClassMetadata(self::TEST_CLASS);
-        $metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => GenderEnum::class]));
+        $metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => StateEnum::class]));
         if (class_exists(Compound::class)) {
             $metadata->addPropertyConstraint(
                 self::TEST_PROPERTY_COMPOUND,
                 new class extends Compound {
                     protected function getConstraints(array $options): array
                     {
-                        return [new Enum(['enum' => GenderEnum::class])];
+                        return [new Enum(['enum' => StateEnum::class])];
                     }
                 }
             );
@@ -79,7 +79,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         $guess = new TypeGuess(
             EnumType::class,
             [
-                'enum' => GenderEnum::class,
+                'enum' => StateEnum::class,
                 'multiple' => false,
             ],
             Guess::HIGH_CONFIDENCE
@@ -97,7 +97,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         $guess = new TypeGuess(
             EnumType::class,
             [
-                'enum' => GenderEnum::class,
+                'enum' => StateEnum::class,
                 'multiple' => false,
             ],
             Guess::HIGH_CONFIDENCE
@@ -128,7 +128,7 @@ class EnumTypeGuesserTest extends TypeTestCase
             ->add(self::TEST_PROPERTY_DIRECT);
 
         self::assertEquals(
-            ['Male' => 'male', 'Female' => 'female'],
+            ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled'],
             $form->get(self::TEST_PROPERTY_DIRECT)->getConfig()->getOption('choices')
         );
     }

@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Tests\Fixtures\GenderEnum;
 use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
 use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 use Yokai\EnumBundle\Tests\Translator;
 use Yokai\EnumBundle\Twig\Extension\EnumExtension;
@@ -39,18 +39,19 @@ class EnumExtensionTest extends TestCase
     public function testEnumChoices(): void
     {
         $registry = new EnumRegistry();
-        $registry->add(new StateEnum(new Translator([
-            'choice.state.new' => 'Nouveau',
-            'choice.state.validated' => 'Validé',
-            'choice.state.disabled' => 'Désactivé',
+        $registry->add(new SubscriptionEnum(new Translator([
+            'choice.subscription.none' => 'Aucune',
+            'choice.subscription.daily' => 'Journalière',
+            'choice.subscription.weekly' => 'Hebdomadaire',
+            'choice.subscription.monthly' => 'Mensuelle',
         ])));
 
         $twig = $this->createEnvironment($registry);
 
         self::assertSame(
-            'new,Nouveau|validated,Validé|disabled,Désactivé|',
+            'none,Aucune|daily,Journalière|weekly,Hebdomadaire|monthly,Mensuelle|',
             $twig->createTemplate(<<<TWIG
-{% for label,value in enum_choices('state') %}{{ value }},{{ label }}|{% endfor %}
+{% for label,value in enum_choices('subscription') %}{{ value }},{{ label }}|{% endfor %}
 TWIG
             )->render([])
         );
@@ -59,14 +60,14 @@ TWIG
     public function testEnumValues(): void
     {
         $registry = new EnumRegistry();
-        $registry->add(new GenderEnum());
+        $registry->add(new StateEnum());
 
         $twig = $this->createEnvironment($registry);
 
         self::assertSame(
-            'male|female|',
+            'new|validated|disabled|',
             $twig->createTemplate(<<<TWIG
-{% for value in enum_values('Yokai\\\\EnumBundle\\\\Tests\\\\Fixtures\\\\GenderEnum') %}{{ value }}|{% endfor %}
+{% for value in enum_values('Yokai\\\\EnumBundle\\\\Tests\\\\Fixtures\\\\StateEnum') %}{{ value }}|{% endfor %}
 TWIG
             )->render([])
         );
