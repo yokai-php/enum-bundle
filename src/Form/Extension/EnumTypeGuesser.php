@@ -10,8 +10,6 @@ use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Guess\ValueGuess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Compound;
-use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
-use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Form\Type\EnumType;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 
@@ -20,22 +18,6 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
  */
 class EnumTypeGuesser extends ValidatorTypeGuesser
 {
-    /**
-     * @var EnumRegistry
-     */
-    private $enumRegistry;
-
-    /**
-     * @param MetadataFactoryInterface $metadataFactory
-     * @param EnumRegistry             $enumRegistry
-     */
-    public function __construct(MetadataFactoryInterface $metadataFactory, EnumRegistry $enumRegistry)
-    {
-        parent::__construct($metadataFactory);
-
-        $this->enumRegistry = $enumRegistry;
-    }
-
     /**
      * @inheritdoc
      */
