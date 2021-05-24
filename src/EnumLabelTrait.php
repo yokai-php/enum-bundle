@@ -11,10 +11,11 @@ trait EnumLabelTrait
      */
     public function getLabel(string $value): string
     {
-        if (!isset($this->getChoices()[$value])) {
+        $choices = $this->getChoices();
+        if (!isset($choices[$value])) {
             throw InvalidEnumValueException::create($this, $value);
         }
 
-        return $this->getChoices()[$value];
+        return $choices[$value];
     }
 }
