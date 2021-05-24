@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Tests;
 
@@ -54,7 +56,8 @@ class EnumTest extends TestCase
     public function testInheritedEnumMustHaveChoicesOrBuildMethod(): void
     {
         $this->expectException(LogicException::class);
-        $fooEnum = new class ('foo', null) extends Enum {};
+        $fooEnum = new class ('foo', null) extends Enum {
+        };
         $fooEnum->getLabel('something');
     }
 }

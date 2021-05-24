@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Tests;
 
@@ -19,7 +21,7 @@ class ConstantListEnumTest extends TestCase
 
     public function testVehicleEnums(): void
     {
-        $type = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type');
+        $type = $this->getEnum(Vehicle::class . '::TYPE_*', 'vehicle.type');
         self::assertSame('vehicle.type', $type->getName());
         self::assertSame(
             ['bike' => 'bike', 'car' => 'car', 'bus' => 'bus'],
@@ -29,7 +31,7 @@ class ConstantListEnumTest extends TestCase
         self::assertSame('bike', $type->getLabel('bike'));
         self::assertSame('bus', $type->getLabel('bus'));
 
-        $engine = $this->getEnum(Vehicle::class.'::ENGINE_*', 'vehicle.engine');
+        $engine = $this->getEnum(Vehicle::class . '::ENGINE_*', 'vehicle.engine');
         self::assertSame('vehicle.engine', $engine->getName());
         self::assertSame(
             ['electic' => 'electic', 'combustion' => 'combustion'],
@@ -39,7 +41,7 @@ class ConstantListEnumTest extends TestCase
         self::assertSame('electic', $engine->getLabel('electic'));
         self::assertSame('combustion', $engine->getLabel('combustion'));
 
-        $brand = $this->getEnum(Vehicle::class.'::BRAND_*', 'vehicle.brand');
+        $brand = $this->getEnum(Vehicle::class . '::BRAND_*', 'vehicle.brand');
         self::assertSame('vehicle.brand', $brand->getName());
         self::assertSame(
             ['renault' => 'renault', 'volkswagen' => 'volkswagen', 'toyota' => 'toyota'],
@@ -54,7 +56,7 @@ class ConstantListEnumTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $enum = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type');
+        $enum = $this->getEnum(Vehicle::class . '::TYPE_*', 'vehicle.type');
 
         $enum->getLabel('unknown');
     }

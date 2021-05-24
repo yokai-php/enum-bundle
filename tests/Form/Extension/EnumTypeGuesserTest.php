@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yokai\EnumBundle\Tests\Form\Extension;
 
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -25,10 +27,10 @@ class EnumTypeGuesserTest extends TypeTestCase
 {
     use ProphecyTrait;
 
-    const TEST_CLASS = EnumTypeGuesserTest_TestClass::class;
+    private const TEST_CLASS = EnumTypeGuesserTest_TestClass::class;
 
-    const TEST_PROPERTY_DIRECT = 'direct';
-    const TEST_PROPERTY_COMPOUND = 'compound';
+    private const TEST_PROPERTY_DIRECT = 'direct';
+    private const TEST_PROPERTY_COMPOUND = 'compound';
 
     /**
      * @var EnumTypeGuesser
@@ -41,11 +43,6 @@ class EnumTypeGuesserTest extends TypeTestCase
     private $enumRegistry;
 
     /**
-     * @var ClassMetadata
-     */
-    private $metadata;
-
-    /**
      * @var ObjectProphecy|MetadataFactoryInterface
      */
     private $metadataFactory;
@@ -55,19 +52,22 @@ class EnumTypeGuesserTest extends TypeTestCase
         $this->enumRegistry = new EnumRegistry();
         $this->enumRegistry->add(new GenderEnum());
 
-        $this->metadata = new ClassMetadata(self::TEST_CLASS);
-        $this->metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => GenderEnum::class]));
+        $metadata = new ClassMetadata(self::TEST_CLASS);
+        $metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => GenderEnum::class]));
         if (class_exists(Compound::class)) {
-            $this->metadata->addPropertyConstraint(self::TEST_PROPERTY_COMPOUND, new class extends Compound {
-                protected function getConstraints(array $options): array
-                {
-                    return [new Enum(['enum' => GenderEnum::class])];
+            $metadata->addPropertyConstraint(
+                self::TEST_PROPERTY_COMPOUND,
+                new class extends Compound {
+                    protected function getConstraints(array $options): array
+                    {
+                        return [new Enum(['enum' => GenderEnum::class])];
+                    }
                 }
-            });
+            );
         }
         $this->metadataFactory = $this->prophesize(MetadataFactoryInterface::class);
         $this->metadataFactory->getMetadataFor(self::TEST_CLASS)
-            ->willReturn($this->metadata);
+            ->willReturn($metadata);
 
         $this->guesser = new EnumTypeGuesser($this->metadataFactory->reveal(), $this->enumRegistry);
 
@@ -124,7 +124,7 @@ class EnumTypeGuesserTest extends TypeTestCase
     public function testCreateForm(): void
     {
         $class = self::TEST_CLASS;
-        $form = $this->factory->create(FormType::class, new $class, ['data_class' => $class])
+        $form = $this->factory->create(FormType::class, new $class(), ['data_class' => $class])
             ->add(self::TEST_PROPERTY_DIRECT);
 
         self::assertEquals(
@@ -141,6 +141,9 @@ class EnumTypeGuesserTest extends TypeTestCase
     }
 }
 
+/**
+ * phpcs:disable
+ */
 class EnumTypeGuesserTest_TestClass
 {
     public $direct;

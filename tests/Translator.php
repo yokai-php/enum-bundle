@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yokai\EnumBundle\Tests;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 class Translator implements TranslatorInterface
 {
     /**

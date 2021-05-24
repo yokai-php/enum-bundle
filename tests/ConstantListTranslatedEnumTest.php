@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Tests;
 
@@ -31,7 +33,7 @@ class ConstantListTranslatedEnumTest extends TestCase
             'vehicle.brand.toyota' => 'Toyota',
         ]);
 
-        $type = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type', $translator);
+        $type = $this->getEnum(Vehicle::class . '::TYPE_*', 'vehicle.type', $translator);
         self::assertSame('vehicle.type', $type->getName());
         self::assertSame(
             ['Moto' => 'bike', 'Voiture' => 'car', 'Bus' => 'bus'],
@@ -41,7 +43,7 @@ class ConstantListTranslatedEnumTest extends TestCase
         self::assertSame('Moto', $type->getLabel('bike'));
         self::assertSame('Bus', $type->getLabel('bus'));
 
-        $engine = $this->getEnum(Vehicle::class.'::ENGINE_*', 'vehicle.engine', $translator);
+        $engine = $this->getEnum(Vehicle::class . '::ENGINE_*', 'vehicle.engine', $translator);
         self::assertSame('vehicle.engine', $engine->getName());
         self::assertSame(
             ['Electrique' => 'electic', 'Combustion' => 'combustion'],
@@ -51,7 +53,7 @@ class ConstantListTranslatedEnumTest extends TestCase
         self::assertSame('Electrique', $engine->getLabel('electic'));
         self::assertSame('Combustion', $engine->getLabel('combustion'));
 
-        $brand = $this->getEnum(Vehicle::class.'::BRAND_*', 'vehicle.brand', $translator);
+        $brand = $this->getEnum(Vehicle::class . '::BRAND_*', 'vehicle.brand', $translator);
         self::assertSame('vehicle.brand', $brand->getName());
         self::assertSame(
             ['Renault' => 'renault', 'Volkswagen' => 'volkswagen', 'Toyota' => 'toyota'],
@@ -72,7 +74,7 @@ class ConstantListTranslatedEnumTest extends TestCase
             'vehicle.type.bus' => 'Bus',
         ]);
 
-        $enum = $this->getEnum(Vehicle::class.'::TYPE_*', 'vehicle.type', $translator);
+        $enum = $this->getEnum(Vehicle::class . '::TYPE_*', 'vehicle.type', $translator);
 
         $enum->getLabel('unknown');
     }

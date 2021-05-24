@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Tests;
 
@@ -45,15 +47,15 @@ class ConstantExtractorTest extends TestCase
     public function empty(): Generator
     {
         yield 'class without constant' => [
-            ClassWithoutConstant::class.'::*',
+            ClassWithoutConstant::class . '::*',
             '/Class .+ has no public constant/',
         ];
         yield 'class without public constant' => [
-            ClassWithNoPublicConstant::class.'::*',
+            ClassWithNoPublicConstant::class . '::*',
             '/Class .+ has no public constant/',
         ];
         yield 'class with constant but no match' => [
-            ClassWithConstant::class.'::NO_MATCH*',
+            ClassWithConstant::class . '::NO_MATCH*',
             '/Pattern matches no constant/',
         ];
     }
@@ -74,15 +76,15 @@ class ConstantExtractorTest extends TestCase
             $invalidPatternRegexp,
         ];
         yield 'missing constant pattern' => [
-            ClassWithConstant::class.'::',
+            ClassWithConstant::class . '::',
             $invalidPatternRegexp,
         ];
         yield 'two separator' => [
-            ClassWithConstant::class.'::STATUS_*::',
+            ClassWithConstant::class . '::STATUS_*::',
             $invalidPatternRegexp,
         ];
         yield 'no * in pattern' => [
-            ClassWithConstant::class.'::STATUS_ONLINE',
+            ClassWithConstant::class . '::STATUS_ONLINE',
             $invalidPatternRegexp,
         ];
     }
@@ -90,26 +92,35 @@ class ConstantExtractorTest extends TestCase
     public function successful(): Generator
     {
         yield 'starting with status' => [
-            ClassWithConstant::class.'::STATUS_*',
+            ClassWithConstant::class . '::STATUS_*',
             [ClassWithConstant::STATUS_ONLINE, ClassWithConstant::STATUS_DRAFT],
         ];
         yield 'ending with online' => [
-            ClassWithConstant::class.'::*_ONLINE',
+            ClassWithConstant::class . '::*_ONLINE',
             [ClassWithConstant::STATUS_ONLINE],
         ];
     }
 }
 
+/**
+ * phpcs:disable
+ */
 class ClassWithoutConstant
 {
 }
 
+/**
+ * phpcs:disable
+ */
 class ClassWithNoPublicConstant
 {
     private const PROTECTED_CONST = 'protected';
     private const PRIVATE_CONST = 'private';
 }
 
+/**
+ * phpcs:disable
+ */
 class ClassWithConstant
 {
     public const STATUS_ONLINE = 'online';
