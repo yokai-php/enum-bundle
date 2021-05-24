@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yokai\EnumBundle;
 
-use Yokai\EnumBundle\Exception\DuplicatedEnumException;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Exception\LogicException;
 
