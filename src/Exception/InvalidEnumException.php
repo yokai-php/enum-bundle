@@ -9,7 +9,7 @@ use DomainException;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class InvalidEnumException extends DomainException
+class InvalidEnumException extends DomainException implements ExceptionInterface
 {
     /**
      * @param string $name

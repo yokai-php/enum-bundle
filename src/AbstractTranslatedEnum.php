@@ -12,6 +12,8 @@ use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
  */
 abstract class AbstractTranslatedEnum implements EnumInterface
 {
+    use EnumLabelTrait;
+
     /**
      * @var TranslatorInterface
      */
@@ -26,6 +28,11 @@ abstract class AbstractTranslatedEnum implements EnumInterface
      * @var string
      */
     private $transDomain = 'messages';
+
+    /**
+     * @var array|null
+     */
+    private $choices = null;
 
     /**
      * @param TranslatorInterface $translator
@@ -46,19 +53,23 @@ abstract class AbstractTranslatedEnum implements EnumInterface
      */
     public function getChoices(): array
     {
-        return array_combine(
-            $this->getValues(),
-            array_map(
-                function (string $value): string {
-                    return $this->translator->trans(
-                        sprintf($this->transPattern, $value),
-                        [],
-                        $this->transDomain
-                    );
-                },
-                $this->getValues()
-            )
-        );
+        if ($this->choices === null) {
+            $this->choices = array_combine(
+                $this->getValues(),
+                array_map(
+                    function (string $value): string {
+                        return $this->translator->trans(
+                            sprintf($this->transPattern, $value),
+                            [],
+                            $this->transDomain
+                        );
+                    },
+                    $this->getValues()
+                )
+            );
+        }
+
+        return $this->choices;
     }
 
     /**

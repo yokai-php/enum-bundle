@@ -87,7 +87,7 @@ class EnumTypeGuesserTest extends TypeTestCase
             Guess::HIGH_CONFIDENCE
         );
 
-        $this->assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
+        self::assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
     }
 
     public function testGuessTypeCompound(): void
@@ -105,22 +105,22 @@ class EnumTypeGuesserTest extends TypeTestCase
             Guess::HIGH_CONFIDENCE
         );
 
-        $this->assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_COMPOUND));
+        self::assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_COMPOUND));
     }
 
     public function testGuessRequired(): void
     {
-        $this->assertNull($this->guesser->guessRequired(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
+        self::assertNull($this->guesser->guessRequired(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
     }
 
     public function testGuessMaxLength(): void
     {
-        $this->assertNull($this->guesser->guessMaxLength(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
+        self::assertNull($this->guesser->guessMaxLength(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
     }
 
     public function testGuessPattern(): void
     {
-        $this->assertNull($this->guesser->guessPattern(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
+        self::assertNull($this->guesser->guessPattern(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
     }
 
     public function testCreateForm(): void
@@ -129,7 +129,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         $form = $this->factory->create(FormType::class, new $class, ['data_class' => $class])
             ->add(self::TEST_PROPERTY_DIRECT);
 
-        $this->assertEquals(
+        self::assertEquals(
             ['Male' => 'male', 'Female' => 'female'],
             $form->get(self::TEST_PROPERTY_DIRECT)->getConfig()->getOption('choices')
         );

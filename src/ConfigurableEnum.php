@@ -9,6 +9,8 @@ namespace Yokai\EnumBundle;
  */
 class ConfigurableEnum implements EnumInterface
 {
+    use EnumLabelTrait;
+
     /**
      * @var string
      */

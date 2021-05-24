@@ -5,6 +5,7 @@ namespace Yokai\EnumBundle\Tests;
 use Prophecy\Prophecy\ObjectProphecy;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\ConfigurableTranslatedEnum;
+use Yokai\EnumBundle\Exception\InvalidEnumValueException;
 use Yokai\EnumBundle\Exception\InvalidTranslatePatternException;
 
 /**
@@ -25,13 +26,15 @@ class ConfigurableTranslatedEnumTest extends TestCase
         $translator = $this->prophesize(TranslatorInterface::class);
         $translator->trans('choice.something.foo', [], 'messages', null)->shouldBeCalled()->willReturn('FOO translated');
         $translator->trans('choice.something.bar', [], 'messages', null)->shouldBeCalled()->willReturn('BAR translated');
-        $type = new ConfigurableTranslatedEnum($translator->reveal(), 'choice.something.%s', 'something', ['foo', 'bar']);
+        $enum = new ConfigurableTranslatedEnum($translator->reveal(), 'choice.something.%s', 'something', ['foo', 'bar']);
 
         $expectedChoices = [
             'foo' => 'FOO translated',
             'bar' => 'BAR translated',
         ];
-        $this->assertEquals($expectedChoices, $type->getChoices());
+        self::assertEquals($expectedChoices, $enum->getChoices());
+        self::assertSame('FOO translated', $enum->getLabel('foo'));
+        self::assertSame('BAR translated', $enum->getLabel('bar'));
     }
 
     public function testTranslatedWithDomainChoices(): void
@@ -42,13 +45,28 @@ class ConfigurableTranslatedEnumTest extends TestCase
         $translator->trans('choice.something.bar', [], 'messages', null)->shouldNotBeCalled();
         $translator->trans('something.foo', [], 'choices', null)->shouldBeCalled()->willReturn('FOO translated');
         $translator->trans('something.bar', [], 'choices', null)->shouldBeCalled()->willReturn('BAR translated');
-        $type = new ConfigurableTranslatedEnum($translator->reveal(), 'something.%s', 'something', ['foo', 'bar']);
-        $type->setTransDomain('choices');
+        $enum = new ConfigurableTranslatedEnum($translator->reveal(), 'something.%s', 'something', ['foo', 'bar']);
+        $enum->setTransDomain('choices');
 
         $expectedChoices = [
             'foo' => 'FOO translated',
             'bar' => 'BAR translated',
         ];
-        $this->assertEquals($expectedChoices, $type->getChoices());
+        self::assertEquals($expectedChoices, $enum->getChoices());
+        self::assertSame('FOO translated', $enum->getLabel('foo'));
+        self::assertSame('BAR translated', $enum->getLabel('bar'));
+    }
+
+    public function testLabelNotFound(): void
+    {
+        $this->expectException(InvalidEnumValueException::class);
+
+        /** @var ObjectProphecy|TranslatorInterface $translator */
+        $translator = $this->prophesize(TranslatorInterface::class);
+        $translator->trans('choice.something.foo', [], 'messages', null)->shouldBeCalled()->willReturn('FOO translated');
+        $translator->trans('choice.something.bar', [], 'messages', null)->shouldBeCalled()->willReturn('BAR translated');
+        $enum = new ConfigurableTranslatedEnum($translator->reveal(), 'choice.something.%s', 'something', ['foo', 'bar']);
+
+        $enum->getLabel('unknown');
     }
 }

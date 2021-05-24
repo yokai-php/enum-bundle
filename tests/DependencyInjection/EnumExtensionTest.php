@@ -37,9 +37,9 @@ class EnumExtensionTest extends TestCase
         }
 
         $autoconfigure = $container->getAutoconfiguredInstanceof();
-        $this->assertArrayHasKey(EnumInterface::class, $autoconfigure);
-        $this->assertEquals(['yokai_enum.enum' => [[]]], $autoconfigure[EnumInterface::class]->getTags());
+        self::assertArrayHasKey(EnumInterface::class, $autoconfigure);
+        self::assertEquals(['yokai_enum.enum' => [[]]], $autoconfigure[EnumInterface::class]->getTags());
 
-        $this->assertTrue($container->hasAlias(EnumRegistry::class));
+        self::assertTrue($container->hasAlias(EnumRegistry::class));
     }
 }

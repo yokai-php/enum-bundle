@@ -9,7 +9,7 @@ use InvalidArgumentException;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class CannotExtractConstantsException extends InvalidArgumentException
+class CannotExtractConstantsException extends InvalidArgumentException implements ExceptionInterface
 {
     public static function invalidPattern(string $pattern): self
     {
