@@ -7,6 +7,8 @@ namespace Yokai\EnumBundle;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  *
+ * NEXT_MAJOR: Add all these methods to the interface by uncommenting them.
+ *
  * @method string getLabel(string $value)
  */
 interface EnumInterface
@@ -26,6 +28,8 @@ interface EnumInterface
     public function getName(): string;
 
     /**
+     * NEXT_MAJOR: uncomment this method
+     *
      * @return string
      */
 //    public function getLabel(string $value): string;
