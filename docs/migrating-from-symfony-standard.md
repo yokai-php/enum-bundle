@@ -144,7 +144,7 @@ class MemberStatusEnum extends ConstantListTranslatedEnum
 {
     public function __construct(TranslatorInterface $translator)
     {
-        parent::__construct(__CLASS__, Member::class . '::STATUS_*', $translator, 'member.status.%s');
+        parent::__construct(Member::class . '::STATUS_*', $translator, 'member.status.%s');
     }
 }
 ```
@@ -162,7 +162,7 @@ class MemberSubscriptionEnum extends ConstantListTranslatedEnum
 {
     public function __construct(TranslatorInterface $translator)
     {
-        parent::__construct(__CLASS__, Member::class . '::SUBSCRIBE_*', $translator, 'member.subscription.%s');
+        parent::__construct(Member::class . '::SUBSCRIBE_*', $translator, 'member.subscription.%s');
     }
 }
 ```

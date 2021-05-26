@@ -16,16 +16,14 @@ use Yokai\EnumBundle\TranslatedEnum;
  */
 class SubscriptionEnum extends TranslatedEnum
 {
-    /**
-     * @inheritDoc
-     */
     public function __construct(TranslatorInterface $translator)
     {
         parent::__construct(
-            'subscription',
             ['none', 'daily', 'weekly', 'monthly'],
             $translator,
-            'choice.subscription.%s'
+            'choice.subscription.%s',
+            'messages',
+            'subscription'
         );
     }
 }

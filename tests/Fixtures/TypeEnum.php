@@ -17,6 +17,6 @@ class TypeEnum extends Enum
 {
     public function __construct()
     {
-        parent::__construct('type', ['Customer' => 'customer', 'Prospect' => 'prospect']);
+        parent::__construct(['Customer' => 'customer', 'Prospect' => 'prospect'], 'type');
     }
 }
