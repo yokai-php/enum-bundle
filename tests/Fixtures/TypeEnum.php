@@ -7,6 +7,10 @@ namespace Yokai\EnumBundle\Tests\Fixtures;
 use Yokai\EnumBundle\Enum;
 
 /**
+ * Inherit implementation from base class.
+ * Values are hardcoded as a constructor argument.
+ * Each value label is hardcoded as a constructor argument.
+ *
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class TypeEnum extends Enum

@@ -14,18 +14,15 @@ use Yokai\EnumBundle\TranslatedEnum;
  *
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class SubscriptionEnum extends TranslatedEnum
+class VehicleWheelsEnum extends TranslatedEnum
 {
-    /**
-     * @inheritDoc
-     */
     public function __construct(TranslatorInterface $translator)
     {
         parent::__construct(
-            'subscription',
-            ['none', 'daily', 'weekly', 'monthly'],
+            __CLASS__,
+            ['two' => Vehicle::WHEELS_TWO, 'four' => Vehicle::WHEELS_FOUR, 'eight' => Vehicle::WHEELS_EIGHT],
             $translator,
-            'choice.subscription.%s'
+            'vehicle.wheels.%s'
         );
     }
 }

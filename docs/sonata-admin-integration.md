@@ -1,15 +1,14 @@
-SonataAdminBundle integration
-=============================
+# SonataAdminBundle integration
 
-If we take our example with member that has `gender`.
-And let's say we want to build a SonataAdmin for this model.
+Back to our [README.md](../README.md) example (member having `status`).
+Let's say we want to build a [SonataAdmin](https://github.com/sonata-project/SonataAdminBundle) for this model.
 
 ```php
 <?php
 
 namespace App\Admin;
 
-use App\Enum\GenderEnum;
+use App\Enum\StatusEnum;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -35,8 +34,8 @@ class MemberAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
-            ->add('gender', TemplateRegistry::TYPE_CHOICE, [
-                'choices' => $this->enums->get(GenderEnum::class)->getChoices(),
+            ->add('status', TemplateRegistry::TYPE_CHOICE, [
+                'choices' => array_flip($this->enums->get(StatusEnum::class)->getChoices()),
                 'catalog' => false, // enum is self translated
             ])
         ;
@@ -45,11 +44,9 @@ class MemberAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('gender', ChoiceFilter::class, [
+            ->add('status', ChoiceFilter::class, [
                 'field_type' => EnumType::class,
-                'field_options' => [
-                    'enum' => GenderEnum::class,
-                ],
+                'field_options' => ['enum' => StatusEnum::class],
             ])
         ;
     }
@@ -57,16 +54,17 @@ class MemberAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            // the bundle guess the form type for you, if you configured validation
-            ->add('gender')
+            // Because we added the @Enum constraint to Member::$status property
+            // the bundle will be able to find out the appropriate form type automatically
+            ->add('status')
         ;
     }
 
     protected function configureShowFields(ShowMapper $form): void
     {
         $form
-            ->add('gender', TemplateRegistry::TYPE_CHOICE, [
-                'choices' => $this->enums->get(GenderEnum::class)->getChoices(),
+            ->add('status', TemplateRegistry::TYPE_CHOICE, [
+                'choices' => $this->enums->get(StatusEnum::class)->getChoices(),
                 'catalog' => false, // enum is self translated
             ])
         ;
@@ -74,8 +72,8 @@ class MemberAdmin extends AbstractAdmin
 }
 ```
 
-There you go, your admin has now enum integrated :
-- list choice filter : [documentation](https://sonata-project.org/bundles/doctrine-orm-admin/master/doc/reference/filter_field_definition.html)
-- list datagrid column : [documentation](https://sonata-project.org/bundles/admin/3-x/doc/getting_started/the_list_view.html)
-- form choice field : [documentation](https://sonata-project.org/bundles/admin/3-x/doc/getting_started/the_form_view.html)
-- show field : [documentation](https://sonata-project.org/bundles/admin/3-x/doc/getting_started/the_form_view.html)
+There you go, your admin has now enum support for :
+- [filter field](https://sonata-project.org/bundles/doctrine-orm-admin/master/doc/reference/filter_field_definition.html)
+- [list field](https://sonata-project.org/bundles/admin/3-x/doc/getting_started/the_list_view.html)
+- [form field](https://sonata-project.org/bundles/admin/3-x/doc/getting_started/the_form_view.html)
+- [show field](https://sonata-project.org/bundles/admin/3-x/doc/reference/action_show.html)

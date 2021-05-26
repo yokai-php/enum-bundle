@@ -8,6 +8,10 @@ use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 
 /**
+ * Direct interface implementation.
+ * Values are hardcoded in `getChoices` method.
+ * Each value label is hardcoded in `getChoices` method.
+ *
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 class StateEnum implements EnumInterface
@@ -42,10 +46,11 @@ class StateEnum implements EnumInterface
     public function getLabel($value): string
     {
         $choices = $this->getChoices();
-        if (!isset($choices[$value])) {
+        $label = \array_search($value, $choices);
+        if ($label === false) {
             throw InvalidArgumentException::enumMissingValue($this, $value);
         }
 
-        return $choices[$value];
+        return $label;
     }
 }
