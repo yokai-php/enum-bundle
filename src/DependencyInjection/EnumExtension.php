@@ -20,7 +20,7 @@ use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumExtension extends Extension
+final class EnumExtension extends Extension
 {
     /**
      * @inheritdoc

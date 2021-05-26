@@ -13,7 +13,7 @@ use Yokai\EnumBundle\EnumRegistry;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumType extends AbstractType
+final class EnumType extends AbstractType
 {
     /**
      * @var EnumRegistry

@@ -16,7 +16,7 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumTypeGuesser extends ValidatorTypeGuesser
+final class EnumTypeGuesser extends ValidatorTypeGuesser
 {
     /**
      * @inheritdoc

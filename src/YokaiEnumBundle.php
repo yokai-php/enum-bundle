@@ -12,7 +12,7 @@ use Yokai\EnumBundle\DependencyInjection\EnumExtension;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class YokaiEnumBundle extends Bundle
+final class YokaiEnumBundle extends Bundle
 {
     /**
      * @inheritdoc

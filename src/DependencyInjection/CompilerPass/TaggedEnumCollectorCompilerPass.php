@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
+final class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
 {
     /**
      * @inheritdoc

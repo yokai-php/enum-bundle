@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints\Choice;
  *
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class Enum extends Choice
+final class Enum extends Choice
 {
     /**
      * @var string

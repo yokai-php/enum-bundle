@@ -10,7 +10,7 @@ use Yokai\EnumBundle\Exception\LogicException;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumRegistry
+final class EnumRegistry
 {
     /**
      * @var EnumInterface[]

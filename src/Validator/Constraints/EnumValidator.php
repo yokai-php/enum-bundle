@@ -13,7 +13,7 @@ use Yokai\EnumBundle\EnumRegistry;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class EnumValidator extends ChoiceValidator
+final class EnumValidator extends ChoiceValidator
 {
     /**
      * @var EnumRegistry

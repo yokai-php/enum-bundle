@@ -13,7 +13,7 @@ use Yokai\EnumBundle\Exception\LogicException;
  *
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-class ConstantExtractor
+final class ConstantExtractor
 {
     /**
      * @param string $pattern
