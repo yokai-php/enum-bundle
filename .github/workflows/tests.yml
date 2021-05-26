@@ -4,7 +4,7 @@ on:
   pull_request: null
   push:
     branches:
-      - "3.x"
+      - "4.x"
 
 jobs:
   phpunit:
