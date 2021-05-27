@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\ConstantListTranslatedEnum;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
+use Yokai\EnumBundle\Exception\LogicException;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
 /**
@@ -17,7 +18,7 @@ class ConstantListTranslatedEnumTest extends TestCase
 {
     public function getEnum(string $pattern, string $name, TranslatorInterface $translator): ConstantListTranslatedEnum
     {
-        return new ConstantListTranslatedEnum($name, $pattern, $translator, $name . '.%s');
+        return new ConstantListTranslatedEnum($pattern, $translator, $name . '.%s', 'messages', $name);
     }
 
     public function testVehicleEnums(): void
@@ -62,6 +63,12 @@ class ConstantListTranslatedEnumTest extends TestCase
         self::assertSame(['renault', 'volkswagen', 'toyota'], $brand->getValues());
         self::assertSame('Renault', $brand->getLabel('renault'));
         self::assertSame('Toyota', $brand->getLabel('toyota'));
+    }
+
+    public function testEnumMustHaveName(): void
+    {
+        $this->expectException(LogicException::class);
+        new ConstantListTranslatedEnum(Vehicle::class . '::TYPE_*', new Translator([]), 'vehicle.type.%s');
     }
 
     public function testLabelNotFound(): void

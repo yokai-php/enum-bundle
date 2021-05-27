@@ -18,7 +18,7 @@ class StatusEnum extends TranslatedEnum
 {
     public function __construct(TranslatorInterface $translator)
     {
-        parent::__construct(__CLASS__, ['new', 'validated', 'disabled'], $translator, 'status.%s');
+        parent::__construct(['new', 'validated', 'disabled'], $translator, 'status.%s');
     }
 }
 ```
@@ -43,7 +43,7 @@ class StatusEnum extends ConstantListTranslatedEnum
 {
     public function __construct(TranslatorInterface $translator)
     {
-        parent::__construct(__CLASS__, Member::class . '::STATUS_*', $translator, 'status.%s');
+        parent::__construct(Member::class . '::STATUS_*', $translator, 'status.%s');
     }
 }
 ```

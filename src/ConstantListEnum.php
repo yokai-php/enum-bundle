@@ -10,12 +10,12 @@ namespace Yokai\EnumBundle;
 class ConstantListEnum extends Enum
 {
     /**
-     * @param string $constantsPattern
-     * @param string $name
+     * @param string      $constantsPattern
+     * @param string|null $name
      */
-    public function __construct(string $constantsPattern, string $name)
+    public function __construct(string $constantsPattern, ?string $name = null)
     {
         $values = ConstantExtractor::extract($constantsPattern);
-        parent::__construct($name, array_combine($values, $values));
+        parent::__construct(array_combine($values, $values), $name);
     }
 }

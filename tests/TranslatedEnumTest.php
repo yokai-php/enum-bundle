@@ -17,7 +17,7 @@ class TranslatedEnumTest extends TestCase
     public function testConstructedWithInvalidPattern(): void
     {
         $this->expectException(LogicException::class);
-        new TranslatedEnum('invalid', ['foo', 'bar'], new Translator([]), 'invalid.pattern');
+        new TranslatedEnum(['foo', 'bar'], new Translator([]), 'invalid.pattern', 'messages', 'invalid');
     }
 
     public function testTranslatedChoices(): void
@@ -26,7 +26,7 @@ class TranslatedEnumTest extends TestCase
             'choice.something.foo' => 'FOO translated',
             'choice.something.bar' => 'BAR translated',
         ]);
-        $enum = new TranslatedEnum('something', ['foo', 'bar'], $translator, 'choice.something.%s');
+        $enum = new TranslatedEnum(['foo', 'bar'], $translator, 'choice.something.%s', 'messages', 'something');
 
         $expectedChoices = [
             'FOO translated' => 'foo',
@@ -44,7 +44,7 @@ class TranslatedEnumTest extends TestCase
             'something.foo' => 'FOO translated',
             'something.bar' => 'BAR translated',
         ], 'choices');
-        $enum = new TranslatedEnum('something', ['foo', 'bar'], $translator, 'something.%s', 'choices');
+        $enum = new TranslatedEnum(['foo', 'bar'], $translator, 'something.%s', 'choices', 'something');
 
         $expectedChoices = [
             'FOO translated' => 'foo',
@@ -63,7 +63,7 @@ class TranslatedEnumTest extends TestCase
             'boolean.no' => 'Non',
         ]);
 
-        $enum = new TranslatedEnum('boolean', ['yes' => true, 'no' => false], $translator, 'boolean.%s');
+        $enum = new TranslatedEnum(['yes' => true, 'no' => false], $translator, 'boolean.%s', 'messages', 'boolean');
 
         self::assertSame('boolean', $enum->getName());
         self::assertSame(['Oui' => true, 'Non' => false], $enum->getChoices());
@@ -87,7 +87,7 @@ class TranslatedEnumTest extends TestCase
             'number.9' => 'Neuf',
         ], 'math');
 
-        $enum = new TranslatedEnum('number', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], $translator, 'number.%s', 'math');
+        $enum = new TranslatedEnum([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], $translator, 'number.%s', 'math', 'number');
 
         self::assertSame('number', $enum->getName());
         self::assertSame(
@@ -110,6 +110,12 @@ class TranslatedEnumTest extends TestCase
         self::assertSame('Neuf', $enum->getLabel(9));
     }
 
+    public function testEnumMustHaveName(): void
+    {
+        $this->expectException(LogicException::class);
+        new TranslatedEnum(['foo', 'bar'], new Translator([]), 'dummy.%s', 'messages', null);
+    }
+
     public function testLabelNotFound(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -119,7 +125,7 @@ class TranslatedEnumTest extends TestCase
             'choice.something.bar' => 'BAR translated',
         ], 'math');
 
-        $enum = new TranslatedEnum('something', ['foo', 'bar'], $translator, 'choice.something.%s');
+        $enum = new TranslatedEnum(['foo', 'bar'], $translator, 'choice.something.%s', 'messages', 'something');
         $enum->getLabel('unknown');
     }
 }

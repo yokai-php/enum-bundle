@@ -19,7 +19,6 @@ class VehicleWheelsEnum extends TranslatedEnum
     public function __construct(TranslatorInterface $translator)
     {
         parent::__construct(
-            __CLASS__,
             ['two' => Vehicle::WHEELS_TWO, 'four' => Vehicle::WHEELS_FOUR, 'eight' => Vehicle::WHEELS_EIGHT],
             $translator,
             'vehicle.wheels.%s'

@@ -17,7 +17,7 @@ class StatusEnum extends Enum
 {
     public function __construct()
     {
-        parent::__construct(__CLASS__, ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled']);
+        parent::__construct(['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled']);
     }
 }
 ```
@@ -41,7 +41,7 @@ class StatusEnum extends ConstantListEnum
 {
     public function __construct()
     {
-        parent::__construct(Member::class . '::STATUS_*', __CLASS__);
+        parent::__construct(Member::class . '::STATUS_*');
     }
 }
 ```

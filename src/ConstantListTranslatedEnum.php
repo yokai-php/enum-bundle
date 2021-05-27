@@ -12,25 +12,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ConstantListTranslatedEnum extends TranslatedEnum
 {
     /**
-     * @param string              $name
      * @param string              $constantsPattern
      * @param TranslatorInterface $translator
      * @param string              $transPattern
      * @param string              $transDomain
+     * @param string|null         $name
      */
     public function __construct(
-        string $name,
         string $constantsPattern,
         TranslatorInterface $translator,
         string $transPattern,
-        string $transDomain = 'messages'
+        string $transDomain = 'messages',
+        ?string $name = null
     ) {
         parent::__construct(
-            $name,
             ConstantExtractor::extract($constantsPattern),
             $translator,
             $transPattern,
-            $transDomain
+            $transDomain,
+            $name
         );
     }
 }

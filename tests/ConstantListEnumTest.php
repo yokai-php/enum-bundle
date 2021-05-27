@@ -7,6 +7,7 @@ namespace Yokai\EnumBundle\Tests;
 use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\ConstantListEnum;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
+use Yokai\EnumBundle\Exception\LogicException;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
 
 /**
@@ -50,6 +51,12 @@ class ConstantListEnumTest extends TestCase
         self::assertSame(['renault', 'volkswagen', 'toyota'], $brand->getValues());
         self::assertSame('renault', $brand->getLabel('renault'));
         self::assertSame('toyota', $brand->getLabel('toyota'));
+    }
+
+    public function testEnumMustHaveName(): void
+    {
+        $this->expectException(LogicException::class);
+        new ConstantListEnum(Vehicle::class . '::TYPE_*', null);
     }
 
     public function testLabelNotFound(): void

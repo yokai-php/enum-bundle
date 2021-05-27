@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Yokai\EnumBundle;
 
-use LogicException;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
+use Yokai\EnumBundle\Exception\LogicException;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -23,19 +23,34 @@ class Enum implements EnumInterface
     private $choices;
 
     /**
-     * @param string                    $name
-     * @param array<string, mixed>|null $choices
+     * @param array<string, mixed>|null $choices Allowed to be null if you are extending this class
+     *                                           and you have overridden the "Enum::build" method.
+     * @param string|null               $name    Allowed to be null if you are extending this class
+     *                                           and you want the FQCN to be the name.
      */
-    public function __construct(string $name, ?array $choices)
+    public function __construct(?array $choices, ?string $name = null)
     {
         if (__CLASS__ === static::class && $choices === null) {
             throw new LogicException(
-                'When using ' . __CLASS__ . ' directly, $choices argument in __construct method cannot be null'
+                'When using ' . __CLASS__ . ' directly, $choices argument in ' . __FUNCTION__ . ' method cannot be null'
             );
         }
 
-        $this->name = $name;
         $this->choices = $choices;
+
+        if ($name === null) {
+            $name = static::class;
+            if (
+                \strpos($name, 'Yokai\\EnumBundle\\') === 0 // using FQCN as name is only allowed for other namespaces
+                && \strpos($name, 'Yokai\\EnumBundle\\Tests\\') !== 0 // except for our tests
+            ) {
+                throw new LogicException(
+                    'When using ' . static::class . ', $name argument in ' . __METHOD__ . ' method cannot be null'
+                );
+            }
+        }
+
+        $this->name = $name;
     }
 
     /**
@@ -86,7 +101,7 @@ class Enum implements EnumInterface
      */
     protected function build(): array
     {
-        throw new \LogicException(static::class . '::' . __FUNCTION__ . ' should have been overridden.');
+        throw new LogicException(static::class . '::' . __FUNCTION__ . ' should have been overridden.');
     }
 
     private function init(): void

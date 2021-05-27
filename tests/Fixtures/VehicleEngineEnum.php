@@ -18,6 +18,12 @@ class VehicleEngineEnum extends ConstantListTranslatedEnum
 {
     public function __construct(TranslatorInterface $translator)
     {
-        parent::__construct('vehicle.engine', Vehicle::class . '::ENGINE_*', $translator, 'vehicle.engine.%s');
+        parent::__construct(
+            Vehicle::class . '::ENGINE_*',
+            $translator,
+            'vehicle.engine.%s',
+            'messages',
+            'vehicle.engine'
+        );
     }
 }
