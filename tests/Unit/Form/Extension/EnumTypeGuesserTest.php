@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests\Form\Extension;
+namespace Yokai\EnumBundle\Tests\Unit\Form\Extension;
 
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -17,8 +17,8 @@ use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Form\Extension\EnumTypeGuesser;
 use Yokai\EnumBundle\Form\Type\EnumType;
-use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
-use Yokai\EnumBundle\Tests\Form\TestExtension;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Unit\Form\TestExtension;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 
 /**

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests\Twig\Extension;
+namespace Yokai\EnumBundle\Tests\Unit\Twig\Extension;
 
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
-use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
-use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
-use Yokai\EnumBundle\Tests\Translator;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\SubscriptionEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\TypeEnum;
+use Yokai\EnumBundle\Tests\Unit\Translator;
 use Yokai\EnumBundle\Twig\Extension\EnumExtension;
 
 /**
@@ -67,7 +67,7 @@ TWIG
         self::assertSame(
             'new|validated|disabled|',
             $twig->createTemplate(<<<TWIG
-{% for value in enum_values('Yokai\\\\EnumBundle\\\\Tests\\\\Fixtures\\\\StateEnum') %}{{ value }}|{% endfor %}
+{% for value in enum_values('Yokai\\\\EnumBundle\\\\Tests\\\\Unit\\\\Fixtures\\\\StateEnum') %}{{ value }}|{% endfor %}
 TWIG
             )->render([])
         );

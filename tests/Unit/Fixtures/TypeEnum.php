@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests\Fixtures;
+namespace Yokai\EnumBundle\Tests\Unit\Fixtures;
 
 use Yokai\EnumBundle\Enum;
 

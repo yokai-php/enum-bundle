@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests;
+namespace Yokai\EnumBundle\Tests\Unit;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\EnumInterface;
-use Yokai\EnumBundle\Tests\Fixtures\Action;
-use Yokai\EnumBundle\Tests\Fixtures\ActionEnum;
-use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
-use Yokai\EnumBundle\Tests\Fixtures\Status;
-use Yokai\EnumBundle\Tests\Fixtures\StatusEnum;
-use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
-use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
-use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
-use Yokai\EnumBundle\Tests\Fixtures\VehicleBrandEnum;
-use Yokai\EnumBundle\Tests\Fixtures\VehicleEngineEnum;
-use Yokai\EnumBundle\Tests\Fixtures\VehicleTypeEnum;
-use Yokai\EnumBundle\Tests\Fixtures\VehicleWheelsEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\Action;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\ActionEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\Status;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\StatusEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\SubscriptionEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\TypeEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\Vehicle;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\VehicleBrandEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\VehicleEngineEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\VehicleTypeEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\VehicleWheelsEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

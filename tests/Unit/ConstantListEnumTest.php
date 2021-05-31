@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests;
+namespace Yokai\EnumBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\ConstantListEnum;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Exception\LogicException;
-use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\Vehicle;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

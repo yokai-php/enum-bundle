@@ -56,7 +56,7 @@ final class EnumExtension extends Extension
         }
         if ($requiresTwig) {
             $container->register('yokai_enum.twig_extension.enum_extension', EnumTwigExtension::class)
-                ->setArgument('$enumRegistry', $registry)
+                ->setArgument('$registry', $registry)
                 ->addTag('twig.extension');
         }
 

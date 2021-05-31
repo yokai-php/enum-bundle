@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests;
+namespace Yokai\EnumBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\EnumRegistry;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Exception\LogicException;
-use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
-use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
-use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\SubscriptionEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\TypeEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

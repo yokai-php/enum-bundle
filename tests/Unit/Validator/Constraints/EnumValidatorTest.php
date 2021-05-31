@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests\Validator\Constraints;
+namespace Yokai\EnumBundle\Tests\Unit\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\TypeEnum;
 use Yokai\EnumBundle\Validator\Constraints\Enum;
 use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
 

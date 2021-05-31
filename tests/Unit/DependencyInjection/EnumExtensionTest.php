@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests\DependencyInjection;
+namespace Yokai\EnumBundle\Tests\Unit\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

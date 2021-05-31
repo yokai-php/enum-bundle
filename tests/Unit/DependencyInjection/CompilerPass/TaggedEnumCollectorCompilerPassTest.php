@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests\DependencyInjection\CompilerPass;
+namespace Yokai\EnumBundle\Tests\Unit\DependencyInjection\CompilerPass;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Yokai\EnumBundle\DependencyInjection\CompilerPass\TaggedEnumCollectorCompilerPass;
 use Yokai\EnumBundle\EnumRegistry;
-use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
-use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\TypeEnum;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests\Form;
+namespace Yokai\EnumBundle\Tests\Unit\Form;
 
 use Symfony\Component\Form\AbstractExtension;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yokai\EnumBundle\Tests;
+namespace Yokai\EnumBundle\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
