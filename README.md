@@ -177,7 +177,7 @@ status.disabled: Désactivé
 
 ## More examples
 
-See examples from [test suite](tests/Fixtures) & associated [tests](tests/EnumsFromFixturesTest.php).
+See examples from [test suite](tests/Unit/Fixtures) & associated [tests](tests/Unit/EnumsFromFixturesTest.php).
 
 
 ## Recipes
