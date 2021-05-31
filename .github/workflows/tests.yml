@@ -35,8 +35,13 @@ jobs:
 
       - name: "Install dependencies with composer"
         run: |
-          composer require --no-update --dev symfony/symfony:${{ matrix.symfony-version }}
-          composer update --no-interaction --no-progress --no-suggest
+          composer require --no-update symfony/framework-bundle:${{ matrix.symfony-version }}
+          composer require --no-update --dev symfony/form:${{ matrix.symfony-version }}
+          composer require --no-update --dev symfony/twig-bundle:${{ matrix.symfony-version }}
+          composer require --no-update --dev symfony/validator:${{ matrix.symfony-version }}
+          composer require --no-update --dev symfony/translation:${{ matrix.symfony-version }}
+          composer require --no-update --dev symfony/yaml:${{ matrix.symfony-version }}
+          composer update --no-interaction --no-progress
 
       - name: "Run tests with phpunit/phpunit"
         run: vendor/bin/phpunit
@@ -61,7 +66,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
 
       - name: "Install dependencies with composer"
-        run: composer update --no-interaction --no-progress --no-suggest
+        run: composer update --no-interaction --no-progress
 
       - name: "Run tests with phpunit/phpunit"
         env:
@@ -92,7 +97,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
 
       - name: "Install dependencies with composer"
-        run: composer update --no-interaction --no-progress --no-suggest
+        run: composer update --no-interaction --no-progress
 
       - name: "Run checkstyle with squizlabs/php_codesniffer"
         run: vendor/bin/phpcs
