@@ -49,7 +49,10 @@ final class EnumExtension extends Extension
         if ($requiresValidator) {
             $container->register('yokai_enum.validator_constraints.enum_validator', EnumValidator::class)
                 ->setArgument('$enumRegistry', $registry)
-                ->addTag('validator.constraint_validator');
+                ->addTag(
+                    'validator.constraint_validator',
+                    ['alias' => 'yokai_enum.validator_constraints.enum_validator']
+                );
         }
         if ($requiresTwig) {
             $container->register('yokai_enum.twig_extension.enum_extension', EnumTwigExtension::class)

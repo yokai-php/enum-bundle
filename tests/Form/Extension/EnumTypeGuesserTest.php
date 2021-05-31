@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
 use Symfony\Component\Form\Test\TypeTestCase;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Compound;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface;
@@ -31,6 +32,7 @@ class EnumTypeGuesserTest extends TypeTestCase
 
     private const TEST_PROPERTY_DIRECT = 'direct';
     private const TEST_PROPERTY_COMPOUND = 'compound';
+    private const TEST_PROPERTY_NONE = 'none';
 
     /**
      * @var EnumTypeGuesser
@@ -53,6 +55,7 @@ class EnumTypeGuesserTest extends TypeTestCase
         $this->enumRegistry->add(new StateEnum());
 
         $metadata = new ClassMetadata(self::TEST_CLASS);
+        $metadata->addPropertyConstraint(self::TEST_PROPERTY_NONE, new Choice(['choices' => ['new', 'validated']]));
         $metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => StateEnum::class]));
         if (class_exists(Compound::class)) {
             $metadata->addPropertyConstraint(
@@ -106,6 +109,11 @@ class EnumTypeGuesserTest extends TypeTestCase
         self::assertEquals($guess, $this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_COMPOUND));
     }
 
+    public function testGuessTypeNone(): void
+    {
+        self::assertNull($this->guesser->guessType(self::TEST_CLASS, self::TEST_PROPERTY_NONE));
+    }
+
     public function testGuessRequired(): void
     {
         self::assertNull($this->guesser->guessRequired(self::TEST_CLASS, self::TEST_PROPERTY_DIRECT));
@@ -148,4 +156,5 @@ class EnumTypeGuesserTest_TestClass
 {
     public $direct;
     public $compound;
+    public $none;
 }
