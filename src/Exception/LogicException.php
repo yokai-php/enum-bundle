@@ -30,4 +30,12 @@ final class LogicException extends \LogicException implements ExceptionInterface
             $name
         ));
     }
+
+    public static function invalidMyClabsEnumClass(string $enum): self
+    {
+        return new self(sprintf(
+            'Enum class must be valid "myclabs/php-enum" enum class. Got "%s".',
+            $enum
+        ));
+    }
 }

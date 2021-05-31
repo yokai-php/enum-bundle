@@ -7,7 +7,11 @@ namespace Yokai\EnumBundle\Tests;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\EnumInterface;
+use Yokai\EnumBundle\Tests\Fixtures\Action;
+use Yokai\EnumBundle\Tests\Fixtures\ActionEnum;
 use Yokai\EnumBundle\Tests\Fixtures\StateEnum;
+use Yokai\EnumBundle\Tests\Fixtures\Status;
+use Yokai\EnumBundle\Tests\Fixtures\StatusEnum;
 use Yokai\EnumBundle\Tests\Fixtures\SubscriptionEnum;
 use Yokai\EnumBundle\Tests\Fixtures\TypeEnum;
 use Yokai\EnumBundle\Tests\Fixtures\Vehicle;
@@ -27,8 +31,8 @@ class EnumsFromFixturesTest extends TestCase
     public function testEnum(EnumInterface $enum, string $name, array $choices): void
     {
         self::assertSame($name, $enum->getName());
-        self::assertSame($choices, $enum->getChoices());
-        self::assertSame(\array_values($choices), $enum->getValues());
+        self::assertEquals($choices, $enum->getChoices());
+        self::assertEquals(\array_values($choices), $enum->getValues());
         foreach ($choices as $label => $value) {
             self::assertSame($label, $enum->getLabel($value));
         }
@@ -36,10 +40,25 @@ class EnumsFromFixturesTest extends TestCase
 
     public function enums(): Generator
     {
+        yield ActionEnum::class . ' : myclabs/php-enum translated enum' => [
+            new ActionEnum(new Translator([
+                'action.VIEW' => 'Voir',
+                'action.EDIT' => 'Modifier',
+            ])),
+            ActionEnum::class,
+            ['Voir' => Action::VIEW(), 'Modifier' => Action::EDIT()]
+        ];
+
         yield StateEnum::class . ' : direct interface implementation' => [
             new StateEnum(),
             StateEnum::class,
             ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled']
+        ];
+
+        yield StatusEnum::class . ' : myclabs/php-enum enum' => [
+            new StatusEnum(),
+            StatusEnum::class,
+            ['SUCCESS' => Status::SUCCESS(), 'ERROR' => Status::ERROR()]
         ];
 
         yield SubscriptionEnum::class . ' : translated enum with keyword name' => [
