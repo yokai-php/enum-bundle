@@ -26,6 +26,11 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
         return new EnumValidator($registry);
     }
 
+    public function testEnumIsValidatedByService(): void
+    {
+        self::assertSame('yokai_enum.validator_constraints.enum_validator', (new Enum())->validatedBy());
+    }
+
     public function testAcceptOnlyEnum(): void
     {
         $this->expectException(UnexpectedTypeException::class);

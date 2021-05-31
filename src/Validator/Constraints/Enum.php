@@ -32,6 +32,6 @@ final class Enum extends Choice
      */
     public function validatedBy(): string
     {
-        return 'enum';
+        return 'yokai_enum.validator_constraints.enum_validator';
     }
 }
