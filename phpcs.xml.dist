@@ -11,7 +11,9 @@
     <rule ref="PSR12"/>
 
     <file>src/</file>
-    <file>tests/</file>
+    <file>tests/Integration/src/</file>
+    <file>tests/Integration/tests/</file>
+    <file>tests/Unit/</file>
 
     <rule ref="Generic.PHP.ForbiddenFunctions">
         <properties>

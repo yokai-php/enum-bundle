@@ -177,7 +177,9 @@ status.disabled: Désactivé
 
 ## More examples
 
-See examples from [test suite](tests/Fixtures) & associated [tests](tests/EnumsFromFixturesTest.php).
+See examples from [unit test suite](tests/Unit/Fixtures) & associated [tests](tests/Unit/EnumsFromFixturesTest.php).
+
+See example Symfony project in [integration test suite](tests/Integration).
 
 
 ## Recipes

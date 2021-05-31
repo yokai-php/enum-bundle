@@ -1,0 +1,5 @@
+pull_request:
+  status:
+    OPENED: Opened
+    MERGED: Merged
+    CLOSED: Closed

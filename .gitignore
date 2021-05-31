@@ -1,4 +1,5 @@
 /.idea/
+/tests/Integration/var/
 /vendor/
 /.phpcs-cache
 /.phpunit.result.cache
