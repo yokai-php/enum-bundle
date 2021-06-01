@@ -9,6 +9,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequest;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 final class PullRequestType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

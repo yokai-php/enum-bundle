@@ -8,6 +8,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Yokai\EnumBundle\MyCLabsTranslatedEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Model\Status;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 final class PullRequestStatusEnum extends MyCLabsTranslatedEnum
 {
     public function __construct(TranslatorInterface $translator)

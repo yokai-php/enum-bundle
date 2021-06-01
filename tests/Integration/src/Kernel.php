@@ -9,6 +9,9 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Yokai\EnumBundle\YokaiEnumBundle;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 final class Kernel extends BaseKernel
 {
     public function registerBundles(): iterable

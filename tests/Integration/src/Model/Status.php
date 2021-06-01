@@ -10,6 +10,8 @@ use MyCLabs\Enum\Enum;
  * @method static self OPENED
  * @method static self MERGED
  * @method static self CLOSED
+ *
+ * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 final class Status extends Enum
 {

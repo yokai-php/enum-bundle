@@ -8,6 +8,9 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestStatusEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 final class PullRequest
 {
     /**

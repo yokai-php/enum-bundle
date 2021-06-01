@@ -15,6 +15,9 @@ use Yokai\EnumBundle\Tests\Integration\App\Form\PullRequestType;
 use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequest;
 use Yokai\EnumBundle\Tests\Integration\App\Model\Status;
 
+/**
+ * @author Yann Eugoné <eugone.yann@gmail.com>
+ */
 final class PullRequestFormTest extends KernelTestCase
 {
     public function testBuildForm(): void
