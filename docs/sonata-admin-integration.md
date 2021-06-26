@@ -54,7 +54,7 @@ class MemberAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            // Because we added the @Enum constraint to Member::$status property
+            // Because we added the #[Enum] constraint to Member::$status property
             // the bundle will be able to find out the appropriate form type automatically
             ->add('status')
         ;
