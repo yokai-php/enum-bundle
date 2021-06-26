@@ -11,14 +11,13 @@ use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-final class PullRequest
+final class PullRequestUsingAnnotations
 {
     /**
      * @var Status
      *
      * @Enum(PullRequestStatusEnum::class)
      */
-    #[Enum(enum: PullRequestStatusEnum::class)]
     public $status;
 
     /**
@@ -26,6 +25,5 @@ final class PullRequest
      *
      * @Enum(PullRequestLabelEnum::class, multiple=true)
      */
-    #[Enum(enum: PullRequestLabelEnum::class, multiple: true)]
     public $labels;
 }
