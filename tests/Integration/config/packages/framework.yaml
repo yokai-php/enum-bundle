@@ -1,1 +1,4 @@
-framework: ~
+framework:
+  test: true
+  form: true
+  property_access: true

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Tests\Unit\Form\Extension;
 
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Guess\Guess;
 use Symfony\Component\Form\Guess\TypeGuess;
@@ -26,8 +25,6 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
  */
 class EnumTypeGuesserTest extends TypeTestCase
 {
-    use ProphecyTrait;
-
     private const TEST_CLASS = EnumTypeGuesserTest_TestClass::class;
 
     private const TEST_PROPERTY_DIRECT = 'direct';
@@ -40,12 +37,12 @@ class EnumTypeGuesserTest extends TypeTestCase
     private $guesser;
 
     /**
-     * @var ObjectProphecy|EnumRegistry
+     * @var EnumRegistry
      */
     private $enumRegistry;
 
     /**
-     * @var ObjectProphecy|MetadataFactoryInterface
+     * @var MockObject|MetadataFactoryInterface
      */
     private $metadataFactory;
 
@@ -68,11 +65,12 @@ class EnumTypeGuesserTest extends TypeTestCase
                 }
             );
         }
-        $this->metadataFactory = $this->prophesize(MetadataFactoryInterface::class);
-        $this->metadataFactory->getMetadataFor(self::TEST_CLASS)
+        $this->metadataFactory = $this->createMock(MetadataFactoryInterface::class);
+        $this->metadataFactory->method('getMetadataFor')
+            ->with(self::TEST_CLASS)
             ->willReturn($metadata);
 
-        $this->guesser = new EnumTypeGuesser($this->metadataFactory->reveal(), $this->enumRegistry);
+        $this->guesser = new EnumTypeGuesser($this->metadataFactory, $this->enumRegistry);
 
         parent::setUp();
     }
@@ -144,7 +142,7 @@ class EnumTypeGuesserTest extends TypeTestCase
     protected function getExtensions(): array
     {
         return [
-            new TestExtension($this->enumRegistry, $this->metadataFactory->reveal()),
+            new TestExtension($this->enumRegistry, $this->metadataFactory),
         ];
     }
 }

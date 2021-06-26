@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Tests\Integration\App;
 
-use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Yokai\EnumBundle\YokaiEnumBundle;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -16,8 +14,11 @@ final class Kernel extends BaseKernel
 {
     public function registerBundles(): iterable
     {
-        yield new FrameworkBundle();
-        yield new YokaiEnumBundle();
+        yield new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
+        yield new \Yokai\EnumBundle\YokaiEnumBundle();
+        if (\PHP_VERSION_ID < 80000) {
+            yield new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle();
+        }
     }
 
     public function getProjectDir(): string
@@ -27,7 +28,12 @@ final class Kernel extends BaseKernel
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load($this->getProjectDir() . '/config/packages/');
-        $loader->load($this->getProjectDir() . '/config/services.yaml');
+        $loader->load(__DIR__ . '/../config/packages/framework.yaml');
+        $loader->load(__DIR__ . '/../config/packages/translation.yaml');
+        if (\PHP_VERSION_ID < 80000) {
+            $loader->load(__DIR__ . '/../config/packages/annotations.yaml');
+        }
+
+        $loader->load(__DIR__ . '/../config/services.yaml');
     }
 }

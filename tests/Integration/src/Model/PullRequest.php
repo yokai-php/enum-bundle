@@ -18,6 +18,7 @@ final class PullRequest
      *
      * @Enum(PullRequestStatusEnum::class)
      */
+    #[Enum(enum: PullRequestStatusEnum::class)]
     public $status;
 
     /**
@@ -25,5 +26,6 @@ final class PullRequest
      *
      * @Enum(PullRequestLabelEnum::class, multiple=true)
      */
+    #[Enum(enum: PullRequestLabelEnum::class, multiple: true)]
     public $labels;
 }
