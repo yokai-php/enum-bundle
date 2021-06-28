@@ -20,7 +20,9 @@ class ConstantExtractorTest extends TestCase
     public function testExtractMalformedPattern(string $pattern, string $exceptionMessage): void
     {
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessageMatches($exceptionMessage);
+        if (\method_exists($this, 'expectExceptionMessageMatches')) {
+            $this->expectExceptionMessageMatches($exceptionMessage);
+        }
 
         ConstantExtractor::extract($pattern);
     }
@@ -31,7 +33,9 @@ class ConstantExtractorTest extends TestCase
     public function testExtractEmpty(string $pattern, string $exceptionMessage): void
     {
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessageMatches($exceptionMessage);
+        if (\method_exists($this, 'expectExceptionMessageMatches')) {
+            $this->expectExceptionMessageMatches($exceptionMessage);
+        }
 
         ConstantExtractor::extract($pattern);
     }

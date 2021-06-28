@@ -28,15 +28,11 @@ class Member
     public const SUBSCRIBE_NEWSLETTER = 'newsletter';
     public const SUBSCRIBE_COMMERCIAL = 'commercial';
 
-    /**
-     * @Assert\NotNull()
-     * @Assert\Choice({Member::STATUS_NEW, Member::STATUS_ACTIVE, Member::STATUS_DISABLED})
-     */
+    #[Assert\NotNull]
+    #[Assert\Choice(choices: [Member::STATUS_NEW, Member::STATUS_ACTIVE, Member::STATUS_DISABLED])]
     public string $status = self::STATUS_NEW;
 
-    /**
-     * @Assert\Choice({Member::SUBSCRIBE_NEWSLETTER, Member::SUBSCRIBE_COMMERCIAL}, multiple=true)
-     */
+    #[Assert\Choice(choices: [Member::SUBSCRIBE_NEWSLETTER, Member::SUBSCRIBE_COMMERCIAL], multiple: true)]
     public array $subscriptions = [];
 }
 ```
@@ -192,17 +188,13 @@ class Member
     public const SUBSCRIBE_NEWSLETTER = 'newsletter';
     public const SUBSCRIBE_COMMERCIAL = 'commercial';
 
-    /**
-     * @Assert\NotNull()
--     * @Assert\Choice({Member::STATUS_NEW, Member::STATUS_ACTIVE, Member::STATUS_DISABLED})
-+     * @Enum(MemberStatusEnum::class)
-     */
+    #[Assert\NotNull]
+-    #[Assert\Choice(choices: [Member::STATUS_NEW, Member::STATUS_ACTIVE, Member::STATUS_DISABLED])]
++    #[Enum(enum: MemberStatusEnum::class)]
     public string $status = self::STATUS_NEW;
 
-    /**
--     * @Assert\Choice({Member::SUBSCRIBE_NEWSLETTER, Member::SUBSCRIBE_COMMERCIAL}, multiple=true)
-+     * @Enum(MemberSubscriptionEnum::class, multiple=true)
-     */
+-    #[Assert\Choice(choices: [Member::SUBSCRIBE_NEWSLETTER, Member::SUBSCRIBE_COMMERCIAL], multiple: true)]
++    #[Enum(enum: MemberSubscriptionEnum::class, multiple: true)]
     public array $subscriptions = [];
 }
 ```

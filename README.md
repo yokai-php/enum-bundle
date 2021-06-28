@@ -84,12 +84,18 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
 
 class Member
 {
-    /**
-     * @Enum(StatusEnum::class)
-     */
+     #[Enum(enum: StatusEnum::class)]
     public ?string $status = null;
 }
 ```
+
+> **note** both PHP Attributes & Annotations are supported :
+> ```php
+>     /**
+>      * @Enum(StatusEnum::class)
+>      */
+>     public ?string $status = null;
+> ```
 
 ### Setting up the form
 
@@ -112,7 +118,7 @@ class MemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Because we added the @Enum constraint to Member::$status property
+            // Because we added the #[Enum] constraint to Member::$status property
             // the bundle will be able to find out the appropriate form type automatically
             ->add('status')
         ;

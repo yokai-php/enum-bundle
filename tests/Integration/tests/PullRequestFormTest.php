@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Integration\tests;
 
 use Generator;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
@@ -12,7 +13,9 @@ use Yokai\EnumBundle\Form\Type\EnumType;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestStatusEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Form\PullRequestType;
-use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequest;
+use Yokai\EnumBundle\Tests\Integration\App\Kernel;
+use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestUsingAnnotations;
+use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestUsingAttributes;
 use Yokai\EnumBundle\Tests\Integration\App\Model\Status;
 
 /**
@@ -24,12 +27,11 @@ final class PullRequestFormTest extends KernelTestCase
     {
         $container = self::bootKernel()->getContainer();
 
-        $model = new PullRequest();
+        $model = self::pullRequest();
         $model->status = Status::MERGED();
         $model->labels = ['3.x', 'feature'];
 
-        /** @var FormInterface $form */
-        $form = $container->get('form.factory')->create(PullRequestType::class, $model);
+        $form = self::form($container, $model);
 
         $status = $form->get('status');
         self::assertEquals(Status::MERGED(), $status->getData());
@@ -62,12 +64,11 @@ final class PullRequestFormTest extends KernelTestCase
     /**
      * @dataProvider valid
      */
-    public function testSubmitValidData(array $formData, PullRequest $model, PullRequest $expected): void
+    public function testSubmitValidData(array $formData, $model, $expected): void
     {
         $container = self::bootKernel()->getContainer();
 
-        /** @var FormInterface $form */
-        $form = $container->get('form.factory')->create(PullRequestType::class, $model);
+        $form = self::form($container, $model);
 
         $form->submit($formData);
 
@@ -77,8 +78,8 @@ final class PullRequestFormTest extends KernelTestCase
 
     public function valid(): Generator
     {
-        $newModel = new PullRequest();
-        $newExpected = new PullRequest();
+        $newModel = self::pullRequest();
+        $newExpected = self::pullRequest();
         $newExpected->status = Status::OPENED();
         $newExpected->labels = ['bugfix', '1.x'];
         yield [
@@ -87,10 +88,10 @@ final class PullRequestFormTest extends KernelTestCase
             $newExpected
         ];
 
-        $updateModel = new PullRequest();
+        $updateModel = self::pullRequest();
         $updateModel->status = Status::OPENED();
         $updateModel->labels = ['bugfix', '1.x'];
-        $updateExpected = new PullRequest();
+        $updateExpected = self::pullRequest();
         $updateExpected->status = Status::CLOSED();
         $updateExpected->labels = ['bugfix', '2.x'];
         yield [
@@ -103,12 +104,11 @@ final class PullRequestFormTest extends KernelTestCase
     /**
      * @dataProvider invalid
      */
-    public function testSubmitInvalidData(array $formData, PullRequest $model, array $errors): void
+    public function testSubmitInvalidData(array $formData, $model, array $errors): void
     {
         $container = self::bootKernel()->getContainer();
 
-        /** @var FormInterface $form */
-        $form = $container->get('form.factory')->create(PullRequestType::class, $model);
+        $form = self::form($container, $model);
 
         $form->submit($formData);
 
@@ -125,14 +125,14 @@ final class PullRequestFormTest extends KernelTestCase
 
     public function invalid(): Generator
     {
-        $newModel = new PullRequest();
+        $newModel = self::pullRequest();
         yield [
             ['status' => 3, 'labels' => ['bugfix', '5.x']],
             $newModel,
             ['status' => 'This value is not valid.', 'labels' => 'The choices "5.x" do not exist in the choice list.']
         ];
 
-        $updateModel = new PullRequest();
+        $updateModel = self::pullRequest();
         $updateModel->status = Status::OPENED();
         $updateModel->labels = ['bugfix', '1.x'];
         yield [
@@ -140,5 +140,29 @@ final class PullRequestFormTest extends KernelTestCase
             $updateModel,
             ['status' => 'This value is not valid.', 'labels' => 'The choices "5.x" do not exist in the choice list.']
         ];
+    }
+
+    /**
+     * @return PullRequestUsingAnnotations|PullRequestUsingAttributes
+     */
+    private static function pullRequest()
+    {
+        if (\PHP_VERSION_ID < 80000 || Kernel::VERSION_ID < 50200) {
+            return new PullRequestUsingAnnotations();
+        }
+
+        return new PullRequestUsingAttributes();
+    }
+
+    private static function form(ContainerInterface $container, $model): FormInterface
+    {
+        if (\PHP_VERSION_ID < 80000 || Kernel::VERSION_ID < 50200) {
+            $class = PullRequestUsingAnnotations::class;
+        } else {
+            $class = PullRequestUsingAttributes::class;
+        }
+
+        return $container->get('form.factory')
+            ->create(PullRequestType::class, $model, ['data_class' => $class]);
     }
 }

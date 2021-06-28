@@ -11,7 +11,7 @@ use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-final class PullRequest
+final class PullRequestUsingAnnotations
 {
     /**
      * @var Status
