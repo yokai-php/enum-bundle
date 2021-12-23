@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Integration\tests;
+namespace Yokai\EnumBundle\Tests\Integration;
 
 use Generator;
 use Psr\Container\ContainerInterface;
@@ -125,11 +125,16 @@ final class PullRequestFormTest extends KernelTestCase
 
     public function invalid(): Generator
     {
+        $message = 'This value is not valid.';
+        if (Kernel::MAJOR_VERSION >= 6) {
+            $message = 'The selected choice is invalid.';
+        }
+
         $newModel = self::pullRequest();
         yield [
             ['status' => 3, 'labels' => ['bugfix', '5.x']],
             $newModel,
-            ['status' => 'This value is not valid.', 'labels' => 'The choices "5.x" do not exist in the choice list.']
+            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.']
         ];
 
         $updateModel = self::pullRequest();
@@ -138,7 +143,7 @@ final class PullRequestFormTest extends KernelTestCase
         yield [
             ['status' => 3, 'labels' => ['bugfix', '5.x']],
             $updateModel,
-            ['status' => 'This value is not valid.', 'labels' => 'The choices "5.x" do not exist in the choice list.']
+            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.']
         ];
     }
 

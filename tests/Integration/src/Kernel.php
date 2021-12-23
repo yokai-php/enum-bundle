@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Yokai\EnumBundle\Tests\Integration\App;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 /**
@@ -35,5 +37,20 @@ final class Kernel extends BaseKernel
         }
 
         $loader->load(__DIR__ . '/../config/services.yaml');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(
+            new class implements CompilerPassInterface {
+                public function process(ContainerBuilder $container)
+                {
+                    $container->findDefinition('form.factory')->setPublic(true);
+                }
+            }
+        );
     }
 }
