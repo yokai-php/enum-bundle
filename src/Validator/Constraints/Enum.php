@@ -45,6 +45,7 @@ final class Enum extends Choice
 
             // Symfony 5.x Constraints has many constructor arguments for PHP 8.0 Attributes support
             parent::__construct(
+                $options,
                 null,
                 $callback,
                 $multiple,
@@ -56,8 +57,7 @@ final class Enum extends Choice
                 $minMessage,
                 $maxMessage,
                 $groups,
-                $payload,
-                $options
+                $payload
             );
         }
     }
