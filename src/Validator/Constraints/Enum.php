@@ -42,23 +42,45 @@ final class Enum extends Choice
             if (\is_string($enum)) {
                 $this->enum = $enum;
             }
-
             // Symfony 5.x Constraints has many constructor arguments for PHP 8.0 Attributes support
-            parent::__construct(
-                null,
-                $callback,
-                $multiple,
-                $strict,
-                $min,
-                $max,
-                $message,
-                $multipleMessage,
-                $minMessage,
-                $maxMessage,
-                $groups,
-                $payload,
-                $options
-            );
+
+            $firstConstructorArg = (new \ReflectionClass(Choice::class))
+                ->getConstructor()->getParameters()[0]->getName();
+            if ($firstConstructorArg === 'choices') {
+                // Prior to Symfony 5.3, first argument of Choice was $choices
+                parent::__construct(
+                    null,
+                    $callback,
+                    $multiple,
+                    $strict,
+                    $min,
+                    $max,
+                    $message,
+                    $multipleMessage,
+                    $minMessage,
+                    $maxMessage,
+                    $groups,
+                    $payload,
+                    $options
+                );
+            } else {
+                // Since Symfony 5.3, first argument of Choice is $options
+                parent::__construct(
+                    $options,
+                    null,
+                    $callback,
+                    $multiple,
+                    $strict,
+                    $min,
+                    $max,
+                    $message,
+                    $multipleMessage,
+                    $minMessage,
+                    $maxMessage,
+                    $groups,
+                    $payload
+                );
+            }
         }
     }
 
