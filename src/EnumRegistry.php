@@ -15,7 +15,7 @@ final class EnumRegistry
     /**
      * @var EnumInterface[]
      */
-    private $enums;
+    private $enums = [];
 
     /**
      * @param EnumInterface $enum

@@ -33,7 +33,13 @@ class EnumRegistryTest extends TestCase
         $registry->get('type');
     }
 
-    public function testAddNominal(): void
+    public function testEmpty(): void
+    {
+        $registry = new EnumRegistry();
+        self::assertSame([], $registry->all());
+    }
+
+    public function testNominal(): void
     {
         $translator = new Translator([]);
         $state = new StateEnum();
