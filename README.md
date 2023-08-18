@@ -192,6 +192,7 @@ See example Symfony project in [integration test suite](tests/Integration).
 
 - Creating [enums](docs/creating-enum.md)
 - Creating [translated enums](docs/creating-translated-enum.md)
+- Integration with [PHP native enum](docs/native-enum-integration.md)
 - Integration with [myclabs/php-enum](docs/myclabs-enum-integration.md)
 - Migrating [from standard Symfony](docs/migrating-from-symfony-standard.md)
 - Integration with [SonataAdminBundle](docs/sonata-admin-integration.md)

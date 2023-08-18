@@ -1,6 +1,6 @@
-# myclabs/php-enum integration
+# PHP native enum integration
 
-Let say that you already has such enum, from [myclabs/php-enum](https://github.com/myclabs/php-enum).
+Let say that you already has such enum, from [PHP](https://www.php.net/manual/en/language.enumerations.php).
 
 ```php
 <?php
@@ -9,20 +9,18 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use MyCLabs\Enum\Enum;
-
-/**
- * @method static self NEW
- * @method static self VALIDATED
- * @method static self DISABLED
- */
-class MemberStatus extends Enum
+enum MemberStatus: string
 {
-    private const NEW = 'new';
-    private const VALIDATED = 'validated';
-    private const DISABLED = 'disabled';
+    case NEW = 'new';
+    case VALIDATED = 'validated';
+    case DISABLED = 'disabled';
 }
 ```
+
+> **Note**
+> Here, we are using a `StringBackedEnum`, but it is not required.
+> The bundle supports any form of `UnitEnum`, backed or not.
+> https://www.php.net/manual/en/language.enumerations.backed.php
 
 ## Standard enum
 
@@ -36,9 +34,9 @@ declare(strict_types=1);
 namespace App\Enum;
 
 use App\Model\MemberStatus;
-use Yokai\EnumBundle\MyCLabsEnum;
+use Yokai\EnumBundle\NativeEnum;
 
-class StatusEnum extends MyCLabsEnum
+class StatusEnum extends NativeEnum
 {
     public function __construct()
     {
@@ -60,9 +58,9 @@ namespace App\Enum;
 
 use App\Model\MemberStatus;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Yokai\EnumBundle\MyCLabsTranslatedEnum;
+use Yokai\EnumBundle\NativeTranslatedEnum;
 
-class StatusEnum extends MyCLabsTranslatedEnum
+class StatusEnum extends NativeTranslatedEnum
 {
     public function __construct(TranslatorInterface $translator)
     {
