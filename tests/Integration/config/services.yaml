@@ -1,9 +1,0 @@
-services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-
-    Yokai\EnumBundle\Tests\Integration\App\:
-        resource: '../src/'
-        exclude:
-            - '../src/Model/'
