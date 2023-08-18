@@ -38,4 +38,12 @@ final class LogicException extends \LogicException implements ExceptionInterface
             $enum
         ));
     }
+
+    public static function invalidUnitEnum(string $enum): self
+    {
+        return new self(sprintf(
+            'Enum class must be valid PHP enum. Got "%s".',
+            $enum
+        ));
+    }
 }
