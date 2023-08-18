@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum: ~
+    Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestNativeStatusEnum: ~
+    Yokai\EnumBundle\Tests\Integration\App\Form\PullRequestType: ~

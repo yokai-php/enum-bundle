@@ -11,12 +11,15 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Yokai\EnumBundle\Form\Type\EnumType;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum;
-use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestStatusEnum;
+use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestMyCLabsStatusEnum;
+use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestNativeStatusEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Form\PullRequestType;
 use Yokai\EnumBundle\Tests\Integration\App\Kernel;
-use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestUsingAnnotations;
-use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestUsingAttributes;
-use Yokai\EnumBundle\Tests\Integration\App\Model\Status;
+use Yokai\EnumBundle\Tests\Integration\App\Model\NativeStatus;
+use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp7;
+use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp80;
+use Yokai\EnumBundle\Tests\Integration\App\Model\MyCLabsStatus;
+use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp81;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -27,21 +30,33 @@ final class PullRequestFormTest extends KernelTestCase
     {
         $container = self::bootKernel()->getContainer();
 
-        $model = self::pullRequest();
-        $model->status = Status::MERGED();
-        $model->labels = ['3.x', 'feature'];
-
+        $model = self::pullRequest('merged', ['3.x', 'feature']);
         $form = self::form($container, $model);
 
         $status = $form->get('status');
-        self::assertEquals(Status::MERGED(), $status->getData());
-        self::assertEquals(Status::MERGED(), $status->getNormData());
-        self::assertSame(EnumType::class, \get_class($status->getConfig()->getType()->getInnerType()));
-        self::assertSame(PullRequestStatusEnum::class, $status->getConfig()->getOption('enum'));
-        self::assertEquals(
-            ['Opened' => Status::OPENED(), 'Merged' => Status::MERGED(), 'Closed' => Status::CLOSED()],
-            $status->getConfig()->getOption('choices')
-        );
+        if (\PHP_VERSION_ID < 80100) {
+            self::assertEquals(MyCLabsStatus::MERGED(), $status->getData());
+            self::assertEquals(MyCLabsStatus::MERGED(), $status->getNormData());
+            self::assertSame(EnumType::class, \get_class($status->getConfig()->getType()->getInnerType()));
+            self::assertSame(PullRequestMyCLabsStatusEnum::class, $status->getConfig()->getOption('enum'));
+            self::assertEquals(
+                [
+                    'Opened' => MyCLabsStatus::OPENED(),
+                    'Merged' => MyCLabsStatus::MERGED(),
+                    'Closed' => MyCLabsStatus::CLOSED(),
+                ],
+                $status->getConfig()->getOption('choices')
+            );
+        } else {
+            self::assertEquals(NativeStatus::MERGED, $status->getData());
+            self::assertEquals(NativeStatus::MERGED, $status->getNormData());
+            self::assertSame(EnumType::class, \get_class($status->getConfig()->getType()->getInnerType()));
+            self::assertSame(PullRequestNativeStatusEnum::class, $status->getConfig()->getOption('enum'));
+            self::assertEquals(
+                ['Opened' => NativeStatus::OPENED, 'Merged' => NativeStatus::MERGED, 'Closed' => NativeStatus::CLOSED],
+                $status->getConfig()->getOption('choices')
+            );
+        }
 
         $labels = $form->get('labels');
         self::assertEquals(['3.x', 'feature'], $labels->getData());
@@ -78,26 +93,16 @@ final class PullRequestFormTest extends KernelTestCase
 
     public function valid(): Generator
     {
-        $newModel = self::pullRequest();
-        $newExpected = self::pullRequest();
-        $newExpected->status = Status::OPENED();
-        $newExpected->labels = ['bugfix', '1.x'];
         yield [
             ['status' => 0, 'labels' => ['bugfix', '1.x']],
-            $newModel,
-            $newExpected
+            self::pullRequest(),
+            self::pullRequest('opened', ['bugfix', '1.x'])
         ];
 
-        $updateModel = self::pullRequest();
-        $updateModel->status = Status::OPENED();
-        $updateModel->labels = ['bugfix', '1.x'];
-        $updateExpected = self::pullRequest();
-        $updateExpected->status = Status::CLOSED();
-        $updateExpected->labels = ['bugfix', '2.x'];
         yield [
             ['status' => 2, 'labels' => ['bugfix', '2.x']],
-            $updateModel,
-            $updateExpected
+            self::pullRequest('opened', ['bugfix', '1.x']),
+            self::pullRequest('closed', ['bugfix', '2.x'])
         ];
     }
 
@@ -130,42 +135,56 @@ final class PullRequestFormTest extends KernelTestCase
             $message = 'The selected choice is invalid.';
         }
 
-        $newModel = self::pullRequest();
         yield [
             ['status' => 3, 'labels' => ['bugfix', '5.x']],
-            $newModel,
+            self::pullRequest(),
             ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.']
         ];
 
-        $updateModel = self::pullRequest();
-        $updateModel->status = Status::OPENED();
-        $updateModel->labels = ['bugfix', '1.x'];
         yield [
             ['status' => 3, 'labels' => ['bugfix', '5.x']],
-            $updateModel,
+            self::pullRequest('opened', ['bugfix', '1.x']),
             ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.']
         ];
     }
 
     /**
-     * @return PullRequestUsingAnnotations|PullRequestUsingAttributes
+     * @return PullRequestPhp7|PullRequestPhp80|PullRequestPhp81
      */
-    private static function pullRequest()
+    private static function pullRequest(string $status = null, array $labels = [])
     {
-        if (\PHP_VERSION_ID < 80000 || Kernel::VERSION_ID < 50200) {
-            return new PullRequestUsingAnnotations();
+        if (Kernel::VERSION_ID < 50200) {
+            $pullRequest = new PullRequestPhp7();
+            $status && $pullRequest->status = new MyCLabsStatus($status);
+            $pullRequest->labels = $labels;
+
+            return $pullRequest;
+        }
+        if (\PHP_VERSION_ID < 80000) {
+            $pullRequest = new PullRequestPhp7();
+            $status && $pullRequest->status = new MyCLabsStatus($status);
+            $pullRequest->labels = $labels;
+
+            return $pullRequest;
+        }
+        if (\PHP_VERSION_ID < 80100) {
+            $pullRequest = new PullRequestPhp80();
+            $status && $pullRequest->status = new MyCLabsStatus($status);
+            $pullRequest->labels = $labels;
+
+            return $pullRequest;
         }
 
-        return new PullRequestUsingAttributes();
+        $pullRequest = new PullRequestPhp81();
+        $status && $pullRequest->status = NativeStatus::from($status);
+        $pullRequest->labels = $labels;
+
+        return $pullRequest;
     }
 
     private static function form(ContainerInterface $container, $model): FormInterface
     {
-        if (\PHP_VERSION_ID < 80000 || Kernel::VERSION_ID < 50200) {
-            $class = PullRequestUsingAnnotations::class;
-        } else {
-            $class = PullRequestUsingAttributes::class;
-        }
+        $class = get_class(self::pullRequest());
 
         return $container->get('form.factory')
             ->create(PullRequestType::class, $model, ['data_class' => $class]);
