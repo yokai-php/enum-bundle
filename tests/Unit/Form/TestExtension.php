@@ -54,6 +54,6 @@ class TestExtension extends AbstractExtension
             return null;
         }
 
-        return new EnumTypeGuesser($this->metadataFactory, $this->enumRegistry);
+        return new EnumTypeGuesser($this->metadataFactory);
     }
 }

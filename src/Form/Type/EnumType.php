@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yokai\EnumBundle\Form\Type;
 
+use MyCLabs\Enum\Enum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
@@ -34,6 +35,7 @@ final class EnumType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
+            ->setDefined(['enum', 'enum_choice_value'])
             ->setRequired('enum')
             ->setAllowedValues(
                 'enum',
@@ -45,6 +47,41 @@ final class EnumType extends AbstractType
                 'choices',
                 function (Options $options): array {
                     return $this->enumRegistry->get($options['enum'])->getChoices();
+                }
+            )
+            ->setAllowedTypes('enum_choice_value', 'bool')
+            ->setDefault(
+                'enum_choice_value',
+                static function (Options $options) {
+                    @\trigger_error(
+                        'Not configuring the "enum_choice_value" option is deprecated.' .
+                        ' It will default to "true" in 5.0.',
+                        \E_USER_DEPRECATED
+                    );
+
+                    return false;
+                }
+            )
+            ->setDefault(
+                'choice_value',
+                static function (Options $options) {
+                    if (!$options['enum_choice_value']) {
+                        return null;
+                    }
+
+                    return function ($value) {
+                        if ($value instanceof \BackedEnum) {
+                            return $value->value;
+                        }
+                        if ($value instanceof \UnitEnum) {
+                            return $value->name;
+                        }
+                        if ($value instanceof Enum) {
+                            return $value->getValue();
+                        }
+
+                        return $value;
+                    };
                 }
             )
         ;
