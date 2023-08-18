@@ -11,6 +11,7 @@ use Yokai\EnumBundle\NativeTranslatedEnum;
 use Yokai\EnumBundle\Tests\Unit\Fixtures\HTTPMethod;
 use Yokai\EnumBundle\Tests\Unit\Fixtures\HTTPStatus;
 use Yokai\EnumBundle\Tests\Unit\Fixtures\Picture;
+use Yokai\EnumBundle\Tests\Unit\Fixtures\Vehicle;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -72,7 +73,7 @@ class NativeTranslatedEnumTest extends TestCase
         }
 
         $this->expectException(LogicException::class);
-        new NativeTranslatedEnum(Picture::class, new Translator([]), 'dummy.%s');
+        new NativeTranslatedEnum(Vehicle::class, new Translator([]), 'dummy.%s');
     }
 
     public function testLabelNotFound(): void
