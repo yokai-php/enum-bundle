@@ -13,7 +13,7 @@ use MyCLabs\Enum\Enum;
  *
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-final class Status extends Enum
+final class MyCLabsStatus extends Enum
 {
     private const OPENED = 'opened';
     private const MERGED = 'merged';

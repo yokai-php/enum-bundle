@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+#    Yokai\EnumBundle\Tests\Integration\App\:
+#        resource: '../src/'
+#        exclude:
+#            - '../src/Model/'
+#            - '../src/Enum/PullRequestNativeStatusEnum.php'
+
+    Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum: ~
+    Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestMyCLabsStatusEnum: ~
+    Yokai\EnumBundle\Tests\Integration\App\Form\PullRequestType: ~

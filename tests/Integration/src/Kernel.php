@@ -36,7 +36,11 @@ final class Kernel extends BaseKernel
             $loader->load(__DIR__ . '/../config/packages/annotations.yaml');
         }
 
-        $loader->load(__DIR__ . '/../config/services.yaml');
+        if (\PHP_VERSION_ID < 80100) {
+            $loader->load(__DIR__ . '/../config/services-8.0.yaml');
+        } else {
+            $loader->load(__DIR__ . '/../config/services-8.1.yaml');
+        }
     }
 
     /**
