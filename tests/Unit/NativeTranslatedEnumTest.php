@@ -7,14 +7,10 @@ namespace Yokai\EnumBundle\Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Yokai\EnumBundle\Exception\InvalidArgumentException;
 use Yokai\EnumBundle\Exception\LogicException;
-use Yokai\EnumBundle\MyCLabsEnum;
-use Yokai\EnumBundle\NativeEnum;
 use Yokai\EnumBundle\NativeTranslatedEnum;
 use Yokai\EnumBundle\Tests\Unit\Fixtures\HTTPMethod;
 use Yokai\EnumBundle\Tests\Unit\Fixtures\HTTPStatus;
-use Yokai\EnumBundle\Tests\Unit\Fixtures\Status;
 use Yokai\EnumBundle\Tests\Unit\Fixtures\Picture;
-use Yokai\EnumBundle\Tests\Unit\Fixtures\Vehicle;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
@@ -76,7 +72,7 @@ class NativeTranslatedEnumTest extends TestCase
         }
 
         $this->expectException(LogicException::class);
-        new NativeEnum(Vehicle::class);
+        new NativeTranslatedEnum(Picture::class, new Translator([]), 'dummy.%s');
     }
 
     public function testLabelNotFound(): void
@@ -86,7 +82,8 @@ class NativeTranslatedEnumTest extends TestCase
         }
 
         $this->expectException(InvalidArgumentException::class);
-        $enum = new NativeEnum(Picture::class);
+        $translator = new Translator(['status.OK' => 'OK', 'status.NOT_FOUND' => 'Introuvable']);
+        $enum = new NativeTranslatedEnum(HTTPStatus::class, $translator, 'status.%s');
         $enum->getLabel('unknown enum value');
     }
 }
