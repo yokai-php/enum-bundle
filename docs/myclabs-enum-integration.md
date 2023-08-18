@@ -70,3 +70,40 @@ class StatusEnum extends MyCLabsTranslatedEnum
     }
 }
 ```
+
+## Submitting values through a form
+
+Because values of enum like `StatusEnum` above are objects, it is not possible to submit it via HTTP.
+As described in the [documentation](https://symfony.com/doc/current/reference/forms/types/choice.html#choice-value) Symfony will use an incrementing integer as value.
+Example, with `StatusEnum` above:
+- `0` will be the value for `MemberStatus::NEW`
+- `1` will be the value for `MemberStatus::VALIDATED`
+- `2` will be the value for `MemberStatus::DISABLED`
+
+But, if you do not like this behavior, you can configure the form to use values instead: 
+```php
+<?php
+
+namespace App\Form\Type;
+
+use App\Enum\StatusEnum;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Yokai\EnumBundle\Form\Type\EnumType;
+
+class MemberType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder->add('status', EnumType::class, [
+            'enum' => StatusEnum::class,
+            'enum_choice_value' => true,
+        ]);
+    }
+}
+```
+
+Now, still with `StatusEnum` above:
+- `"new"` will be the value for `MemberStatus::NEW`
+- `"validated"` will be the value for `MemberStatus::VALIDATED`
+- `"disabled"` will be the value for `MemberStatus::DISABLED`
