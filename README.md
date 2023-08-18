@@ -1,6 +1,6 @@
 # YokaiEnumBundle
 
-[![Tests](https://img.shields.io/github/workflow/status/yokai-php/enum-bundle/Tests?style=flat-square&label=tests)](https://github.com/yokai-php/enum-bundle/actions)
+[![Tests](https://img.shields.io/github/actions/workflow/status/yokai-php/enum-bundle/tests.yml?branch=4.x&style=flat-square&label=tests)](https://github.com/yokai-php/enum-bundle/actions)
 [![Coverage](https://img.shields.io/codecov/c/github/yokai-php/enum-bundle?style=flat-square)](https://codecov.io/gh/yokai-php/enum-bundle)
 [![Contributors](https://img.shields.io/github/contributors/yokai-php/enum-bundle?style=flat-square)](https://github.com/yokai-php/enum-bundle/graphs/contributors)
 [![License](https://poser.pugx.org/yokai/enum-bundle/license)](https://packagist.org/packages/yokai/enum-bundle)
