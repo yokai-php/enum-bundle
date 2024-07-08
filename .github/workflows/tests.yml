@@ -4,7 +4,7 @@ on:
   pull_request: null
   push:
     branches:
-      - "4.x"
+      - "5.x"
 
 jobs:
   phpunit:
@@ -14,30 +14,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - php-version: '7.1'
-            symfony-version: '4.4.*'
-
-          - php-version: '7.4'
-            symfony-version: '4.4.*'
-          - php-version: '7.4'
-            symfony-version: '5.4.*'
-
-          - php-version: '8.0'
-            symfony-version: '4.4.*'
-          - php-version: '8.0'
-            symfony-version: '5.4.*'
-          - php-version: '8.0'
-            symfony-version: '6.0.*'
-
-          - php-version: '8.1'
-            symfony-version: '5.4.*'
-          - php-version: '8.1'
-            symfony-version: '6.3.*'
-
           - php-version: '8.2'
-            symfony-version: '5.4.*'
-          - php-version: '8.2'
-            symfony-version: '6.3.*'
+            symfony-version: '7.0.*'
+          - php-version: '8.3'
+            symfony-version: '7.1.*'
 
     steps:
       - name: "Checkout"
@@ -75,7 +55,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: xdebug
-          php-version: '8.2'
+          php-version: '8.3'
 
       - name: "Install dependencies with composer"
         run: composer update --no-interaction --no-progress
@@ -101,7 +81,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: xdebug
-          php-version: '8.2'
+          php-version: '8.3'
 
       - name: "Install dependencies with composer"
         run: composer update --no-interaction --no-progress
