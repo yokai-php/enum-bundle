@@ -46,7 +46,7 @@ final class Kernel extends BaseKernel
     /**
      * @inheritDoc
      */
-    protected function build(ContainerBuilder $container)
+    protected function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(
             new class implements CompilerPassInterface {
