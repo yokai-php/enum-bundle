@@ -19,8 +19,15 @@ final class InvalidArgumentException extends \InvalidArgumentException implement
         ));
     }
 
-    public static function enumMissingValue(EnumInterface $enum, string $value): self
+    public static function enumMissingValue(EnumInterface $enum, mixed $value): self
     {
+        if (\is_object($value) && \method_exists($value, '__toString')) {
+            $value = (string)$value;
+        }
+        if (!\is_string($value)) {
+            $value = \get_debug_type($value);
+        }
+
         return new self(\sprintf(
             'Enum "%s" does not have "%s" value.',
             $enum->getName(),

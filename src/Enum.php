@@ -71,7 +71,7 @@ class Enum implements EnumInterface
     {
         $this->init();
 
-        $label = \array_search($value, $this->choices, true);
+        $label = \array_search($value, $this->choices, false);
         if ($label === false) {
             throw InvalidArgumentException::enumMissingValue($this, $value);
         }
