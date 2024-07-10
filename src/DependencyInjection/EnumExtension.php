@@ -22,9 +22,6 @@ use Yokai\EnumBundle\Validator\Constraints\EnumValidator;
  */
 final class EnumExtension extends Extension
 {
-    /**
-     * @inheritdoc
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $container->register('yokai_enum.enum_registry', EnumRegistry::class);
@@ -32,9 +29,9 @@ final class EnumExtension extends Extension
 
         $registry = new Reference(EnumRegistry::class);
 
-        $requiresForm = interface_exists(FormInterface::class);
-        $requiresValidator = interface_exists(ValidatorInterface::class);
-        $requiresTwig = class_exists(TwigBundle::class);
+        $requiresForm = \interface_exists(FormInterface::class);
+        $requiresValidator = \interface_exists(ValidatorInterface::class);
+        $requiresTwig = \class_exists(TwigBundle::class);
 
         if ($requiresForm) {
             $container->register('yokai_enum.form_type.enum_type', EnumType::class)

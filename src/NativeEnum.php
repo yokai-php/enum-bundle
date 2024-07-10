@@ -12,10 +12,6 @@ use Yokai\EnumBundle\Exception\LogicException;
  */
 class NativeEnum extends Enum
 {
-    /**
-     * @param string      $enum
-     * @param string|null $name
-     */
     public function __construct(string $enum, string $name = null)
     {
         if (!\is_a($enum, UnitEnum::class, true)) {

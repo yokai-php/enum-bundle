@@ -19,17 +19,11 @@ final class EnumExtension extends AbstractExtension
      */
     private $registry;
 
-    /**
-     * @param EnumRegistry $registry
-     */
     public function __construct(EnumRegistry $registry)
     {
         $this->registry = $registry;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getFunctions(): array
     {
         return [
@@ -42,9 +36,6 @@ final class EnumExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getFilters(): array
     {
         return [

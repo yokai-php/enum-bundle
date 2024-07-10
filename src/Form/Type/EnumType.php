@@ -21,17 +21,11 @@ final class EnumType extends AbstractType
      */
     private $enumRegistry;
 
-    /**
-     * @param EnumRegistry $enumRegistry
-     */
     public function __construct(EnumRegistry $enumRegistry)
     {
         $this->enumRegistry = $enumRegistry;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
@@ -91,17 +85,11 @@ final class EnumType extends AbstractType
         ;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getParent(): string
     {
         return ChoiceType::class;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getBlockPrefix(): string
     {
         return 'yokai_enum';

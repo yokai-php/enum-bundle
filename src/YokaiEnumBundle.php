@@ -14,9 +14,6 @@ use Yokai\EnumBundle\DependencyInjection\EnumExtension;
  */
 final class YokaiEnumBundle extends Bundle
 {
-    /**
-     * @inheritdoc
-     */
     public function build(ContainerBuilder $container): void
     {
         $container
@@ -24,9 +21,6 @@ final class YokaiEnumBundle extends Bundle
         ;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getContainerExtension(): EnumExtension
     {
         return new EnumExtension();

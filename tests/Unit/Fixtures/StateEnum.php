@@ -16,37 +16,25 @@ use Yokai\EnumBundle\Exception\InvalidArgumentException;
  */
 class StateEnum implements EnumInterface
 {
-    /**
-     * @inheritDoc
-     */
     public function getName(): string
     {
         return __CLASS__;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getValues(): array
     {
         return \array_values($this->getChoices());
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getChoices(): array
     {
         return ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled'];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getLabel($value): string
     {
         $choices = $this->getChoices();
-        $label = \array_search($value, $choices);
+        $label = \array_search($value, $choices, true);
         if ($label === false) {
             throw InvalidArgumentException::enumMissingValue($this, $value);
         }

@@ -18,8 +18,6 @@ final class EnumRegistry
     private $enums = [];
 
     /**
-     * @param EnumInterface $enum
-     *
      * @throws LogicException
      */
     public function add(EnumInterface $enum): void
@@ -32,9 +30,6 @@ final class EnumRegistry
     }
 
     /**
-     * @param string $name
-     *
-     * @return EnumInterface
      * @throws InvalidArgumentException
      */
     public function get(string $name): EnumInterface
@@ -46,11 +41,6 @@ final class EnumRegistry
         return $this->enums[$name];
     }
 
-    /**
-     * @param string $name
-     *
-     * @return bool
-     */
     public function has(string $name): bool
     {
         return isset($this->enums[$name]);

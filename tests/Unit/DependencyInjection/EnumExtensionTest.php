@@ -27,7 +27,7 @@ class EnumExtensionTest extends TestCase
             'yokai_enum.twig_extension.enum_extension',
         ];
         foreach ($services as $service) {
-            self::assertTrue($container->has($service), sprintf('Service "%s" is registered', $service));
+            self::assertTrue($container->has($service), \sprintf('Service "%s" is registered', $service));
         }
 
         $autoconfigure = $container->getAutoconfiguredInstanceof();

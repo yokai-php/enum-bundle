@@ -34,10 +34,6 @@ class TranslatedEnum extends Enum
 
     /**
      * @param array<int|string, mixed> $values
-     * @param TranslatorInterface      $translator
-     * @param string                   $transPattern
-     * @param string                   $transDomain
-     * @param string|null              $name
      *
      * @throws LogicException
      */
@@ -48,7 +44,7 @@ class TranslatedEnum extends Enum
         string $transDomain = 'messages',
         ?string $name = null
     ) {
-        if (false === strpos($transPattern, '%s')) {
+        if (\strpos($transPattern, '%s') === false) {
             throw LogicException::placeholderRequired($transPattern);
         }
 
@@ -60,9 +56,6 @@ class TranslatedEnum extends Enum
         parent::__construct(null, $name);
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function build(): array
     {
         $choices = [];

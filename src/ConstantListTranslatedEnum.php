@@ -11,13 +11,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ConstantListTranslatedEnum extends TranslatedEnum
 {
-    /**
-     * @param string              $constantsPattern
-     * @param TranslatorInterface $translator
-     * @param string              $transPattern
-     * @param string              $transDomain
-     * @param string|null         $name
-     */
     public function __construct(
         string $constantsPattern,
         TranslatorInterface $translator,

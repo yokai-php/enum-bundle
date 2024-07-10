@@ -20,24 +20,18 @@ final class EnumValidator extends ChoiceValidator
      */
     private $enumRegistry;
 
-    /**
-     * @param EnumRegistry $enumRegistry
-     */
     public function __construct(EnumRegistry $enumRegistry)
     {
         $this->enumRegistry = $enumRegistry;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof Enum) {
             throw new UnexpectedTypeException($constraint, Enum::class);
         }
 
-        $constraint->choices  = null;
+        $constraint->choices = null;
         $constraint->callback = null;
 
         if (!$constraint->enum) {
@@ -45,7 +39,7 @@ final class EnumValidator extends ChoiceValidator
         }
 
         if (!$this->enumRegistry->has($constraint->enum)) {
-            throw new ConstraintDefinitionException(sprintf(
+            throw new ConstraintDefinitionException(\sprintf(
                 '"enum" "%s" on constraint Enum does not exist',
                 $constraint->enum
             ));

@@ -13,7 +13,7 @@ final class InvalidArgumentException extends \InvalidArgumentException implement
 {
     public static function unregisteredEnum(string $name): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Enum with name "%s" was not registered in registry',
             $name
         ));
@@ -21,7 +21,7 @@ final class InvalidArgumentException extends \InvalidArgumentException implement
 
     public static function enumMissingValue(EnumInterface $enum, string $value): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Enum "%s" does not have "%s" value.',
             $enum->getName(),
             $value

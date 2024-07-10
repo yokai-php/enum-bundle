@@ -30,7 +30,7 @@ class Enum implements EnumInterface
      */
     public function __construct(?array $choices, ?string $name = null)
     {
-        if (__CLASS__ === static::class && $choices === null) {
+        if (static::class === __CLASS__ && $choices === null) {
             throw new LogicException(
                 'When using ' . __CLASS__ . ' directly, $choices argument in ' . __FUNCTION__ . ' method cannot be null'
             );
@@ -53,9 +53,6 @@ class Enum implements EnumInterface
         $this->name = $name;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getChoices(): array
     {
         $this->init();
@@ -63,9 +60,6 @@ class Enum implements EnumInterface
         return $this->choices;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getValues(): array
     {
         $this->init();
@@ -73,14 +67,11 @@ class Enum implements EnumInterface
         return \array_values($this->choices);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getLabel($value): string
     {
         $this->init();
 
-        $label = \array_search($value, $this->choices);
+        $label = \array_search($value, $this->choices, true);
         if ($label === false) {
             throw InvalidArgumentException::enumMissingValue($this, $value);
         }
@@ -88,9 +79,6 @@ class Enum implements EnumInterface
         return $label;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getName(): string
     {
         return $this->name;

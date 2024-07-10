@@ -46,19 +46,19 @@ class EnumsFromFixturesTest extends TestCase
                 'action.EDIT' => 'Modifier',
             ])),
             ActionEnum::class,
-            ['Voir' => Action::VIEW(), 'Modifier' => Action::EDIT()]
+            ['Voir' => Action::VIEW(), 'Modifier' => Action::EDIT()],
         ];
 
         yield StateEnum::class . ' : direct interface implementation' => [
             new StateEnum(),
             StateEnum::class,
-            ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled']
+            ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled'],
         ];
 
         yield StatusEnum::class . ' : myclabs/php-enum enum' => [
             new StatusEnum(),
             StatusEnum::class,
-            ['SUCCESS' => Status::SUCCESS(), 'ERROR' => Status::ERROR()]
+            ['SUCCESS' => Status::SUCCESS(), 'ERROR' => Status::ERROR()],
         ];
 
         yield SubscriptionEnum::class . ' : translated enum with keyword name' => [
@@ -69,13 +69,13 @@ class EnumsFromFixturesTest extends TestCase
                 'choice.subscription.monthly' => 'Mensuelle',
             ])),
             'subscription',
-            ['Aucune' => 'none', 'Journalière' => 'daily', 'Hebdomadaire' => 'weekly', 'Mensuelle' => 'monthly']
+            ['Aucune' => 'none', 'Journalière' => 'daily', 'Hebdomadaire' => 'weekly', 'Mensuelle' => 'monthly'],
         ];
 
         yield TypeEnum::class . ' : enum with keyword name' => [
             new TypeEnum(),
             'type',
-            ['Customer' => 'customer', 'Prospect' => 'prospect']
+            ['Customer' => 'customer', 'Prospect' => 'prospect'],
         ];
 
         yield VehicleBrandEnum::class . ' : constant list enum with keyword name' => [

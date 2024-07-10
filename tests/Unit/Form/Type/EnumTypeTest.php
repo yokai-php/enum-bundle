@@ -144,7 +144,7 @@ class EnumTypeTest extends TypeTestCase
         }
 
         return [
-            new TestExtension($enumRegistry)
+            new TestExtension($enumRegistry),
         ];
     }
 

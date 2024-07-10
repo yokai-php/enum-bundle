@@ -84,17 +84,11 @@ final class Enum extends Choice
         }
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getDefaultOption(): string
     {
         return 'enum';
     }
 
-    /**
-     * @inheritdoc
-     */
     public function validatedBy(): string
     {
         return 'yokai_enum.validator_constraints.enum_validator';

@@ -50,7 +50,8 @@ class EnumExtensionTest extends TestCase
 
         self::assertSame(
             'none,Aucune|daily,Journalière|weekly,Hebdomadaire|monthly,Mensuelle|',
-            $twig->createTemplate(<<<TWIG
+            $twig->createTemplate(
+                <<<TWIG
 {% for label,value in enum_choices('subscription') %}{{ value }},{{ label }}|{% endfor %}
 TWIG
             )->render([])
@@ -66,7 +67,8 @@ TWIG
 
         self::assertSame(
             'new|validated|disabled|',
-            $twig->createTemplate(<<<TWIG
+            $twig->createTemplate(
+                <<<TWIG
 {% for value in enum_values('Yokai\\\\EnumBundle\\\\Tests\\\\Unit\\\\Fixtures\\\\StateEnum') %}{{ value }}|{% endfor %}
 TWIG
             )->render([])

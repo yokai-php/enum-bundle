@@ -25,19 +25,12 @@ class TestExtension extends AbstractExtension
      */
     private $metadataFactory;
 
-    /**
-     * @param EnumRegistry                  $enumRegistry
-     * @param MetadataFactoryInterface|null $metadataFactory
-     */
     public function __construct(EnumRegistry $enumRegistry, MetadataFactoryInterface $metadataFactory = null)
     {
         $this->enumRegistry = $enumRegistry;
         $this->metadataFactory = $metadataFactory;
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function loadTypes(): array
     {
         return [
@@ -45,9 +38,6 @@ class TestExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function loadTypeGuesser(): ?EnumTypeGuesser
     {
         if ($this->metadataFactory === null) {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Yokai\EnumBundle;
 
-use UnitEnum;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use UnitEnum;
 use Yokai\EnumBundle\Exception\LogicException;
 
 /**
@@ -13,13 +13,6 @@ use Yokai\EnumBundle\Exception\LogicException;
  */
 class NativeTranslatedEnum extends TranslatedEnum
 {
-    /**
-     * @param string              $enum
-     * @param TranslatorInterface $translator
-     * @param string              $transPattern
-     * @param string              $transDomain
-     * @param string|null         $name
-     */
     public function __construct(
         string $enum,
         TranslatorInterface $translator,

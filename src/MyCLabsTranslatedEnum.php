@@ -13,13 +13,6 @@ use Yokai\EnumBundle\Exception\LogicException;
  */
 class MyCLabsTranslatedEnum extends TranslatedEnum
 {
-    /**
-     * @param string              $enum
-     * @param TranslatorInterface $translator
-     * @param string              $transPattern
-     * @param string              $transDomain
-     * @param string|null         $name
-     */
     public function __construct(
         string $enum,
         TranslatorInterface $translator,

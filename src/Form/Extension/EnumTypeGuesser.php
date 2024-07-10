@@ -18,9 +18,6 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
  */
 final class EnumTypeGuesser extends ValidatorTypeGuesser
 {
-    /**
-     * @inheritdoc
-     */
     public function guessTypeForConstraint(Constraint $constraint): ?TypeGuess
     {
         $enum = $this->getEnum($constraint);
@@ -38,25 +35,16 @@ final class EnumTypeGuesser extends ValidatorTypeGuesser
         );
     }
 
-    /**
-     * @inheritDoc
-     */
     public function guessRequired($class, $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }
 
-    /**
-     * @inheritDoc
-     */
     public function guessMaxLength($class, $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }
 
-    /**
-     * @inheritDoc
-     */
     public function guessPattern($class, $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
