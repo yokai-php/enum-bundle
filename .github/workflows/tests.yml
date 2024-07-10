@@ -86,5 +86,5 @@ jobs:
       - name: "Install dependencies with composer"
         run: composer update --no-interaction --no-progress
 
-      - name: "Run checkstyle with squizlabs/php_codesniffer"
-        run: vendor/bin/phpcs
+      - name: "Run checkstyle with symplify/easy-coding-standard"
+        run: vendor/bin/ecs
