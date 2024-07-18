@@ -12,10 +12,6 @@ use Yokai\EnumBundle\Exception\LogicException;
  */
 class MyCLabsEnum extends Enum
 {
-    /**
-     * @param string      $enum
-     * @param string|null $name
-     */
     public function __construct(string $enum, string $name = null)
     {
         if (!\is_a($enum, ActualMyCLabsEnum::class, true)) {

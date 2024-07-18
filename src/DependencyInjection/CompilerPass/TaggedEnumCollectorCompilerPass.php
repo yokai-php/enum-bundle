@@ -13,9 +13,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 final class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @inheritdoc
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('yokai_enum.enum_registry')) {
@@ -24,7 +21,7 @@ final class TaggedEnumCollectorCompilerPass implements CompilerPassInterface
 
         $registry = $container->getDefinition('yokai_enum.enum_registry');
 
-        foreach (array_keys($container->findTaggedServiceIds('yokai_enum.enum')) as $enum) {
+        foreach (\array_keys($container->findTaggedServiceIds('yokai_enum.enum')) as $enum) {
             $registry->addMethodCall('add', [new Reference($enum)]);
         }
     }

@@ -15,10 +15,10 @@ use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestMyCLabsStatusEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestNativeStatusEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Form\PullRequestType;
 use Yokai\EnumBundle\Tests\Integration\App\Kernel;
+use Yokai\EnumBundle\Tests\Integration\App\Model\MyCLabsStatus;
 use Yokai\EnumBundle\Tests\Integration\App\Model\NativeStatus;
 use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp7;
 use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp80;
-use Yokai\EnumBundle\Tests\Integration\App\Model\MyCLabsStatus;
 use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp81;
 
 /**
@@ -96,13 +96,13 @@ final class PullRequestFormTest extends KernelTestCase
         yield [
             ['status' => 0, 'labels' => ['bugfix', '1.x']],
             self::pullRequest(),
-            self::pullRequest('opened', ['bugfix', '1.x'])
+            self::pullRequest('opened', ['bugfix', '1.x']),
         ];
 
         yield [
             ['status' => 2, 'labels' => ['bugfix', '2.x']],
             self::pullRequest('opened', ['bugfix', '1.x']),
-            self::pullRequest('closed', ['bugfix', '2.x'])
+            self::pullRequest('closed', ['bugfix', '2.x']),
         ];
     }
 
@@ -123,7 +123,7 @@ final class PullRequestFormTest extends KernelTestCase
             $formErrors = $form->get($path)->getErrors();
             self::assertCount(1, $formErrors);
             /** @var ConstraintViolationInterface $violation */
-            $violation =  $formErrors[0]->getCause();
+            $violation = $formErrors[0]->getCause();
             self::assertSame($message, $violation->getMessage());
         }
     }
@@ -138,13 +138,13 @@ final class PullRequestFormTest extends KernelTestCase
         yield [
             ['status' => 3, 'labels' => ['bugfix', '5.x']],
             self::pullRequest(),
-            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.']
+            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.'],
         ];
 
         yield [
             ['status' => 3, 'labels' => ['bugfix', '5.x']],
             self::pullRequest('opened', ['bugfix', '1.x']),
-            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.']
+            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.'],
         ];
     }
 
@@ -184,7 +184,7 @@ final class PullRequestFormTest extends KernelTestCase
 
     private static function form(ContainerInterface $container, $model): FormInterface
     {
-        $class = get_class(self::pullRequest());
+        $class = \get_class(self::pullRequest());
 
         return $container->get('form.factory')
             ->create(PullRequestType::class, $model, ['data_class' => $class]);

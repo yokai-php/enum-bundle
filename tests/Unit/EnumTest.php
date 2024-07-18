@@ -62,7 +62,7 @@ class EnumTest extends TestCase
     public function testInheritedEnumMustHaveChoicesOrBuildMethod(): void
     {
         $this->expectException(LogicException::class);
-        $fooEnum = new class (null, 'foo') extends Enum {
+        $fooEnum = new class(null, 'foo') extends Enum {
         };
         $fooEnum->getLabel('something');
     }

@@ -17,7 +17,7 @@ final class LogicException extends \LogicException implements ExceptionInterface
 
     public static function placeholderRequired(string $transPattern): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Translation pattern "%s" must contain %%s placeholder.',
             $transPattern
         ));
@@ -25,7 +25,7 @@ final class LogicException extends \LogicException implements ExceptionInterface
 
     public static function alreadyRegistered(string $name): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Enum with name "%s" is already registered.',
             $name
         ));
@@ -33,7 +33,7 @@ final class LogicException extends \LogicException implements ExceptionInterface
 
     public static function invalidMyClabsEnumClass(string $enum): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Enum class must be valid "myclabs/php-enum" enum class. Got "%s".',
             $enum
         ));
@@ -41,7 +41,7 @@ final class LogicException extends \LogicException implements ExceptionInterface
 
     public static function invalidUnitEnum(string $enum): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Enum class must be valid PHP enum. Got "%s".',
             $enum
         ));

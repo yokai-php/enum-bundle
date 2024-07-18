@@ -43,13 +43,10 @@ final class Kernel extends BaseKernel
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     protected function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(
-            new class implements CompilerPassInterface {
+            new class() implements CompilerPassInterface {
                 public function process(ContainerBuilder $container)
                 {
                     $container->findDefinition('form.factory')->setPublic(true);

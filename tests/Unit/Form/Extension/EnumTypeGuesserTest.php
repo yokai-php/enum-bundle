@@ -54,10 +54,10 @@ class EnumTypeGuesserTest extends TypeTestCase
         $metadata = new ClassMetadata(self::TEST_CLASS);
         $metadata->addPropertyConstraint(self::TEST_PROPERTY_NONE, new Choice(['choices' => ['new', 'validated']]));
         $metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => StateEnum::class]));
-        if (class_exists(Compound::class)) {
+        if (\class_exists(Compound::class)) {
             $metadata->addPropertyConstraint(
                 self::TEST_PROPERTY_COMPOUND,
-                new class extends Compound {
+                new class() extends Compound {
                     protected function getConstraints(array $options): array
                     {
                         return [new Enum(['enum' => StateEnum::class])];
@@ -91,7 +91,7 @@ class EnumTypeGuesserTest extends TypeTestCase
 
     public function testGuessTypeCompound(): void
     {
-        if (!class_exists(Compound::class)) {
+        if (!\class_exists(Compound::class)) {
             $this->markTestSkipped();
         }
 

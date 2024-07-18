@@ -9,13 +9,9 @@ namespace Yokai\EnumBundle;
  */
 class ConstantListEnum extends Enum
 {
-    /**
-     * @param string      $constantsPattern
-     * @param string|null $name
-     */
     public function __construct(string $constantsPattern, ?string $name = null)
     {
         $values = ConstantExtractor::extract($constantsPattern);
-        parent::__construct(array_combine($values, $values), $name);
+        parent::__construct(\array_combine($values, $values), $name);
     }
 }
