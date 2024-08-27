@@ -13,7 +13,7 @@ use Yokai\EnumBundle\Exception\LogicException;
 class TranslatedEnum extends Enum
 {
     /**
-     * @var array
+     * @var array<int|string, mixed>
      */
     private $values;
 
@@ -62,6 +62,9 @@ class TranslatedEnum extends Enum
         foreach ($this->values as $key => $value) {
             $transLabel = $value;
             if (\is_string($key)) {
+                $transLabel = $key;
+            }
+            if (!\is_scalar($transLabel)) {
                 $transLabel = $key;
             }
 

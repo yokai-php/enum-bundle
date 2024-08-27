@@ -67,4 +67,10 @@ class ConstantListEnumTest extends TestCase
 
         $enum->getLabel('unknown');
     }
+
+    public function testConstantMustBeStringOrInt(): void
+    {
+        $this->expectException(LogicException::class);
+        new ConstantListEnum(Vehicle::class . '::PERIOD_*', 'vehicle.period');
+    }
 }

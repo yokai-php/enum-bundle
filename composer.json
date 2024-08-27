@@ -16,6 +16,7 @@
     "require-dev": {
         "doctrine/annotations": "^1.14",
         "myclabs/php-enum": "^1.8",
+        "phpstan/phpstan": "^1.11",
         "phpunit/phpunit": "^9.6",
         "symfony/form": "^7.0",
         "symfony/http-kernel": "^7.0",

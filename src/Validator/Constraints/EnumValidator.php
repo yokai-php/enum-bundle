@@ -25,7 +25,7 @@ final class EnumValidator extends ChoiceValidator
         $this->enumRegistry = $enumRegistry;
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof Enum) {
             throw new UnexpectedTypeException($constraint, Enum::class);

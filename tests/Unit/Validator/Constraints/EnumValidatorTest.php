@@ -46,19 +46,19 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
     public function testValidEnumIsRequired(): void
     {
         $this->expectException(ConstraintDefinitionException::class);
-        $this->validator->validate('foo', new Enum('state'));
+        $this->validator->validate('foo', new Enum(enum: 'state'));
     }
 
     public function testNullIsValid(): void
     {
-        $this->validator->validate(null, new Enum('type'));
+        $this->validator->validate(null, new Enum(enum: 'type'));
 
         $this->assertNoViolation();
     }
 
     public function testValidSingleEnum(): void
     {
-        $this->validator->validate('customer', new Enum('type'));
+        $this->validator->validate('customer', new Enum(enum: 'type'));
 
         $this->assertNoViolation();
     }

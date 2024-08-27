@@ -16,6 +16,7 @@ use Yokai\EnumBundle\Exception\LogicException;
 final class ConstantExtractor
 {
     /**
+     * @return list<mixed>
      * @throws LogicException
      */
     public static function extract(string $pattern): array
@@ -29,17 +30,25 @@ final class ConstantExtractor
         );
     }
 
+    /**
+     * @param array<string, mixed> $constants
+     *
+     * @return list<mixed>
+     */
     private static function filter(array $constants, string $regexp, string $pattern): array
     {
         $matchingNames = \preg_grep($regexp, \array_keys($constants));
 
-        if (\count($matchingNames) === 0) {
+        if ($matchingNames === false || \count($matchingNames) === 0) {
             throw LogicException::cannotExtractConstants($pattern, 'Pattern matches no constant.');
         }
 
         return \array_values(\array_intersect_key($constants, \array_flip($matchingNames)));
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     private static function publicConstants(string $class, string $pattern): array
     {
         try {
@@ -67,6 +76,9 @@ final class ConstantExtractor
         return $list;
     }
 
+    /**
+     * @return array{string, string}
+     */
     private static function explode(string $pattern): array
     {
         if (\substr_count($pattern, '::') !== 1) {
