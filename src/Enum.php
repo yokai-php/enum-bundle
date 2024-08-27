@@ -92,6 +92,9 @@ class Enum implements EnumInterface
         throw new LogicException(static::class . '::' . __FUNCTION__ . ' should have been overridden.');
     }
 
+    /**
+     * @phpstan-assert !null $this->choices
+     */
     private function init(): void
     {
         if ($this->choices !== null) {

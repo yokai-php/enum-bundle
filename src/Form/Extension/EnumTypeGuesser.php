@@ -35,17 +35,17 @@ final class EnumTypeGuesser extends ValidatorTypeGuesser
         );
     }
 
-    public function guessRequired($class, $property): ?ValueGuess
+    public function guessRequired(string $class, string $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }
 
-    public function guessMaxLength($class, $property): ?ValueGuess
+    public function guessMaxLength(string $class, string $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }
 
-    public function guessPattern($class, $property): ?ValueGuess
+    public function guessPattern(string $class, string $property): ?ValueGuess
     {
         return null; //override parent : not able to guess
     }

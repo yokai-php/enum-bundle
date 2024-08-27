@@ -25,4 +25,8 @@ class Vehicle
     public const WHEELS_TWO = 2;
     public const WHEELS_FOUR = 4;
     public const WHEELS_EIGHT = 8;
+
+    public const PERIOD_COLLECTION = [1817, 1980];
+    public const PERIOD_OLD = [1981, 2010];
+    public const PERIOD_RECENT = [2010, 2024];
 }

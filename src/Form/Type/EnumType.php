@@ -40,7 +40,9 @@ final class EnumType extends AbstractType
             ->setDefault(
                 'choices',
                 function (Options $options): array {
-                    $choices = $this->enumRegistry->get($options['enum'])->getChoices();
+                    /** @var string $name */
+                    $name = $options['enum'];
+                    $choices = $this->enumRegistry->get($name)->getChoices();
 
                     if ($options['enum_choice_value'] === null) {
                         foreach ($choices as $value) {

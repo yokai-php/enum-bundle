@@ -20,9 +20,13 @@ final class Enum extends Choice
      */
     public $enum;
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function __construct(
-        $enum = null,
-        $callback = null,
+        array $options = [],
+        string|null $enum = null,
+        callable|null|string $callback = null,
         bool $multiple = null,
         bool $strict = null,
         int $min = null,
@@ -31,57 +35,29 @@ final class Enum extends Choice
         string $multipleMessage = null,
         string $minMessage = null,
         string $maxMessage = null,
-        $groups = null,
-        $payload = null,
-        array $options = []
+        array|null $groups = null,
+        mixed $payload = null,
     ) {
-        if (\is_array($enum)) {
-            // Symfony 4.4 Constraints has single constructor argument containing all options
-            parent::__construct($enum);
-        } else {
-            if (\is_string($enum)) {
-                $this->enum = $enum;
-            }
-            // Symfony 5.x Constraints has many constructor arguments for PHP 8.0 Attributes support
-
-            $firstConstructorArg = (new \ReflectionClass(Choice::class))
-                ->getConstructor()->getParameters()[0]->getName();
-            if ($firstConstructorArg === 'choices') {
-                // Prior to Symfony 5.3, first argument of Choice was $choices
-                parent::__construct(
-                    null,
-                    $callback,
-                    $multiple,
-                    $strict,
-                    $min,
-                    $max,
-                    $message,
-                    $multipleMessage,
-                    $minMessage,
-                    $maxMessage,
-                    $groups,
-                    $payload,
-                    $options
-                );
-            } else {
-                // Since Symfony 5.3, first argument of Choice is $options
-                parent::__construct(
-                    $options,
-                    null,
-                    $callback,
-                    $multiple,
-                    $strict,
-                    $min,
-                    $max,
-                    $message,
-                    $multipleMessage,
-                    $minMessage,
-                    $maxMessage,
-                    $groups,
-                    $payload
-                );
-            }
+        if (\is_string($enum)) {
+            $this->enum = $enum;
         }
+
+        // Since Symfony 5.3, first argument of Choice is $options
+        parent::__construct(
+            $options,
+            null,
+            $callback,
+            $multiple,
+            $strict,
+            $min,
+            $max,
+            $message,
+            $multipleMessage,
+            $minMessage,
+            $maxMessage,
+            $groups,
+            $payload
+        );
     }
 
     public function getDefaultOption(): string

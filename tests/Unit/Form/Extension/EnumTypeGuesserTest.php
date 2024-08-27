@@ -70,7 +70,7 @@ class EnumTypeGuesserTest extends TypeTestCase
             ->with(self::TEST_CLASS)
             ->willReturn($metadata);
 
-        $this->guesser = new EnumTypeGuesser($this->metadataFactory, $this->enumRegistry);
+        $this->guesser = new EnumTypeGuesser($this->metadataFactory);
 
         parent::setUp();
     }
