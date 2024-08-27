@@ -14,49 +14,53 @@ use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestLabelEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestMyCLabsStatusEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Enum\PullRequestNativeStatusEnum;
 use Yokai\EnumBundle\Tests\Integration\App\Form\PullRequestType;
-use Yokai\EnumBundle\Tests\Integration\App\Kernel;
+use Yokai\EnumBundle\Tests\Integration\App\Model\MyCLabsPullRequest;
 use Yokai\EnumBundle\Tests\Integration\App\Model\MyCLabsStatus;
+use Yokai\EnumBundle\Tests\Integration\App\Model\NativeEnumPullRequest;
 use Yokai\EnumBundle\Tests\Integration\App\Model\NativeStatus;
-use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp7;
-use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp80;
-use Yokai\EnumBundle\Tests\Integration\App\Model\PullRequestPhp81;
 
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 final class PullRequestFormTest extends KernelTestCase
 {
-    public function testBuildForm(): void
+    /**
+     * @dataProvider classes
+     */
+    public function testBuildForm(string $class): void
     {
         $container = self::bootKernel()->getContainer();
 
-        $model = self::pullRequest('merged', ['3.x', 'feature']);
+        $model = self::pullRequest($class, 'merged', ['3.x', 'feature']);
         $form = self::form($container, $model);
 
         $status = $form->get('status');
-        if (\PHP_VERSION_ID < 80100) {
-            self::assertEquals(MyCLabsStatus::MERGED(), $status->getData());
-            self::assertEquals(MyCLabsStatus::MERGED(), $status->getNormData());
-            self::assertSame(EnumType::class, \get_class($status->getConfig()->getType()->getInnerType()));
-            self::assertSame(PullRequestMyCLabsStatusEnum::class, $status->getConfig()->getOption('enum'));
-            self::assertEquals(
-                [
-                    'Opened' => MyCLabsStatus::OPENED(),
-                    'Merged' => MyCLabsStatus::MERGED(),
-                    'Closed' => MyCLabsStatus::CLOSED(),
-                ],
-                $status->getConfig()->getOption('choices')
-            );
-        } else {
-            self::assertEquals(NativeStatus::MERGED, $status->getData());
-            self::assertEquals(NativeStatus::MERGED, $status->getNormData());
-            self::assertSame(EnumType::class, \get_class($status->getConfig()->getType()->getInnerType()));
-            self::assertSame(PullRequestNativeStatusEnum::class, $status->getConfig()->getOption('enum'));
-            self::assertEquals(
-                ['Opened' => NativeStatus::OPENED, 'Merged' => NativeStatus::MERGED, 'Closed' => NativeStatus::CLOSED],
-                $status->getConfig()->getOption('choices')
-            );
-        }
+        (match ($class) {
+            MyCLabsPullRequest::class => function () use ($status) {
+                self::assertEquals(MyCLabsStatus::MERGED(), $status->getData());
+                self::assertEquals(MyCLabsStatus::MERGED(), $status->getNormData());
+                self::assertSame(EnumType::class, \get_class($status->getConfig()->getType()->getInnerType()));
+                self::assertSame(PullRequestMyCLabsStatusEnum::class, $status->getConfig()->getOption('enum'));
+                self::assertEquals(
+                    [
+                        'Opened' => MyCLabsStatus::OPENED(),
+                        'Merged' => MyCLabsStatus::MERGED(),
+                        'Closed' => MyCLabsStatus::CLOSED(),
+                    ],
+                    $status->getConfig()->getOption('choices')
+                );
+            },
+            NativeEnumPullRequest::class => function () use ($status) {
+                self::assertEquals(NativeStatus::MERGED, $status->getData());
+                self::assertEquals(NativeStatus::MERGED, $status->getNormData());
+                self::assertSame(EnumType::class, \get_class($status->getConfig()->getType()->getInnerType()));
+                self::assertSame(PullRequestNativeStatusEnum::class, $status->getConfig()->getOption('enum'));
+                self::assertEquals(
+                    ['Opened' => NativeStatus::OPENED, 'Merged' => NativeStatus::MERGED, 'Closed' => NativeStatus::CLOSED],
+                    $status->getConfig()->getOption('choices')
+                );
+            },
+        })();
 
         $labels = $form->get('labels');
         self::assertEquals(['3.x', 'feature'], $labels->getData());
@@ -76,11 +80,20 @@ final class PullRequestFormTest extends KernelTestCase
         );
     }
 
+    public function classes(): Generator
+    {
+        yield [MyCLabsPullRequest::class];
+        yield [NativeEnumPullRequest::class];
+    }
+
     /**
      * @dataProvider valid
      */
-    public function testSubmitValidData(array $formData, $model, $expected): void
-    {
+    public function testSubmitValidData(
+        array $formData,
+        MyCLabsPullRequest|NativeEnumPullRequest $model,
+        MyCLabsPullRequest|NativeEnumPullRequest $expected,
+    ): void {
         $container = self::bootKernel()->getContainer();
 
         $form = self::form($container, $model);
@@ -93,24 +106,29 @@ final class PullRequestFormTest extends KernelTestCase
 
     public function valid(): Generator
     {
-        yield [
-            ['status' => 0, 'labels' => ['bugfix', '1.x']],
-            self::pullRequest(),
-            self::pullRequest('opened', ['bugfix', '1.x']),
-        ];
+        foreach ($this->classes() as [$class]) {
+            yield [
+                ['status' => 0, 'labels' => ['bugfix', '1.x']],
+                self::pullRequest($class),
+                self::pullRequest($class, 'opened', ['bugfix', '1.x']),
+            ];
 
-        yield [
-            ['status' => 2, 'labels' => ['bugfix', '2.x']],
-            self::pullRequest('opened', ['bugfix', '1.x']),
-            self::pullRequest('closed', ['bugfix', '2.x']),
-        ];
+            yield [
+                ['status' => 2, 'labels' => ['bugfix', '2.x']],
+                self::pullRequest($class, 'opened', ['bugfix', '1.x']),
+                self::pullRequest($class, 'closed', ['bugfix', '2.x']),
+            ];
+        }
     }
 
     /**
      * @dataProvider invalid
      */
-    public function testSubmitInvalidData(array $formData, $model, array $errors): void
-    {
+    public function testSubmitInvalidData(
+        array $formData,
+        MyCLabsPullRequest|NativeEnumPullRequest $model,
+        array $errors,
+    ): void {
         $container = self::bootKernel()->getContainer();
 
         $form = self::form($container, $model);
@@ -130,63 +148,55 @@ final class PullRequestFormTest extends KernelTestCase
 
     public function invalid(): Generator
     {
-        $message = 'This value is not valid.';
-        if (Kernel::MAJOR_VERSION >= 6) {
-            $message = 'The selected choice is invalid.';
+        foreach ($this->classes() as [$class]) {
+            yield [
+                ['status' => 3, 'labels' => ['bugfix', '5.x']],
+                self::pullRequest($class),
+                [
+                    'status' => 'The selected choice is invalid.',
+                    'labels' => 'The choices "5.x" do not exist in the choice list.',
+                ],
+            ];
+
+            yield [
+                ['status' => 3, 'labels' => ['bugfix', '5.x']],
+                self::pullRequest($class, 'opened', ['bugfix', '1.x']),
+                [
+                    'status' => 'The selected choice is invalid.',
+                    'labels' => 'The choices "5.x" do not exist in the choice list.',
+                ],
+            ];
         }
-
-        yield [
-            ['status' => 3, 'labels' => ['bugfix', '5.x']],
-            self::pullRequest(),
-            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.'],
-        ];
-
-        yield [
-            ['status' => 3, 'labels' => ['bugfix', '5.x']],
-            self::pullRequest('opened', ['bugfix', '1.x']),
-            ['status' => $message, 'labels' => 'The choices "5.x" do not exist in the choice list.'],
-        ];
     }
 
-    /**
-     * @return PullRequestPhp7|PullRequestPhp80|PullRequestPhp81
-     */
-    private static function pullRequest(string $status = null, array $labels = [])
-    {
-        if (Kernel::VERSION_ID < 50200) {
-            $pullRequest = new PullRequestPhp7();
-            $status && $pullRequest->status = new MyCLabsStatus($status);
-            $pullRequest->labels = $labels;
+    private static function pullRequest(
+        string $class,
+        string $status = null,
+        array $labels = [],
+    ): MyCLabsPullRequest|NativeEnumPullRequest {
+        return (match ($class) {
+            MyCLabsPullRequest::class => function () use ($status, $labels) {
+                $pullRequest = new MyCLabsPullRequest();
+                $status && $pullRequest->status = new MyCLabsStatus($status);
+                $pullRequest->labels = $labels;
 
-            return $pullRequest;
-        }
-        if (\PHP_VERSION_ID < 80000) {
-            $pullRequest = new PullRequestPhp7();
-            $status && $pullRequest->status = new MyCLabsStatus($status);
-            $pullRequest->labels = $labels;
+                return $pullRequest;
+            },
+            NativeEnumPullRequest::class => function () use ($status, $labels) {
+                $pullRequest = new NativeEnumPullRequest();
+                $status && $pullRequest->status = NativeStatus::from($status);
+                $pullRequest->labels = $labels;
 
-            return $pullRequest;
-        }
-        if (\PHP_VERSION_ID < 80100) {
-            $pullRequest = new PullRequestPhp80();
-            $status && $pullRequest->status = new MyCLabsStatus($status);
-            $pullRequest->labels = $labels;
-
-            return $pullRequest;
-        }
-
-        $pullRequest = new PullRequestPhp81();
-        $status && $pullRequest->status = NativeStatus::from($status);
-        $pullRequest->labels = $labels;
-
-        return $pullRequest;
+                return $pullRequest;
+            },
+        })();
     }
 
-    private static function form(ContainerInterface $container, $model): FormInterface
-    {
-        $class = \get_class(self::pullRequest());
-
+    private static function form(
+        ContainerInterface $container,
+        MyCLabsPullRequest|NativeEnumPullRequest $model,
+    ): FormInterface {
         return $container->get('form.factory')
-            ->create(PullRequestType::class, $model, ['data_class' => $class]);
+            ->create(PullRequestType::class, $model, ['data_class' => $model::class]);
     }
 }

@@ -31,20 +31,11 @@ class EnumTypeGuesserTest extends TypeTestCase
     private const TEST_PROPERTY_COMPOUND = 'compound';
     private const TEST_PROPERTY_NONE = 'none';
 
-    /**
-     * @var EnumTypeGuesser
-     */
-    private $guesser;
+    private EnumTypeGuesser $guesser;
 
-    /**
-     * @var EnumRegistry
-     */
-    private $enumRegistry;
+    private EnumRegistry $enumRegistry;
 
-    /**
-     * @var MockObject|MetadataFactoryInterface
-     */
-    private $metadataFactory;
+    private MockObject|MetadataFactoryInterface $metadataFactory;
 
     protected function setUp(): void
     {

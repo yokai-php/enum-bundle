@@ -89,14 +89,6 @@ class Member
 }
 ```
 
-> **note** both PHP Attributes & Annotations are supported :
-> ```php
->     /**
->      * @Enum(StatusEnum::class)
->      */
->     public ?string $status = null;
-> ```
-
 ### Setting up the form
 
 Now that validation is configured, the only thing we have to do is to add a field on our form :

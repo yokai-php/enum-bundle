@@ -15,7 +15,7 @@ final class EnumRegistry
     /**
      * @var EnumInterface[]
      */
-    private $enums = [];
+    private array $enums = [];
 
     /**
      * @throws LogicException

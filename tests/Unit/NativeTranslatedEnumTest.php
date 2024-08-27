@@ -20,10 +20,6 @@ class NativeTranslatedEnumTest extends TestCase
 {
     public function testEnum(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $translator = new Translator(['picture.Landscape' => 'Paysage', 'picture.Portrait' => 'Portrait']);
         $enum = new NativeTranslatedEnum(Picture::class, $translator, 'picture.%s');
 
@@ -36,10 +32,6 @@ class NativeTranslatedEnumTest extends TestCase
 
     public function testStringBackedEnum(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $translator = new Translator(['method.GET' => 'get', 'method.POST' => 'post']);
         $enum = new NativeTranslatedEnum(HTTPMethod::class, $translator, 'method.%s');
 
@@ -52,10 +44,6 @@ class NativeTranslatedEnumTest extends TestCase
 
     public function testIntBackedEnum(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $translator = new Translator(['status.OK' => 'OK', 'status.NOT_FOUND' => 'Introuvable']);
         $enum = new NativeTranslatedEnum(HTTPStatus::class, $translator, 'status.%s');
 
@@ -68,20 +56,12 @@ class NativeTranslatedEnumTest extends TestCase
 
     public function testEnumClassMustBeValid(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $this->expectException(LogicException::class);
         new NativeTranslatedEnum(Vehicle::class, new Translator([]), 'dummy.%s');
     }
 
     public function testLabelNotFound(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $this->expectException(InvalidArgumentException::class);
         $translator = new Translator(['status.OK' => 'OK', 'status.NOT_FOUND' => 'Introuvable']);
         $enum = new NativeTranslatedEnum(HTTPStatus::class, $translator, 'status.%s');

@@ -31,7 +31,7 @@ class StateEnum implements EnumInterface
         return ['New' => 'new', 'Validated' => 'validated', 'Disabled' => 'disabled'];
     }
 
-    public function getLabel($value): string
+    public function getLabel(mixed $value): string
     {
         $choices = $this->getChoices();
         $label = \array_search($value, $choices, true);

@@ -15,15 +15,9 @@ use Yokai\EnumBundle\Form\Type\EnumType;
  */
 class TestExtension extends AbstractExtension
 {
-    /**
-     * @var EnumRegistry
-     */
-    private $enumRegistry;
+    private EnumRegistry $enumRegistry;
 
-    /**
-     * @var MetadataFactoryInterface|null
-     */
-    private $metadataFactory;
+    private MetadataFactoryInterface|null $metadataFactory;
 
     public function __construct(EnumRegistry $enumRegistry, MetadataFactoryInterface $metadataFactory = null)
     {

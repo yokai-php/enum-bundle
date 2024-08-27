@@ -28,11 +28,11 @@ class EnumExtensionTest extends TestCase
 
         self::assertSame(
             'Customer',
-            $twig->createTemplate("{{ 'customer'|enum_label('type') }}")->render([])
+            $twig->createTemplate("{{ 'customer'|enum_label('type') }}")->render()
         );
         self::assertSame(
             'Prospect',
-            $twig->createTemplate("{{ 'prospect'|enum_label('type') }}")->render([])
+            $twig->createTemplate("{{ 'prospect'|enum_label('type') }}")->render()
         );
     }
 
@@ -54,7 +54,7 @@ class EnumExtensionTest extends TestCase
                 <<<TWIG
 {% for label,value in enum_choices('subscription') %}{{ value }},{{ label }}|{% endfor %}
 TWIG
-            )->render([])
+            )->render()
         );
     }
 
@@ -71,7 +71,7 @@ TWIG
                 <<<TWIG
 {% for value in enum_values('Yokai\\\\EnumBundle\\\\Tests\\\\Unit\\\\Fixtures\\\\StateEnum') %}{{ value }}|{% endfor %}
 TWIG
-            )->render([])
+            )->render()
         );
     }
 
