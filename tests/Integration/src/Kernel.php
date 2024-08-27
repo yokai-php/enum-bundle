@@ -18,9 +18,6 @@ final class Kernel extends BaseKernel
     {
         yield new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
         yield new \Yokai\EnumBundle\YokaiEnumBundle();
-        if (\PHP_VERSION_ID < 80000) {
-            yield new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle();
-        }
     }
 
     public function getProjectDir(): string
@@ -32,22 +29,14 @@ final class Kernel extends BaseKernel
     {
         $loader->load(__DIR__ . '/../config/packages/framework.yaml');
         $loader->load(__DIR__ . '/../config/packages/translation.yaml');
-        if (\PHP_VERSION_ID < 80000) {
-            $loader->load(__DIR__ . '/../config/packages/annotations.yaml');
-        }
-
-        if (\PHP_VERSION_ID < 80100) {
-            $loader->load(__DIR__ . '/../config/services-8.0.yaml');
-        } else {
-            $loader->load(__DIR__ . '/../config/services-8.1.yaml');
-        }
+        $loader->load(__DIR__ . '/../config/services.yaml');
     }
 
     protected function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(
             new class() implements CompilerPassInterface {
-                public function process(ContainerBuilder $container)
+                public function process(ContainerBuilder $container): void
                 {
                     $container->findDefinition('form.factory')->setPublic(true);
                 }

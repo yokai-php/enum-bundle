@@ -85,10 +85,6 @@ class EnumTypeTest extends TypeTestCase
             Action::EDIT(),
         ];
 
-        if (\PHP_VERSION_ID < 80100) {
-            return;
-        }
-
         yield [
             Picture::class,
             [],
@@ -137,11 +133,9 @@ class EnumTypeTest extends TypeTestCase
             'action.VIEW' => 'Voir',
             'action.EDIT' => 'Modifier',
         ])));
-        if (\PHP_VERSION_ID >= 80100) {
-            $enumRegistry->add(new NativeEnum(Picture::class));
-            $enumRegistry->add(new NativeEnum(HTTPMethod::class));
-            $enumRegistry->add(new NativeEnum(HTTPStatus::class));
-        }
+        $enumRegistry->add(new NativeEnum(Picture::class));
+        $enumRegistry->add(new NativeEnum(HTTPMethod::class));
+        $enumRegistry->add(new NativeEnum(HTTPStatus::class));
 
         return [
             new TestExtension($enumRegistry),

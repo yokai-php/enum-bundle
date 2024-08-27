@@ -7,18 +7,12 @@ namespace Yokai\EnumBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraints\Choice;
 
 /**
- * @Annotation
- * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
- *
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD)]
 final class Enum extends Choice
 {
-    /**
-     * @var string
-     */
-    public $enum;
+    public string $enum;
 
     /**
      * @param array<string, mixed> $options

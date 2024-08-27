@@ -15,22 +15,13 @@ class TranslatedEnum extends Enum
     /**
      * @var array<int|string, mixed>
      */
-    private $values;
+    private array $values;
 
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
+    private TranslatorInterface $translator;
 
-    /**
-     * @var string
-     */
-    private $transPattern;
+    private string $transPattern;
 
-    /**
-     * @var string
-     */
-    private $transDomain;
+    private string $transDomain;
 
     /**
      * @param array<int|string, mixed> $values
@@ -44,7 +35,7 @@ class TranslatedEnum extends Enum
         string $transDomain = 'messages',
         ?string $name = null
     ) {
-        if (\strpos($transPattern, '%s') === false) {
+        if (!\str_contains($transPattern, '%s')) {
             throw LogicException::placeholderRequired($transPattern);
         }
 

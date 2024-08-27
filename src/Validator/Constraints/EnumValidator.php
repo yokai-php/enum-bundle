@@ -15,10 +15,7 @@ use Yokai\EnumBundle\EnumRegistry;
  */
 final class EnumValidator extends ChoiceValidator
 {
-    /**
-     * @var EnumRegistry
-     */
-    private $enumRegistry;
+    private EnumRegistry $enumRegistry;
 
     public function __construct(EnumRegistry $enumRegistry)
     {
@@ -34,7 +31,7 @@ final class EnumValidator extends ChoiceValidator
         $constraint->choices = null;
         $constraint->callback = null;
 
-        if (!$constraint->enum) {
+        if (!isset($constraint->enum)) {
             throw new ConstraintDefinitionException('"enum" must be specified on constraint Enum');
         }
 

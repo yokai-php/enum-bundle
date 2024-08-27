@@ -16,10 +16,7 @@ use Yokai\EnumBundle\EnumRegistry;
  */
 final class EnumType extends AbstractType
 {
-    /**
-     * @var EnumRegistry
-     */
-    private $enumRegistry;
+    private EnumRegistry $enumRegistry;
 
     public function __construct(EnumRegistry $enumRegistry)
     {

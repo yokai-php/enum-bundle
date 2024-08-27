@@ -20,10 +20,6 @@ class NativeEnumTest extends TestCase
 {
     public function testEnum(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $enum = new NativeEnum(Picture::class);
 
         self::assertSame(Picture::class, $enum->getName());
@@ -35,10 +31,6 @@ class NativeEnumTest extends TestCase
 
     public function testStringBackedEnum(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $enum = new NativeEnum(HTTPMethod::class);
 
         self::assertSame(HTTPMethod::class, $enum->getName());
@@ -50,10 +42,6 @@ class NativeEnumTest extends TestCase
 
     public function testIntBackedEnum(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $enum = new NativeEnum(HTTPStatus::class);
 
         self::assertSame(HTTPStatus::class, $enum->getName());
@@ -65,20 +53,12 @@ class NativeEnumTest extends TestCase
 
     public function testEnumClassMustBeValid(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $this->expectException(LogicException::class);
         new NativeEnum(Vehicle::class);
     }
 
     public function testLabelNotFound(): void
     {
-        if (\PHP_VERSION_ID < 80100) {
-            self::markTestSkipped('Only for PHP >= 8.1');
-        }
-
         $this->expectException(InvalidArgumentException::class);
         $enum = new NativeEnum(Picture::class);
         $enum->getLabel('unknown enum value');

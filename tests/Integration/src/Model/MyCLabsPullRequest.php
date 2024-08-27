@@ -11,19 +11,14 @@ use Yokai\EnumBundle\Validator\Constraints\Enum;
 /**
  * @author Yann Eugoné <eugone.yann@gmail.com>
  */
-final class PullRequestPhp7
+final class MyCLabsPullRequest
 {
-    /**
-     * @var MyCLabsStatus
-     *
-     * @Enum(PullRequestMyCLabsStatusEnum::class)
-     */
-    public $status;
+    #[Enum(enum: PullRequestMyCLabsStatusEnum::class)]
+    public MyCLabsStatus $status;
 
     /**
      * @var string[]
-     *
-     * @Enum(PullRequestLabelEnum::class, multiple=true)
      */
-    public $labels;
+    #[Enum(enum: PullRequestLabelEnum::class, multiple: true)]
+    public array $labels;
 }

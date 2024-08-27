@@ -25,10 +25,8 @@ interface EnumInterface
 
     /**
      * Returns enum value label.
-     *
-     * @param mixed $value
      */
-    public function getLabel($value): string;
+    public function getLabel(mixed $value): string;
 
     /**
      * Returns enum identifier (must be unique across app).

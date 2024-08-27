@@ -14,10 +14,7 @@ use Yokai\EnumBundle\EnumRegistry;
  */
 final class EnumExtension extends AbstractExtension
 {
-    /**
-     * @var EnumRegistry
-     */
-    private $registry;
+    private EnumRegistry $registry;
 
     public function __construct(EnumRegistry $registry)
     {

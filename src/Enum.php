@@ -12,15 +12,12 @@ use Yokai\EnumBundle\Exception\LogicException;
  */
 class Enum implements EnumInterface
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
     /**
      * @var array<string, mixed>|null
      */
-    private $choices;
+    private array|null $choices;
 
     /**
      * @param array<string, mixed>|null $choices Allowed to be null if you are extending this class
@@ -41,8 +38,10 @@ class Enum implements EnumInterface
         if ($name === null) {
             $name = static::class;
             if (
-                \strpos($name, 'Yokai\\EnumBundle\\') === 0 // using FQCN as name is only allowed for other namespaces
-                && \strpos($name, 'Yokai\\EnumBundle\\Tests\\') !== 0 // except for our tests
+                // using FQCN as name is only allowed for other namespaces
+                \str_starts_with($name, 'Yokai\\EnumBundle\\')
+                // except for our tests
+                && !\str_starts_with($name, 'Yokai\\EnumBundle\\Tests\\')
             ) {
                 throw new LogicException(
                     'When using ' . static::class . ', $name argument in ' . __METHOD__ . ' method cannot be null'
@@ -67,7 +66,7 @@ class Enum implements EnumInterface
         return \array_values($this->choices);
     }
 
-    public function getLabel($value): string
+    public function getLabel(mixed $value): string
     {
         $this->init();
 
