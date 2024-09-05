@@ -6,9 +6,9 @@ namespace Yokai\EnumBundle\DependencyInjection;
 
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Yokai\EnumBundle\EnumInterface;
 use Yokai\EnumBundle\EnumRegistry;
