@@ -19,7 +19,7 @@ class TestExtension extends AbstractExtension
 
     private MetadataFactoryInterface|null $metadataFactory;
 
-    public function __construct(EnumRegistry $enumRegistry, MetadataFactoryInterface $metadataFactory = null)
+    public function __construct(EnumRegistry $enumRegistry, MetadataFactoryInterface|null $metadataFactory = null)
     {
         $this->enumRegistry = $enumRegistry;
         $this->metadataFactory = $metadataFactory;

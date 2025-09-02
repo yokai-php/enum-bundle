@@ -32,7 +32,7 @@ class Translator implements TranslatorInterface
         return 'fr';
     }
 
-    public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null): string
+    public function trans(string $id, array $parameters = [], string $domain = null, string|null $locale = null): string
     {
         if ($domain !== $this->domain) {
             return $id;
