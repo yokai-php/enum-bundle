@@ -43,15 +43,15 @@ class EnumTypeGuesserTest extends TypeTestCase
         $this->enumRegistry->add(new StateEnum());
 
         $metadata = new ClassMetadata(self::TEST_CLASS);
-        $metadata->addPropertyConstraint(self::TEST_PROPERTY_NONE, new Choice(['choices' => ['new', 'validated']]));
-        $metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(['enum' => StateEnum::class]));
+        $metadata->addPropertyConstraint(self::TEST_PROPERTY_NONE, new Choice(choices: ['new', 'validated']));
+        $metadata->addPropertyConstraint(self::TEST_PROPERTY_DIRECT, new Enum(enum: StateEnum::class));
         if (\class_exists(Compound::class)) {
             $metadata->addPropertyConstraint(
                 self::TEST_PROPERTY_COMPOUND,
                 new class() extends Compound {
                     protected function getConstraints(array $options): array
                     {
-                        return [new Enum(['enum' => StateEnum::class])];
+                        return [new Enum(enum: StateEnum::class)];
                     }
                 }
             );
