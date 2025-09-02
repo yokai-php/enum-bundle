@@ -18,7 +18,7 @@ class MyCLabsTranslatedEnum extends TranslatedEnum
         TranslatorInterface $translator,
         string $transPattern,
         string $transDomain = 'messages',
-        string $name = null
+        string|null $name = null
     ) {
         if (!\is_a($enum, ActualMyCLabsEnum::class, true)) {
             throw LogicException::invalidMyClabsEnumClass($enum);
