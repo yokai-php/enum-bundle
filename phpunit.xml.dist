@@ -5,6 +5,7 @@
          bootstrap="vendor/autoload.php">
     <php>
         <server name="KERNEL_CLASS" value="Yokai\EnumBundle\Tests\Integration\App\Kernel"/>
+        <server name="SYMFONY_DEPRECATIONS_HELPER" value="max[direct]=0"/>
     </php>
 
     <testsuites>
