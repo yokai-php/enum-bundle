@@ -18,7 +18,7 @@ class NativeTranslatedEnum extends TranslatedEnum
         TranslatorInterface $translator,
         string $transPattern,
         string $transDomain = 'messages',
-        string $name = null
+        string|null $name = null
     ) {
         if (!\is_a($enum, UnitEnum::class, true)) {
             throw LogicException::invalidUnitEnum($enum);

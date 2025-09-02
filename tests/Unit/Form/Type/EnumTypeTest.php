@@ -61,65 +61,65 @@ class EnumTypeTest extends TypeTestCase
     {
         yield [
             StateEnum::class,
-            [],
+            ['enum_choice_value' => false],
             'new',
             'new',
         ];
         yield [
             StateEnum::class,
-            ['enum_choice_value' => true],
+            [],
             'new',
             'new',
         ];
 
         yield [
             ActionEnum::class,
-            [],
+            ['enum_choice_value' => false],
             1,
             Action::EDIT(),
         ];
         yield [
             ActionEnum::class,
-            ['enum_choice_value' => true],
+            [],
             'edit',
             Action::EDIT(),
         ];
 
         yield [
             Picture::class,
-            [],
+            ['enum_choice_value' => false],
             0,
             Picture::Landscape,
         ];
         yield [
             Picture::class,
-            ['enum_choice_value' => true],
+            [],
             'Landscape',
             Picture::Landscape,
         ];
 
         yield [
             HTTPMethod::class,
-            [],
+            ['enum_choice_value' => false],
             0,
             HTTPMethod::GET,
         ];
         yield [
             HTTPMethod::class,
-            ['enum_choice_value' => true],
+            [],
             'get',
             HTTPMethod::GET,
         ];
 
         yield [
             HTTPStatus::class,
-            ['enum_choice_value' => true],
+            [],
             200,
             HTTPStatus::OK,
         ];
         yield [
             HTTPStatus::class,
-            [],
+            ['enum_choice_value' => false],
             0,
             HTTPStatus::OK,
         ];

@@ -65,7 +65,7 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
     public function testInvalidSingleEnum(): void
     {
-        $constraint = new Enum(['enum' => 'type', 'message' => 'myMessage']);
+        $constraint = new Enum(enum: 'type', message: 'myMessage');
 
         $this->validator->validate('foo', $constraint);
 
@@ -78,7 +78,7 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
     public function testValidMultipleEnum(): void
     {
-        $constraint = new Enum(['enum' => 'type', 'multiple' => true]);
+        $constraint = new Enum(enum: 'type', multiple: true);
 
         $this->validator->validate(['customer', 'prospect'], $constraint);
 
@@ -87,7 +87,7 @@ class EnumValidatorTest extends ConstraintValidatorTestCase
 
     public function testInvalidMultipleEnum(): void
     {
-        $constraint = new Enum(['enum' => 'type', 'multiple' => true, 'multipleMessage' => 'myMessage']);
+        $constraint = new Enum(enum: 'type', multiple: true, multipleMessage: 'myMessage');
 
         $this->validator->validate(['customer', 'foo'], $constraint);
 

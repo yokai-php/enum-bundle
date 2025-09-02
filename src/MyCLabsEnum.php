@@ -12,7 +12,7 @@ use Yokai\EnumBundle\Exception\LogicException;
  */
 class MyCLabsEnum extends Enum
 {
-    public function __construct(string $enum, string $name = null)
+    public function __construct(string $enum, string|null $name = null)
     {
         if (!\is_a($enum, ActualMyCLabsEnum::class, true)) {
             throw LogicException::invalidMyClabsEnumClass($enum);

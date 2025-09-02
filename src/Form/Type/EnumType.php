@@ -39,30 +39,16 @@ final class EnumType extends AbstractType
                 function (Options $options): array {
                     /** @var string $name */
                     $name = $options['enum'];
-                    $choices = $this->enumRegistry->get($name)->getChoices();
 
-                    if ($options['enum_choice_value'] === null) {
-                        foreach ($choices as $value) {
-                            if (!\is_scalar($value)) {
-                                @\trigger_error(
-                                    'Not configuring the "enum_choice_value" option is deprecated.' .
-                                    ' It will default to "true" in 5.0.',
-                                    \E_USER_DEPRECATED
-                                );
-                                break;
-                            }
-                        }
-                    }
-
-                    return $choices;
+                    return $this->enumRegistry->get($name)->getChoices();
                 }
             )
-            ->setAllowedTypes('enum_choice_value', ['bool', 'null'])
-            ->setDefault('enum_choice_value', null)
+            ->setAllowedTypes('enum_choice_value', ['bool'])
+            ->setDefault('enum_choice_value', true)
             ->setDefault(
                 'choice_value',
                 static function (Options $options) {
-                    if ($options['enum_choice_value'] !== true) {
+                    if (!$options['enum_choice_value']) {
                         return null;
                     }
 

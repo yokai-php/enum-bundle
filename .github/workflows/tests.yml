@@ -16,8 +16,8 @@ jobs:
         include:
           - php-version: '8.2'
             symfony-version: '7.0.*'
-          - php-version: '8.3'
-            symfony-version: '7.1.*'
+          - php-version: '8.4'
+            symfony-version: '7.3.*'
 
     steps:
       - name: "Checkout"
@@ -55,7 +55,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: xdebug
-          php-version: '8.3'
+          php-version: '8.4'
 
       - name: "Install dependencies with composer"
         run: composer update --no-interaction --no-progress
@@ -81,7 +81,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '8.3'
+          php-version: '8.4'
 
       - name: "Install dependencies with composer"
         run: composer update --no-interaction --no-progress
@@ -101,7 +101,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           coverage: none
-          php-version: '8.3'
+          php-version: '8.4'
 
       - name: "Install dependencies with composer"
         run: composer update --no-interaction --no-progress

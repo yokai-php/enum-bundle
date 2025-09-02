@@ -108,13 +108,13 @@ final class PullRequestFormTest extends KernelTestCase
     {
         foreach ($this->classes() as [$class]) {
             yield [
-                ['status' => 0, 'labels' => ['bugfix', '1.x']],
+                ['status' => 'opened', 'labels' => ['bugfix', '1.x']],
                 self::pullRequest($class),
                 self::pullRequest($class, 'opened', ['bugfix', '1.x']),
             ];
 
             yield [
-                ['status' => 2, 'labels' => ['bugfix', '2.x']],
+                ['status' => 'closed', 'labels' => ['bugfix', '2.x']],
                 self::pullRequest($class, 'opened', ['bugfix', '1.x']),
                 self::pullRequest($class, 'closed', ['bugfix', '2.x']),
             ];
@@ -171,7 +171,7 @@ final class PullRequestFormTest extends KernelTestCase
 
     private static function pullRequest(
         string $class,
-        string $status = null,
+        string|null $status = null,
         array $labels = [],
     ): MyCLabsPullRequest|NativeEnumPullRequest {
         return (match ($class) {

@@ -21,24 +21,33 @@ final class Enum extends Choice
         array $options = [],
         string|null $enum = null,
         callable|null|string $callback = null,
-        bool $multiple = null,
-        bool $strict = null,
-        int $min = null,
-        int $max = null,
-        string $message = null,
-        string $multipleMessage = null,
-        string $minMessage = null,
-        string $maxMessage = null,
+        bool|null $multiple = null,
+        bool|null $strict = null,
+        int|null $min = null,
+        int|null $max = null,
+        string|null $message = null,
+        string|null $multipleMessage = null,
+        string|null $minMessage = null,
+        string|null $maxMessage = null,
         array|null $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options) && $options !== []) {
+            \trigger_deprecation(
+                'symfony/validator',
+                '7.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated, use named arguments instead.',
+                static::class,
+            );
+        }
+
         if (\is_string($enum)) {
             $this->enum = $enum;
         }
 
         // Since Symfony 5.3, first argument of Choice is $options
         parent::__construct(
-            $options,
+            [],
             null,
             $callback,
             $multiple,
