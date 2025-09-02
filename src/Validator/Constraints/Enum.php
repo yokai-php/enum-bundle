@@ -32,8 +32,8 @@ final class Enum extends Choice
         array|null $groups = null,
         mixed $payload = null,
     ) {
-        if (\is_array($options) && [] !== $options) {
-            trigger_deprecation(
+        if (\is_array($options) && $options !== []) {
+            \trigger_deprecation(
                 'symfony/validator',
                 '7.3',
                 'Passing an array of options to configure the "%s" constraint is deprecated, use named arguments instead.',
