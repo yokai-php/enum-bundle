@@ -12,6 +12,38 @@
 
 This repository aims to provide simple enumeration implementation to Symfony.
 
+> [!WARNING]
+> **This bundle is deprecated and will no longer be maintained.**
+>
+> It was created at a time when PHP had no enums, and Symfony had no way to deal with them.
+> Since PHP 8.1 introduced [native enums](https://www.php.net/manual/en/language.enumerations.php),
+> and Symfony added native support for them in many of its components, this bundle has no reason to exist anymore.
+>
+> We encourage you to migrate to a PHP native enum, and use what Symfony & Doctrine provide:
+> - **Forms**: use Symfony's [`EnumType`](https://symfony.com/doc/current/reference/forms/types/enum.html) form type.
+> - **Doctrine**: use the [`enumType`](https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/attributes-reference.html#column) option of the `#[ORM\Column]` mapping.
+> - **Validation**: type your properties with the enum itself, invalid values cannot exist anymore.
+> - **Translation**: implement Symfony's [`TranslatableInterface`](https://symfony.com/doc/current/translation.html#translatable-objects) on your enum.
+>   Symfony's `EnumType` will use it to translate choice labels,
+>   and you can translate values in Twig templates with the `trans` filter: `{{ member.status|trans }}`.
+>
+> ```php
+> use Symfony\Contracts\Translation\TranslatableInterface;
+> use Symfony\Contracts\Translation\TranslatorInterface;
+>
+> enum Status: string implements TranslatableInterface
+> {
+>     case New = 'new';
+>     case Validated = 'validated';
+>     case Disabled = 'disabled';
+>
+>     public function trans(TranslatorInterface $translator, ?string $locale = null): string
+>     {
+>         return $translator->trans('status.' . $this->value, locale: $locale);
+>     }
+> }
+> ```
+
 
 ## Installation
 
